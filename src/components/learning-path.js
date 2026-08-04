@@ -1,60 +1,92 @@
 /**
- * learning-path.js —— 首页学习路径 DAG 图
+ * learning-path.js —— 首页学习路径(垂直阶段流程图)
  *
- * 用 SVG 手绘有向无环图,展示 16 篇文章的依赖关系。
- * 五层结构:基石 → 架构 → 算法(监督/对齐两支) → 面试
- *
- * 数据来源:manifest.json 的 prerequisites 字段(explorer 实证的交叉引用)
+ * 设计:放弃 SVG DAG(21 条交叉线太乱),改用 roadmap 风格:
+ * - 5 个阶段从上到下排列,每个阶段是一个横条
+ * - 阶段间用大向下箭头连接(只连阶段,不画文章间连线)
+ * - 对齐阶段特殊处理:分 RL-Free / RL 两条路线
+ * - 文章间的具体依赖关系通过"前置"标签文字标注
+ * - 用 HTML/CSS 实现,响应式天然支持
  */
 
 import manifest from '../data/manifest.json';
 import { getAllProgress } from '../core/progress.js';
 
-// 篇章分层(基于 explorer 实证的依赖 DAG)
-const LAYERS = [
-  // 第一层:基石(无前置或互不依赖)
-  { name: '基石', articles: ['tokenizer', 'minimind-design', 'embedding-position-encoding'] },
-  // 第二层:架构
-  { name: '架构', articles: ['normalization', 'kv-cache-flash-attention', 'moe', 'assembly'] },
-  // 第三层:算法-监督
-  { name: '监督学习', articles: ['pretrain', 'sft'] },
-  // 第四层:算法-对齐(两支并列)
-  { name: '对齐', articles: ['rl-overview', 'dpo', 'ppo', 'grpo', 'spo'] },
-  // 第五层:求职
-  { name: '求职', articles: ['interview-100'] },
+// 阶段定义:每阶段含若干"行",每行是一组横向排列的文章
+// 对齐阶段用 rows 表达双路线
+const STAGES = [
+  {
+    id: 'foundations',
+    name: '第一阶段 · 基石',
+    desc: '万丈高楼平地起,理解 LLM 的基本组件',
+    rows: [
+      { articles: ['tokenizer', 'minimind-design', 'embedding-position-encoding'] },
+    ],
+  },
+  {
+    id: 'architecture',
+    name: '第二阶段 · 核心架构',
+    desc: '深入 Transformer 内部:归一化、注意力、MoE',
+    rows: [
+      { articles: ['normalization', 'kv-cache-flash-attention', 'moe', 'assembly'] },
+    ],
+  },
+  {
+    id: 'supervised',
+    name: '第三阶段 · 监督学习',
+    desc: '从预训练到指令微调',
+    rows: [
+      { articles: ['pretrain', 'sft'], flow: 'chain' },  // chain 表示箭头串联
+    ],
+  },
+  {
+    id: 'alignment',
+    name: '第四阶段 · 对齐',
+    desc: '让模型听话的两条路线',
+    rows: [
+      { label: 'RL-Free 路线', articles: ['dpo'] },
+      { label: 'RL 路线', articles: ['rl-overview', 'ppo', 'grpo', 'spo'], flow: 'chain' },
+    ],
+  },
+  {
+    id: 'career',
+    name: '第五阶段 · 求职',
+    desc: '面试冲刺',
+    rows: [
+      { articles: ['interview-100'] },
+    ],
+  },
 ];
 
-// 节点尺寸和间距
-const NODE_W = 150;
-const NODE_H = 44;
-const LAYER_GAP_X = 60;   // 篇章层之间水平间距
-const NODE_GAP_Y = 16;    // 同层节点垂直间距
-const COLUMN_GAP_X = 140; // 不同篇章列之间水平间距
-
 /**
- * 渲染学习路径图到目标容器
+ * 渲染学习路径到目标容器
  */
 export function renderLearningPath(container) {
   const progress = getAllProgress();
-  const { nodes, edges, width, height } = computeLayout(progress);
+  const slugToArticle = {};
+  manifest.forEach((a) => { slugToArticle[a.slug] = a; });
+
+  const stagesHTML = STAGES.map((stage, si) => {
+    const isLast = si === STAGES.length - 1;
+    return `
+      ${renderStage(stage, slugToArticle, progress)}
+      ${!isLast ? '<div class="lp-stage-arrow">↓</div>' : ''}
+    `;
+  }).join('');
 
   container.innerHTML = `
     <div class="learning-path-container">
       <div class="learning-path-header">
         <h3>学习路径</h3>
-        <span class="learning-path-hint">点击节点跳转阅读 · 实线箭头表示推荐前置</span>
+        <span class="learning-path-hint">推荐按阶段顺序学习 · 点击卡片跳转阅读</span>
       </div>
-      <div class="learning-path-scroll">
-        <svg class="learning-path-svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
-          ${renderEdges(edges)}
-          ${renderLayerLabels(nodes)}
-          ${nodes.map(renderNode).join('')}
-        </svg>
+      <div class="lp-stages">
+        ${stagesHTML}
       </div>
     </div>
   `;
 
-  // 节点点击跳转
+  // 卡片点击跳转
   container.querySelectorAll('[data-slug]').forEach((el) => {
     el.addEventListener('click', () => {
       location.hash = `#/article/${el.dataset.slug}`;
@@ -62,102 +94,83 @@ export function renderLearningPath(container) {
   });
 }
 
-function computeLayout(progress) {
-  const nodes = [];
-  const slugToNode = {};
-
-  // 计算每层节点的 Y 坐标
-  let x = 20;
-  const layerWidths = LAYERS.map((layer) => {
-    const maxColWidth = NODE_W;
-    return maxColWidth;
-  });
-
-  let currentX = 20;
-  for (let li = 0; li < LAYERS.length; li++) {
-    const layer = LAYERS[li];
-    const layerArticles = layer.articles
-      .map((slug) => manifest.find((a) => a.slug === slug))
-      .filter(Boolean);
-
-    const layerHeight = layerArticles.length * (NODE_H + NODE_GAP_Y) - NODE_GAP_Y;
-    const startY = 40; // 留出层标签空间
-
-    layerArticles.forEach((article, ni) => {
-      const node = {
-        slug: article.slug,
-        title: shortenTitle(article.title),
-        fullTitle: article.title,
-        x: currentX,
-        y: startY + ni * (NODE_H + NODE_GAP_Y),
-        w: NODE_W,
-        h: NODE_H,
-        layer: li,
-        status: getNodeStatus(article.slug, progress),
-        difficulty: article.difficulty,
-      };
-      nodes.push(node);
-      slugToNode[article.slug] = node;
-    });
-
-    currentX += NODE_W + (li < LAYERS.length - 1 ? COLUMN_GAP_X : 0);
-  }
-
-  // 计算边(从 prerequisites 反推)
-  const edges = [];
-  for (const article of manifest) {
-    if (!article.prerequisites) continue;
-    for (const prereq of article.prerequisites) {
-      const from = slugToNode[prereq];
-      const to = slugToNode[article.slug];
-      if (from && to) {
-        edges.push({ from, to });
-      }
-    }
-  }
-
-  const width = currentX + 20;
-  const height = Math.max(...LAYERS.map((l) => l.articles.length)) * (NODE_H + NODE_GAP_Y) + 80;
-
-  return { nodes, edges, width, height };
-}
-
-function renderEdges(edges) {
-  return edges.map((edge) => {
-    const x1 = edge.from.x + edge.from.w;
-    const y1 = edge.from.y + edge.from.h / 2;
-    const x2 = edge.to.x;
-    const y2 = edge.to.y + edge.to.h / 2;
-    const midX = (x1 + x2) / 2;
-    // 贝塞尔曲线
-    const path = `M ${x1} ${y1} C ${midX} ${y1}, ${midX} ${y2}, ${x2} ${y2}`;
-    return `<path d="${path}" class="lp-edge" marker-end="url(#lp-arrow)"/>`;
-  }).join('');
-}
-
-function renderLayerLabels(nodes) {
-  // 每层第一个节点的 X 坐标处放层名
-  const layersSeen = new Set();
-  const labels = [];
-  // 用 LAYERS 定义顺序渲染层标签
-  let currentX = 20;
-  for (let li = 0; li < LAYERS.length; li++) {
-    const layer = LAYERS[li];
-    labels.push(`<text x="${currentX + NODE_W / 2}" y="22" class="lp-layer-label">${layer.name}</text>`);
-    currentX += NODE_W + (li < LAYERS.length - 1 ? COLUMN_GAP_X : 0);
-  }
-  return labels.join('');
-}
-
-function renderNode(node) {
-  const statusClass = `lp-node-${node.status}`;
+function renderStage(stage, slugToArticle, progress) {
+  const rowsHTML = stage.rows.map((row) => renderRow(row, slugToArticle, progress)).join('');
   return `
-    <g class="lp-node ${statusClass}" data-slug="${node.slug}">
-      <rect x="${node.x}" y="${node.y}" width="${node.w}" height="${node.h}" rx="6" class="lp-node-rect" />
-      <text x="${node.x + node.w / 2}" y="${node.y + node.h / 2 + 4}" class="lp-node-text">${node.title}</text>
-      ${node.status === 'read' ? `<circle cx="${node.x + node.w - 8}" cy="${node.y + 8}" r="5" class="lp-check"/>` : ''}
-    </g>
+    <div class="lp-stage">
+      <div class="lp-stage-header">
+        <span class="lp-stage-name">${stage.name}</span>
+        <span class="lp-stage-desc">${stage.desc}</span>
+      </div>
+      <div class="lp-stage-body">
+        ${rowsHTML}
+      </div>
+    </div>
   `;
+}
+
+function renderRow(row, slugToArticle, progress) {
+  const isChain = row.flow === 'chain';
+  const labelHTML = row.label ? `<div class="lp-route-label">${row.label}</div>` : '';
+
+  const cards = row.articles
+    .map((slug) => slugToArticle[slug])
+    .filter(Boolean)
+    .map((article) => renderCard(article, progress));
+
+  // chain 模式:卡片之间插入小箭头
+  const inner = isChain
+    ? cards.join('<span class="lp-chain-arrow">→</span>')
+    : cards.join('');
+
+  return `
+    <div class="lp-row ${isChain ? 'lp-row-chain' : ''} ${row.label ? 'lp-row-labeled' : ''}">
+      ${labelHTML}
+      <div class="lp-row-cards">${inner}</div>
+    </div>
+  `;
+}
+
+function renderCard(article, progress) {
+  const status = getNodeStatus(article.slug, progress);
+  const statusClass = `lp-card-${status}`;
+  const prereqText = formatPrereqs(article.prerequisites);
+
+  return `
+    <div class="lp-card ${statusClass}" data-slug="${article.slug}">
+      <div class="lp-card-status-dot"></div>
+      <div class="lp-card-body">
+        <div class="lp-card-title">${article.title}</div>
+        ${prereqText ? `<div class="lp-card-prereq">前置: ${prereqText}</div>` : ''}
+      </div>
+      <div class="lp-card-meta">
+        <span class="lp-card-diff">${diffLabel(article.difficulty)}</span>
+        <span class="lp-card-time">${article.duration}min</span>
+      </div>
+    </div>
+  `;
+}
+
+function formatPrereqs(prereqs) {
+  if (!prereqs || prereqs.length === 0) return '';
+  // slug → 短名
+  const slugToShort = {
+    tokenizer: 'Tokenizer',
+    'minimind-design': '设计目录',
+    'embedding-position-encoding': 'Embedding',
+    normalization: '归一化',
+    'kv-cache-flash-attention': 'KVCache',
+    moe: 'MoE',
+    assembly: '超级拼装',
+    pretrain: 'Pretrain',
+    sft: 'SFT',
+    'rl-overview': 'RL概览',
+    dpo: 'DPO',
+    ppo: 'PPO',
+    grpo: 'GRPO',
+    spo: 'SPO',
+  };
+  return prereqs.map((p) => slugToShort[p] || p).join('、');
 }
 
 function getNodeStatus(slug, progress) {
@@ -167,12 +180,7 @@ function getNodeStatus(slug, progress) {
   return 'todo';
 }
 
-function shortenTitle(title) {
-  // 缩短标题适配节点宽度
-  return title
-    .replace(/^架构篇：/, '')
-    .replace(/^算法篇：Minimind的/, '')
-    .replace(/^基石：/, '')
-    .replace(/：.*$/, m => m.length > 6 ? '' : m)
-    .slice(0, 12);
+function diffLabel(d) {
+  const map = { beginner: '入门', intermediate: '进阶', advanced: '高级', expert: '专家' };
+  return map[d] || d;
 }
