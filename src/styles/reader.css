@@ -240,6 +240,14 @@
 .reader-content .markdown-body .katex {
   font-size: 1.05em;
 }
+.reader-content .markdown-body .katex.formula-glossed {
+  cursor: help;
+  border-bottom: 1px dashed var(--text-muted);
+  transition: border-color 0.15s;
+}
+.reader-content .markdown-body .katex.formula-glossed:hover {
+  border-bottom-color: var(--accent);
+}
 .reader-content .markdown-body .katex-display {
   margin: 20px 0;
   overflow-x: auto;
@@ -248,4 +256,7 @@
 }
 .reader-content .markdown-body .katex-display > .katex {
   white-space: nowrap;
+}
+.reader-content .markdown-body .katex-display .katex.formula-glossed {
+  border-bottom: none;
 }
