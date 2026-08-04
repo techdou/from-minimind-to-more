@@ -1,0 +1,114 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "host_1",
+      "filename": "01_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "轻松活泼的快问快答节奏。",
+      "speech_text": "冰糖!快速过一遍大模型强化学习,给我三句话讲清楚它干嘛的。"
+    },
+    {
+      "index": 2,
+      "title": "guest_2",
+      "filename": "02_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "简洁清晰地回答,语速偏快但不急促。",
+      "speech_text": "好。第一,预训练让模型会说话但不懂规矩。第二,强化学习通过奖励信号教会它听话。第三,核心就是让好回答概率变大、坏回答概率变小。"
+    },
+    {
+      "index": 3,
+      "title": "host_3",
+      "filename": "03_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "快速好奇地追问,语速明快。",
+      "speech_text": "PPO 和 DPO 有什么区别?一句话。"
+    },
+    {
+      "index": 4,
+      "title": "guest_4",
+      "filename": "04_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "快速但有力地强调重点。",
+      "speech_text": "PPO 要训练一个奖励模型再做强化学习,流程复杂;DPO 直接从偏好数据学,跳过奖励模型,更简单。"
+    },
+    {
+      "index": 5,
+      "title": "host_5",
+      "filename": "05_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "快速好奇地追问,语速明快。",
+      "speech_text": "那 GRPO 呢?最近很火。"
+    },
+    {
+      "index": 6,
+      "title": "guest_6",
+      "filename": "06_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "简洁清晰地回答,语速偏快但不急促。",
+      "speech_text": "GRPO 是 PPO 的简化版。PPO 要 Actor 和 Critic 两个模型,显存翻倍。GRPO 干掉 Critic,用同一个 prompt 生成多个回答做组内排序来估优势,省一半显存。"
+    },
+    {
+      "index": 7,
+      "title": "host_7",
+      "filename": "07_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "干脆利落地提出疑问,不拖泥带水。",
+      "speech_text": "Actor-Critic 是什么概念?快说。"
+    },
+    {
+      "index": 8,
+      "title": "guest_8",
+      "filename": "08_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "简洁清晰地回答,语速偏快但不急促。",
+      "speech_text": "Actor 是策略网络负责做决策,Critic 是价值网络负责评价决策好坏。一个行动一个评判,像运动员和教练。PPO 就是这个框架。"
+    },
+    {
+      "index": 9,
+      "title": "host_9",
+      "filename": "09_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "快速好奇地追问,语速明快。",
+      "speech_text": "学习路线怎么走?"
+    },
+    {
+      "index": 10,
+      "title": "guest_10",
+      "filename": "10_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "快速但有力地强调重点。",
+      "speech_text": "先理解 Actor-Critic,再学 PPO,然后看 DPO 作为对比,最后上 GRPO。DeepSeek-R1 就是靠 GRPO 训出来的。"
+    },
+    {
+      "index": 11,
+      "title": "host_11",
+      "filename": "11_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "恍然大悟的轻快语气。",
+      "speech_text": "收到!Actor-Critic → PPO → DPO → GRPO,搞定。"
+    }
+  ]
+}

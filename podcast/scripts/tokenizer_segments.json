@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "白老师,今天要讲的 Tokenizer 是什么?我之前一直以为大模型直接读文字就行。"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "这是个常见的误解。计算机不认识文字,它只懂数字。Tokenizer 的作用就是把人类写的文字切成一个个小块,每个小块对应一个数字编号。模型实际处理的是这些数字。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "带着学生常见的困惑提问,语气温和。",
+      "speech_text": "那切多大的块?一个字一块还是一个词一块?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "问得好。按字切太碎,模型学不到词的完整语义;按词切词表太大,遇到新词就没办法了。现在主流方案是子词(subword),介于字和词之间。最常用的子词算法叫 BPE。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "BPE 的原理是什么?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "BPE 全叫 Byte-Pair Encoding。思路很简单:先从单字符开始,然后统计哪些字符对出现最多,把它们合并成一个新 token。不断重复这个合并过程,直到词表达到设定大小。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "领悟的语气,像是终于把知识点串联起来了。",
+      "speech_text": "所以词表大小是人为控制的?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "对。词表越大,每个 token 承载的信息越多,但模型 embedding 层参数也越多。GPT-2 用了 5 万 token,GPT-4 涨到了 10 万。这是效果和成本的权衡。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "带着学生常见的困惑提问,语气温和。",
+      "speech_text": "我听说分词不好会影响模型表现,具体是怎么回事?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "最典型的例子是代码缩进。如果分词器把空格和换行处理不好,Python 代码的缩进就会乱,模型自然学不会正确的代码结构。另外中文的 Token 通胀问题也很严重——同样意思的句子,中文用的 token 数可能是英文的好几倍,直接影响推理成本。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "领悟的语气,像是终于把知识点串联起来了。",
+      "speech_text": "原来分词对成本影响这么大。今天算是理解了 Tokenizer 的重要性。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "总结一下:Tokenizer 是文字到数字的桥梁,主流用 BPE 算法做子词切分,词表大小是效果和成本的权衡。下一篇我们讲 Embedding,那才是语义真正开始的地方。"
+    }
+  ]
+}

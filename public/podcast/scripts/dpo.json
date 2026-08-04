@@ -1,0 +1,133 @@
+{
+  "title": "Minimind 的 DPO",
+  "slug": "dpo",
+  "style": "debate",
+  "duration_estimate": "6分钟",
+  "dialogue": [
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "苏打,我始终认为 RLHF 才是正道。训练一个奖励模型,再用 PPO 做策略优化,这是经过验证的方法。DPO 跳过奖励模型,总觉得不靠谱。",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "我理解你的顾虑,但你想想 RLHF 的代价。要同时维护四个模型——Actor、Critic、Reference、Reward,显存开销巨大。而且奖励模型本身也是近似,引入了额外的偏差。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "但奖励模型能对任意回答打分,DPO 只能用已有的偏好数据对。数据量不够怎么办?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "这正是 DPO 的定位——它不是 RLHF 的替代,而是当你已经有偏好数据时的更高效选择。实际中,偏好数据比绝对评分更容易标注。让人选'哪个好'比让人打分简单得多。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "DPO 的损失函数我看了,本质是在做 chosen 和 rejected 的对比。这个数学推导你信吗?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "推导是严谨的。DPO 的核心贡献是证明了:在 Bradley-Terry 偏好模型下,最优策略可以直接从偏好数据推导出来,不需要显式的奖励函数。它把 RL 问题转化成了分类问题。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "把 RL 转成分类?这个角度倒是新颖。那训练代码比 PPO 简单多少?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "简单非常多。DPO 的代码结构和 SFT 几乎一样,就是换了损失函数。不需要 Critic 模型,不需要 PPO 的 clip 机制,不需要 KL 散度惩罚的复杂调参。几行代码就能跑。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "好吧,我承认在工程效率上 DPO 确实有优势。但极端情况下呢?比如偏好数据有矛盾或者分布偏移。",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "你说到点子上了。DPO 对数据质量更敏感,因为它没有奖励模型做平滑。所以实践中,很多时候先 DPO 快速迭代,再用 RLHF 精修。两者不是对立而是互补。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "这个结论我同意。DPO 求效率,RLHF 求精度,组合使用是最佳实践。",
+      "emotion": "恍然大悟"
+    }
+  ],
+  "timings": [
+    {
+      "start": 0,
+      "end": 13.28,
+      "duration": 13.28
+    },
+    {
+      "start": 13.68,
+      "end": 28.08,
+      "duration": 14.4
+    },
+    {
+      "start": 28.48,
+      "end": 37.120000000000005,
+      "duration": 8.64
+    },
+    {
+      "start": 37.52,
+      "end": 53.040000000000006,
+      "duration": 15.52
+    },
+    {
+      "start": 53.440000000000005,
+      "end": 60.800000000000004,
+      "duration": 7.36
+    },
+    {
+      "start": 61.2,
+      "end": 76.24000000000001,
+      "duration": 15.04
+    },
+    {
+      "start": 76.64,
+      "end": 84.48,
+      "duration": 7.84
+    },
+    {
+      "start": 84.88,
+      "end": 100.56,
+      "duration": 15.68
+    },
+    {
+      "start": 100.96,
+      "end": 111.19999999999999,
+      "duration": 10.24
+    },
+    {
+      "start": 111.6,
+      "end": 126.32,
+      "duration": 14.72
+    },
+    {
+      "start": 126.72,
+      "end": 134.4,
+      "duration": 7.68
+    }
+  ],
+  "total_duration": 134.8,
+  "audio_url": "/podcast/audio/dpo.mp3"
+}

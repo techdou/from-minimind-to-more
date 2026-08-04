@@ -80,8 +80,8 @@ export async function renderArticle(container, slug) {
   // 考点 callout 增强
   enhanceCallouts(targetEl);
 
-  // 抽象概念配图注入
-  injectConceptImages(targetEl, slug);
+  // 抽象概念配图注入(异步,图片可能需要加载)
+  injectConceptImages(targetEl, slug).catch(() => {});
 
   // 公式符号 hover 释义
   enhanceFormulaTooltips(targetEl, slug);

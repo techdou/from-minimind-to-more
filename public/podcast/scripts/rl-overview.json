@@ -1,0 +1,133 @@
+{
+  "title": "大模型强化学习算法概览",
+  "slug": "rl-overview",
+  "style": "quickfire",
+  "duration_estimate": "5分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "冰糖!快速过一遍大模型强化学习,给我三句话讲清楚它干嘛的。",
+      "emotion": "轻松"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "好。第一,预训练让模型会说话但不懂规矩。第二,强化学习通过奖励信号教会它听话。第三,核心就是让好回答概率变大、坏回答概率变小。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "PPO 和 DPO 有什么区别?一句话。",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "PPO 要训练一个奖励模型再做强化学习,流程复杂;DPO 直接从偏好数据学,跳过奖励模型,更简单。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "那 GRPO 呢?最近很火。",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "GRPO 是 PPO 的简化版。PPO 要 Actor 和 Critic 两个模型,显存翻倍。GRPO 干掉 Critic,用同一个 prompt 生成多个回答做组内排序来估优势,省一半显存。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "Actor-Critic 是什么概念?快说。",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "Actor 是策略网络负责做决策,Critic 是价值网络负责评价决策好坏。一个行动一个评判,像运动员和教练。PPO 就是这个框架。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "学习路线怎么走?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "先理解 Actor-Critic,再学 PPO,然后看 DPO 作为对比,最后上 GRPO。DeepSeek-R1 就是靠 GRPO 训出来的。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "收到!Actor-Critic → PPO → DPO → GRPO,搞定。",
+      "emotion": "恍然大悟"
+    }
+  ],
+  "timings": [
+    {
+      "start": 0,
+      "end": 5.28,
+      "duration": 5.28
+    },
+    {
+      "start": 5.680000000000001,
+      "end": 18,
+      "duration": 12.32
+    },
+    {
+      "start": 18.400000000000002,
+      "end": 21.28,
+      "duration": 2.88
+    },
+    {
+      "start": 21.680000000000003,
+      "end": 30.96,
+      "duration": 9.28
+    },
+    {
+      "start": 31.360000000000003,
+      "end": 34.080000000000005,
+      "duration": 2.72
+    },
+    {
+      "start": 34.480000000000004,
+      "end": 47.92,
+      "duration": 13.44
+    },
+    {
+      "start": 48.32000000000001,
+      "end": 51.36000000000001,
+      "duration": 3.04
+    },
+    {
+      "start": 51.760000000000005,
+      "end": 62.160000000000004,
+      "duration": 10.4
+    },
+    {
+      "start": 62.56,
+      "end": 64.48,
+      "duration": 1.92
+    },
+    {
+      "start": 64.88,
+      "end": 74.96,
+      "duration": 10.08
+    },
+    {
+      "start": 75.36,
+      "end": 81.28,
+      "duration": 5.92
+    }
+  ],
+  "total_duration": 81.68,
+  "audio_url": "/podcast/audio/rl-overview.mp3"
+}
