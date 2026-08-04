@@ -2,13 +2,15 @@
  * home.js —— 首页(学习中心)
  *
  * 展示:
- * - hero 介绍
- * - 统计(总篇数/已读/总时长)
+ * - hero 介绍 + 统计
+ * - 学习路径 DAG 图(基于 prerequisites)
+ * - 推荐下一篇(基于已读 + 依赖)
  * - 按篇章分组的文章卡片网格
  */
 
 import manifest from '../data/manifest.json';
 import { getAllProgress, isRead } from '../core/progress.js';
+import { renderLearningPath } from '../components/learning-path.js';
 
 const CATEGORY_META = {
   foundations: { name: '基石与原理', desc: '万丈高楼平地起,理解 LLM 的起点', icon: '🏛' },
@@ -22,6 +24,7 @@ export async function renderHome(container) {
   const progress = getAllProgress();
   const readCount = manifest.filter((a) => progress[a.slug]?.read).length;
   const totalDuration = manifest.reduce((sum, a) => sum + (a.duration || 0), 0);
+  const recommendation = getRecommendation(progress);
 
   container.innerHTML = `
     <div class="home-container">
@@ -43,9 +46,15 @@ export async function renderHome(container) {
           </div>
         </div>
       </div>
+      ${recommendation ? renderRecommendation(recommendation) : ''}
+      <div id="learning-path-mount"></div>
       ${renderCategories(progress)}
     </div>
   `;
+
+  // 渲染学习路径图
+  const pathMount = container.querySelector('#learning-path-mount');
+  renderLearningPath(pathMount);
 
   // 卡片点击跳转
   container.querySelectorAll('.article-card').forEach((card) => {
@@ -53,6 +62,55 @@ export async function renderHome(container) {
       location.hash = `#/article/${card.dataset.slug}`;
     });
   });
+
+  // 推荐点击
+  const recBanner = container.querySelector('.recommendation-banner');
+  if (recBanner) {
+    recBanner.addEventListener('click', () => {
+      location.hash = `#/article/${recBanner.dataset.slug}`;
+    });
+  }
+}
+
+/**
+ * 推荐下一篇逻辑:
+ * 找所有 prerequisites 已满足的未读文章,优先推荐 order 最小的
+ */
+function getRecommendation(progress) {
+  const candidates = manifest.filter((article) => {
+    if (progress[article.slug]?.read) return false;
+    // 检查所有前置是否已读
+    if (!article.prerequisites || article.prerequisites.length === 0) return true;
+    return article.prerequisites.every((p) => progress[p]?.read);
+  });
+
+  if (candidates.length === 0) {
+    // 所有文章都读完了,或剩余的都有未读前置
+    // 返回第一篇未读的
+    const unread = manifest.find((a) => !progress[a.slug]?.read);
+    return unread || null;
+  }
+
+  // 按 category 优先级 + order 排序
+  const catPriority = { foundations: 1, architecture: 2, algorithms: 3, career: 4, optional: 5 };
+  candidates.sort((a, b) => {
+    const pa = catPriority[a.category] || 9;
+    const pb = catPriority[b.category] || 9;
+    if (pa !== pb) return pa - pb;
+    return a.order - b.order;
+  });
+
+  return candidates[0];
+}
+
+function renderRecommendation(article) {
+  return `
+    <div class="recommendation-banner" data-slug="${article.slug}">
+      <span class="recommendation-label">推荐下一步</span>
+      <span class="recommendation-title">${article.title}</span>
+      <span class="recommendation-arrow">→</span>
+    </div>
+  `;
 }
 
 function renderCategories(progress) {

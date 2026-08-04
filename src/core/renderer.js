@@ -13,7 +13,17 @@
  */
 
 import { marked } from 'marked';
-import hljs from 'highlight.js';
+// 只注册用到的语言,避免全量打包(998KB → 大幅缩小)
+import hljs from 'highlight.js/lib/core';
+import python from 'highlight.js/lib/languages/python';
+import bash from 'highlight.js/lib/languages/bash';
+import json from 'highlight.js/lib/languages/json';
+import plaintext from 'highlight.js/lib/languages/plaintext';
+
+hljs.registerLanguage('python', python);
+hljs.registerLanguage('bash', bash);
+hljs.registerLanguage('json', json);
+hljs.registerLanguage('plaintext', plaintext);
 
 /* ------------------------------------------------------------------ */
 /* marked 配置                                                          */

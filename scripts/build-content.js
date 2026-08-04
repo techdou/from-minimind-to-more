@@ -16,8 +16,11 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const CONTENT_DIR = path.join(ROOT, 'content');
-const OUT_DIR = path.join(ROOT, 'src', 'data');
-const ARTICLES_DIR = path.join(OUT_DIR, 'articles');
+// manifest 放 src/data(静态 import,vite 打包)
+const MANIFEST_DIR = path.join(ROOT, 'src', 'data');
+// articles 放 public/data(fetch 按需加载,vite build 原样复制到 dist)
+const PUBLIC_DATA_DIR = path.join(ROOT, 'public', 'data');
+const ARTICLES_DIR = path.join(PUBLIC_DATA_DIR, 'articles');
 
 // 篇章顺序覆盖(gen-frontmatter 的 alphabetical 排序不准)
 const ORDER_OVERRIDE = {
@@ -91,6 +94,7 @@ function extractTOCFromText(body) {
 }
 
 // 主流程
+fs.mkdirSync(MANIFEST_DIR, { recursive: true });
 fs.mkdirSync(ARTICLES_DIR, { recursive: true });
 
 const manifest = [];
@@ -156,7 +160,7 @@ manifest.sort((a, b) => {
 });
 
 fs.writeFileSync(
-  path.join(OUT_DIR, 'manifest.json'),
+  path.join(MANIFEST_DIR, 'manifest.json'),
   JSON.stringify(manifest, null, 0),
   'utf-8',
 );

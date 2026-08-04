@@ -24,7 +24,7 @@ export async function renderArticle(container, slug) {
   // 动态加载文章 JSON
   let article;
   try {
-    const resp = await fetch(`/src/data/articles/${slug}.json`);
+    const resp = await fetch(`/data/articles/${slug}.json`);
     article = await resp.json();
   } catch (err) {
     container.innerHTML = `<div class="error-state"><h2>加载失败</h2><p>${err.message}</p></div>`;
@@ -65,6 +65,7 @@ export async function renderArticle(container, slug) {
       ` : ''}
     </div>
     <div id="markdown-body-target"></div>
+    ${renderQuizEntry(slug, meta)}
     ${renderFooterNav(slug)}
   `;
 
@@ -153,6 +154,19 @@ function setupScrollSpy(container, toc) {
     }
   }, { passive: true });
   updateActive();
+}
+
+function renderQuizEntry(slug, meta) {
+  if (!meta.keypoints || meta.keypoints.length === 0) return '';
+  return `
+    <div class="quiz-entry-banner">
+      <div class="quiz-entry-info">
+        <span class="quiz-entry-label">读完检测</span>
+        <span class="quiz-entry-text">本篇有 ${meta.keypoints.length} 个考点,来做测验检验掌握程度</span>
+      </div>
+      <a href="#/article/${slug}/quiz" class="quiz-entry-btn">开始测验 →</a>
+    </div>
+  `;
 }
 
 function renderFooterNav(currentSlug) {

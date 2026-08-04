@@ -10,6 +10,7 @@
 import { renderHome } from './pages/home.js';
 import { renderCategory } from './pages/category.js';
 import { renderArticle } from './pages/article.js';
+import { renderQuiz } from './pages/quiz.js';
 import { initTheme, toggleTheme } from './core/theme.js';
 import manifest from './data/manifest.json';
 
@@ -36,6 +37,8 @@ async function router() {
       await renderHome(main);
     } else if (parts[0] === 'category' && parts[1]) {
       await renderCategory(main, parts[1]);
+    } else if (parts[0] === 'article' && parts[1] && parts[2] === 'quiz') {
+      await renderQuiz(main, parts[1]);
     } else if (parts[0] === 'article' && parts[1]) {
       await renderArticle(main, parts[1]);
     } else {

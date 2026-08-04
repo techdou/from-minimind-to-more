@@ -1,0 +1,9 @@
+name = "minimind-to-more"
+compatibility_date = "2024-09-01"
+pages_build_output_dir = "dist"
+
+# Cloudflare Pages 部署配置
+# 部署步骤:
+# 1. npm run build          (构建内容 JSON + vite build)
+# 2. npx wrangler login     (首次需要,浏览器授权)
+# 3. npx wrangler pages deploy dist --project-name minimind-to-more
