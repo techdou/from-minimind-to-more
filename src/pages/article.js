@@ -1,0 +1,186 @@
+/**
+ * article.js —— 文章阅读页(核心)
+ *
+ * 整合:
+ * - renderer.js 渲染 markdown(marked+KaTeX+Mermaid+高亮)
+ * - callout.js 考点自动识别
+ * - toc.js 从渲染后 DOM 抽目录
+ * - progress.js 阅读进度条 + 位置记忆
+ * - 侧栏目录 + scrollspy 高亮
+ */
+
+import { renderMarkdown, extractTOC } from '../core/renderer.js';
+import { enhanceCallouts } from '../core/callout.js';
+import { bindProgressBar, restoreScroll, getProgress } from '../core/progress.js';
+import manifest from '../data/manifest.json';
+
+export async function renderArticle(container, slug) {
+  const meta = manifest.find((a) => a.slug === slug);
+  if (!meta) {
+    container.innerHTML = `<div class="error-state"><h2>文章不存在</h2><p>找不到 slug: ${slug}</p><a href="#/">回首页</a></div>`;
+    return;
+  }
+
+  // 动态加载文章 JSON
+  let article;
+  try {
+    const resp = await fetch(`/src/data/articles/${slug}.json`);
+    article = await resp.json();
+  } catch (err) {
+    container.innerHTML = `<div class="error-state"><h2>加载失败</h2><p>${err.message}</p></div>`;
+    return;
+  }
+
+  // 渲染骨架
+  container.innerHTML = `
+    <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
+    <div class="reader-layout">
+      <aside class="reader-sidebar" id="reader-sidebar">
+        <h3>目录</h3>
+        <ul class="toc-list" id="toc-list"></ul>
+      </aside>
+      <article class="reader-content" id="reader-content">
+        <div class="loading-state">加载中...</div>
+      </article>
+    </div>
+  `;
+
+  const contentEl = container.querySelector('#reader-content');
+  const theme = document.documentElement.dataset.theme || 'light';
+
+  // 渲染 markdown
+  contentEl.innerHTML = `
+    <div class="article-header">
+      <h1>${article.title}</h1>
+      <div class="article-meta">
+        <span>${article.series}</span>
+        <span>· ⏱ ${article.duration} 分钟</span>
+        <span>· ${wordCount(article.body)} 字</span>
+      </div>
+      ${article.objectives.length > 0 ? `
+        <div class="article-objectives">
+          <h4>学习目标</h4>
+          <ul>${article.objectives.map((o) => `<li>${o}</li>`).join('')}</ul>
+        </div>
+      ` : ''}
+    </div>
+    <div id="markdown-body-target"></div>
+    ${renderFooterNav(slug)}
+  `;
+
+  const targetEl = contentEl.querySelector('#markdown-body-target');
+  await renderMarkdown(article.body, targetEl, { theme });
+
+  // 考点 callout 增强
+  enhanceCallouts(targetEl);
+
+  // 从渲染后 DOM 抽目录(比预提取更准,因为标题 id 已生成)
+  const toc = extractTOC(targetEl);
+  renderSidebarTOC(toc, container);
+
+  // 进度条
+  bindProgressBar(slug, container.querySelector('#progress-bar'));
+
+  // 恢复上次阅读位置(延迟到渲染完成)
+  setTimeout(() => restoreScroll(slug), 300);
+
+  // scrollspy
+  setupScrollSpy(container, toc);
+}
+
+function renderSidebarTOC(toc, container) {
+  const tocList = container.querySelector('#toc-list');
+  if (toc.length === 0) {
+    container.querySelector('.reader-sidebar').style.display = 'none';
+    return;
+  }
+
+  tocList.innerHTML = toc
+    .map((item) => {
+      const cls = `toc-level-${item.level}`;
+      return `<li><a href="#${item.id}" class="${cls}" data-target="${item.id}">${item.text}</a></li>`;
+    })
+    .join('');
+
+  // 点击跳转(平滑滚动,考虑 sticky header)
+  tocList.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = a.dataset.target;
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 76;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+}
+
+function setupScrollSpy(container, toc) {
+  if (toc.length === 0) return;
+
+  const headings = toc
+    .map((t) => document.getElementById(t.id))
+    .filter(Boolean);
+
+  const links = container.querySelectorAll('.toc-list a');
+
+  function updateActive() {
+    const scrollY = window.scrollY + 100;
+    let activeIdx = 0;
+    for (let i = 0; i < headings.length; i++) {
+      if (headings[i].offsetTop <= scrollY) activeIdx = i;
+    }
+    links.forEach((l, i) => l.classList.toggle('active', i === activeIdx));
+
+    // 滚动 TOC 让 active 项可见
+    const activeLink = links[activeIdx];
+    if (activeLink) {
+      const sidebar = container.querySelector('.reader-sidebar');
+      const linkRect = activeLink.getBoundingClientRect();
+      const sidebarRect = sidebar.getBoundingClientRect();
+      if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
+        activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateActive(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  updateActive();
+}
+
+function renderFooterNav(currentSlug) {
+  const flat = manifest.slice();
+  const idx = flat.findIndex((a) => a.slug === currentSlug);
+  const prev = idx > 0 ? flat[idx - 1] : null;
+  const next = idx < flat.length - 1 ? flat[idx + 1] : null;
+
+  return `
+    <div class="article-footer-nav">
+      ${prev ? `
+        <a href="#/article/${prev.slug}" class="nav-link prev">
+          <span class="nav-link-label">← 上一篇</span>
+          <span class="nav-link-title">${prev.title}</span>
+        </a>
+      ` : '<div></div>'}
+      ${next ? `
+        <a href="#/article/${next.slug}" class="nav-link next">
+          <span class="nav-link-label">下一篇 →</span>
+          <span class="nav-link-title">${next.title}</span>
+        </a>
+      ` : '<div></div>'}
+    </div>
+  `;
+}
+
+function wordCount(body) {
+  // 去掉 markdown 标记,粗略统计
+  const text = body.replace(/[#*`>\-\[\]()]/g, '').replace(/\s+/g, '');
+  return text.length;
+}

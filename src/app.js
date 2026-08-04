@@ -1,0 +1,89 @@
+/**
+ * app.js —— 应用入口 + hash 路由
+ *
+ * 路由表:
+ *   #/                          首页(学习中心)
+ *   #/category/:category        篇章列表
+ *   #/article/:slug             文章阅读
+ */
+
+import { renderHome } from './pages/home.js';
+import { renderCategory } from './pages/category.js';
+import { renderArticle } from './pages/article.js';
+import { initTheme, toggleTheme } from './core/theme.js';
+import manifest from './data/manifest.json';
+
+// 初始化主题
+initTheme();
+
+const app = document.getElementById('app');
+
+function getRoute() {
+  const hash = location.hash.slice(1) || '/';
+  const parts = hash.split('/').filter(Boolean); // ['article','normalization']
+  return parts;
+}
+
+async function router() {
+  const parts = getRoute();
+  app.innerHTML = '';
+  app.appendChild(renderTopbar(parts));
+
+  const main = document.createElement('main');
+
+  try {
+    if (parts.length === 0) {
+      await renderHome(main);
+    } else if (parts[0] === 'category' && parts[1]) {
+      await renderCategory(main, parts[1]);
+    } else if (parts[0] === 'article' && parts[1]) {
+      await renderArticle(main, parts[1]);
+    } else {
+      main.innerHTML = `<div class="error-state"><h2>404</h2><p>找不到这个页面</p><a href="#/">回首页</a></div>`;
+    }
+  } catch (err) {
+    console.error('Route error:', err);
+    main.innerHTML = `<div class="error-state"><h2>出错了</h2><p>${err.message}</p><a href="#/">回首页</a></div>`;
+  }
+
+  app.appendChild(main);
+  window.scrollTo(0, 0);
+}
+
+function renderTopbar(currentParts) {
+  const topbar = document.createElement('header');
+  topbar.className = 'topbar';
+
+  const currentPath = currentParts.join('/');
+
+  topbar.innerHTML = `
+    <a href="#/" class="topbar-logo">
+      <span class="logo-mark">M</span>
+      <span>Minimind to More</span>
+    </a>
+    <nav class="topbar-nav">
+      <a href="#/" class="${currentParts.length === 0 ? 'active' : ''}">首页</a>
+      <a href="#/category/foundations" class="${currentPath === 'category/foundations' ? 'active' : ''}">基石</a>
+      <a href="#/category/architecture" class="${currentPath === 'category/architecture' ? 'active' : ''}">架构</a>
+      <a href="#/category/algorithms" class="${currentPath === 'category/algorithms' ? 'active' : ''}">算法</a>
+    </nav>
+    <div class="topbar-spacer"></div>
+    <button class="theme-toggle" id="theme-toggle" title="切换主题">
+      ${document.body.dataset.theme === 'dark' ? '☀' : '☾'}
+    </button>
+  `;
+
+  topbar.querySelector('#theme-toggle').addEventListener('click', () => {
+    toggleTheme();
+    topbar.querySelector('#theme-toggle').textContent =
+      document.body.dataset.theme === 'dark' ? '☀' : '☾';
+  });
+
+  return topbar;
+}
+
+// 监听路由变化
+window.addEventListener('hashchange', router);
+window.addEventListener('DOMContentLoaded', router);
+
+export { manifest };
