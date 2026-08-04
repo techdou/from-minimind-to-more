@@ -193,6 +193,36 @@
   opacity: 0.92;
 }
 
+/* 概念配图 figure */
+.reader-content .markdown-body figure.concept-image {
+  margin: 32px 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--panel-bg);
+}
+.reader-content .markdown-body figure.concept-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.reader-content .markdown-body figure.concept-image figcaption {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+  margin: 0;
+}
+[data-theme="dark"] .reader-content .markdown-body figure.concept-image img {
+  opacity: 0.95;
+}
+
 /* Mermaid */
 .reader-content .markdown-body .mermaid {
   display: flex;

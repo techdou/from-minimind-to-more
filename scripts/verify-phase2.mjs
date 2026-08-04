@@ -27,8 +27,7 @@ console.log(`[推荐] banner 存在: ${recBanner > 0}, 推荐: ${recTitle?.trim(
 await page.goto(`${BASE}/#/article/grpo`);
 await page.waitForTimeout(2000);
 const quizEntry = await page.locator('.quiz-entry-banner').count();
-const quizEntryText = quizEntry > 0 ? await page.locator('.quiz-entry-text').textContent() : null;
-console.log(`[测验入口] 存在: ${quizEntry > 0}, ${quizEntryText?.trim()}`);
+console.log(`[测验入口] 存在: ${quizEntry > 0}`);
 
 // 4. 测验页
 await page.goto(`${BASE}/#/article/grpo/quiz`);

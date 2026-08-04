@@ -11,6 +11,7 @@
 
 import { renderMarkdown, extractTOC } from '../core/renderer.js';
 import { enhanceCallouts } from '../core/callout.js';
+import { injectConceptImages } from '../core/concept-images.js';
 import { bindProgressBar, restoreScroll, getProgress } from '../core/progress.js';
 import manifest from '../data/manifest.json';
 
@@ -77,6 +78,9 @@ export async function renderArticle(container, slug) {
 
   // 考点 callout 增强
   enhanceCallouts(targetEl);
+
+  // 抽象概念配图注入
+  injectConceptImages(targetEl, slug);
 
   // 从渲染后 DOM 抽目录(比预提取更准,因为标题 id 已生成)
   const toc = extractTOC(targetEl);
