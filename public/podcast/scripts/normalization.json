@@ -1,0 +1,143 @@
+{
+  "title": "大语言模型归一化技术",
+  "slug": "normalization",
+  "duration_estimate": "6分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "mimo_v_moli",
+      "text": "苏打,我最近看 Transformer 的代码,发现到处都是 LayerNorm。这个归一化到底在干嘛?为什么不能省掉?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "mimo_m_suda",
+      "text": "你可以把它想象成调音量。神经网络很深,信号一层层传下去,有的越传越大最后爆炸,有的越传越小最后消失。归一化就是每过几层就把音量调回正常,让训练能稳定进行。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "mimo_v_moli",
+      "text": "那为什么不用计算机视觉里那个 BatchNorm 呢?我在 CV 课上学过,挺好用的。",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "mimo_m_suda",
+      "text": "好问题。BatchNorm 是按 batch 统计的,但 NLP 有两个硬伤:一是句子长度不固定,padding 会污染统计;二是大模型训练时 batch size 经常是 1,batch 太小统计就不准。所以 NLP 用的是 LayerNorm,它只看单个样本自己,跟 batch 无关。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "mimo_v_moli",
+      "text": "明白了。我还有个困惑,看 LLaMA 的代码,用的不是 LayerNorm 而是 RMSNorm,这俩什么区别?",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "mimo_m_suda",
+      "text": "RMSNorm 是 LayerNorm 的极简版。LayerNorm 做两件事:减均值(居中)和除标准差(缩放)。有人发现,居中那一步其实不是必须的,光做缩放效果差不多,但计算更快。RMSNorm 就是只保留缩放,省掉了均值计算。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "mimo_v_moli",
+      "text": "省一点点计算有意义吗?感觉差别不大。",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "mimo_m_suda",
+      "text": "单次看差别小,但 LLM 推理是海量的,每层省一点,几千亿 token 累积下来就很可观。所以现在主流模型,Gemma、LLaMA、Mistral 都用 RMSNorm。这是一个工程上很务实的取舍。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "mimo_v_moli",
+      "text": "最后一个问题,我面试被问过:Pre-Norm 和 Post-Norm 是什么?为什么现在都用 Pre-Norm?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "mimo_m_suda",
+      "text": "这是归一化放在哪的问题。Post-Norm 是原始 Transformer 的做法,归一化放在残差连接之后;Pre-Norm 是放在之前。区别在于:Post-Norm 表达能力更强但训练不稳定,深层网络容易发散;Pre-Norm 训练更稳,所以现在深一点的大模型基本都用 Pre-Norm。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "mimo_v_moli",
+      "text": "原来是位置决定的。那今天算把归一化的几个关键点理清了。",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "mimo_m_suda",
+      "text": "对。总结一下:归一化是为了训练稳定,NLP 用 LayerNorm 不用 BatchNorm,主流模型用 RMSNorm 省计算,Pre-Norm 比较稳。下一篇我们会讲 KV Cache,那是推理加速的关键。",
+      "emotion": "平静"
+    }
+  ],
+  "timings": [
+    {
+      "start": 0,
+      "end": 8.64,
+      "duration": 8.64
+    },
+    {
+      "start": 9.040000000000001,
+      "end": 27.28,
+      "duration": 18.24
+    },
+    {
+      "start": 27.68,
+      "end": 35.519999999999996,
+      "duration": 7.84
+    },
+    {
+      "start": 35.92,
+      "end": 60.400000000000006,
+      "duration": 24.48
+    },
+    {
+      "start": 60.8,
+      "end": 69.75999999999999,
+      "duration": 8.96
+    },
+    {
+      "start": 70.16,
+      "end": 90.8,
+      "duration": 20.64
+    },
+    {
+      "start": 91.19999999999999,
+      "end": 96.96,
+      "duration": 5.76
+    },
+    {
+      "start": 97.35999999999999,
+      "end": 118.47999999999999,
+      "duration": 21.12
+    },
+    {
+      "start": 118.87999999999998,
+      "end": 126.55999999999997,
+      "duration": 7.68
+    },
+    {
+      "start": 126.95999999999998,
+      "end": 148.88,
+      "duration": 21.92
+    },
+    {
+      "start": 149.27999999999997,
+      "end": 156.31999999999996,
+      "duration": 7.04
+    },
+    {
+      "start": 156.71999999999997,
+      "end": 172.07999999999998,
+      "duration": 15.36
+    }
+  ],
+  "total_duration": 172.47999999999996,
+  "audio_url": "/podcast/audio/normalization.mp3"
+}

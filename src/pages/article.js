@@ -65,7 +65,10 @@ export async function renderArticle(container, slug) {
       ` : ''}
     </div>
     <div id="markdown-body-target"></div>
-    ${renderQuizEntry(slug, meta)}
+    <div class="article-extras">
+      ${renderPodcastEntry(slug)}
+      ${renderQuizEntry(slug, meta)}
+    </div>
     ${renderFooterNav(slug)}
   `;
 
@@ -87,6 +90,9 @@ export async function renderArticle(container, slug) {
 
   // scrollspy
   setupScrollSpy(container, toc);
+
+  // 检查是否有播客脚本(异步显示入口)
+  checkAndShowPodcastEntry(container, slug);
 }
 
 function renderSidebarTOC(toc, container) {
@@ -154,6 +160,33 @@ function setupScrollSpy(container, toc) {
     }
   }, { passive: true });
   updateActive();
+}
+
+function renderPodcastEntry(slug) {
+  // 只有有播客脚本的篇章才显示入口(异步检查)
+  return `
+    <div class="podcast-entry-banner" data-slug="${slug}" style="display:none;">
+      <div class="quiz-entry-info">
+        <span class="quiz-entry-label">播客精讲</span>
+        <span class="quiz-entry-text">5 分钟双人对话,苏打×茉莉带你快速建立框架</span>
+      </div>
+      <a href="#/article/${slug}/podcast" class="quiz-entry-btn podcast-entry-btn">收听播客 →</a>
+    </div>
+  `;
+}
+
+async function checkAndShowPodcastEntry(container, slug) {
+  try {
+    const resp = await fetch(`/podcast/scripts/${slug}.json`);
+    // SPA fallback 可能返回 index.html(200 但不是 JSON),必须检查 content-type
+    if (!resp.ok) return;
+    const ct = resp.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) return;
+    const data = await resp.json();
+    if (!data.dialogue || data.dialogue.length === 0) return;
+    const banner = container.querySelector(`.podcast-entry-banner[data-slug="${slug}"]`);
+    if (banner) banner.style.display = 'flex';
+  } catch {}
 }
 
 function renderQuizEntry(slug, meta) {

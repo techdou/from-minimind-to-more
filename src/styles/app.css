@@ -828,6 +828,163 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ------------------------------------------------------------------ */
+/* 播客播放器                                                           */
+/* ------------------------------------------------------------------ */
+
+.podcast-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+.podcast-header {
+  margin-bottom: 24px;
+}
+.podcast-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 12px 0 4px;
+}
+.podcast-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.podcast-player {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.podcast-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.podcast-play-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.podcast-play-btn:hover { background: var(--accent-hover); transform: scale(1.05); }
+.podcast-time {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.podcast-speed {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+.podcast-speed button {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+.podcast-speed button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.podcast-progress {
+  height: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+.podcast-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 0;
+  transition: width 0.1s linear;
+}
+
+.podcast-transcript {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 16px 20px;
+  scroll-behavior: smooth;
+}
+.podcast-line {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 4px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.podcast-line:hover { background: var(--surface); }
+.podcast-line.active {
+  background: var(--speaker-bg, var(--accent-soft));
+  border-left-color: var(--speaker-accent, var(--accent));
+}
+.podcast-speaker {
+  flex-shrink: 0;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.podcast-speaker-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.podcast-speaker-role {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.podcast-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.podcast-line.active .podcast-text {
+  color: var(--text);
+}
+
+/* 文章页播客入口 */
+.podcast-entry-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, var(--accent-soft), transparent);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.podcast-entry-btn {
+  background: var(--text) !important;
+  color: var(--panel-bg) !important;
+}
+
+.article-extras {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+/* ------------------------------------------------------------------ */
 /* 404 / 加载                                                           */
 /* ------------------------------------------------------------------ */
 

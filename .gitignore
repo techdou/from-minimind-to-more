@@ -5,3 +5,9 @@ screenshots/
 *.log
 .zcode/
 .DS_Store
+
+# 播客中间产物(只保留 mp3 和 dialogue JSON 到 public/)
+output/
+podcast/audio/**/*.wav
+podcast/audio/**/manifest.json
+podcast/audio/**/subtitles.srt
