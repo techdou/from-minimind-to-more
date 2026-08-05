@@ -1,0 +1,62 @@
+{
+  "title": "大规模语言模型推理与训练优化机制",
+  "slug": "inference-training-optimization",
+  "style": "quickfire",
+  "duration_estimate": "4分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "冰糖,大模型推理为什么慢?不是算力不够吗?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "不只是算力。推理分两个阶段,瓶颈完全不同。第一个阶段叫 Prefill,并行处理你的输入,瓶颈是计算。第二个阶段叫 Decode,逐个生成 token,瓶颈变成了显存带宽。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "显存带宽?就是数据从内存搬到芯片的速度?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "对。Decode 阶段每生成一个 token,都要加载整个模型权重和之前所有的 KV Cache。GPU 大部分时间在等数据搬运,计算单元闲着。这就是存储墙。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "那怎么优化?有哪些方向?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "推理优化三大方向:KV Cache 压缩(GQA/MQA 减少 KV 体积)、算子融合(Flash Attention 减少 IO)、量化(INT8/INT4 降低权重体积)。训练优化主要是并行策略——数据并行、张量并行、流水线并行。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "量化会损失精度吗?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "会有轻微损失,但 INT8 几乎无损,INT4 在大模型上也能接受。关键是用得够大——模型越大,量化对效果的影响越小,这是涌现现象之一。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "收到。推理慢主要卡存储墙,优化靠 KV 压缩+算子融合+量化。",
+      "emotion": "恍然大悟"
+    }
+  ]
+}
