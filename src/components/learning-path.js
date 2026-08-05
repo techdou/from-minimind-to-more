@@ -1,13 +1,14 @@
 /**
- * learning-path.js —— 学习路径(地铁线路图 + 流式链条)
+ * learning-path.js —— 学习路径(地铁线路图 + 弹性铺满 + 阶段折叠)
  *
- * P0: 卡片三态(未读灰点/在读橙边条+下一步角标/已读✓降灰)
- *     推荐横幅联动:被推荐的文章在路径中自动标记"在读/推荐"态
- *     阶段进度数字(2/4),全完成变品牌色
- * P1: 流式横向链条(flex-wrap, min-width 220px, 标题允许两行,无省略号)
- *     同阶段有顺序的卡片用 → 连接
- * P2: 左侧贯穿轨道线,阶段编号改站点圆点,阶段过渡由轨道承担
- * P3: 难度徽章分级配色(绿/蓝/橙/紫)
+ * 追加需求:
+ * 1. 卡片弹性铺满(flex 1 1 240px),行尾不留空白
+ *    - 卡片左上角加顺序编号(01/02/03),→ 仅同行相邻保留
+ *    - 单卡阶段允许通栏
+ * 2. 阶段折叠(手风琴)
+ *    - 标题行整行可点折叠,含 chevron 图标
+ *    - 200ms 高度+透明度过渡
+ *    - 默认:当前阶段展开,其余收起;localStorage 记忆
  */
 
 import manifest from '../data/manifest.json';
@@ -54,6 +55,16 @@ const PREREQ_SHORT = {
   dpo: 'DPO', ppo: 'PPO', grpo: 'GRPO', spo: 'SPO',
 };
 
+const COLLAPSE_KEY = 'mm2m_lp_collapse';
+
+function loadCollapseState() {
+  try { return JSON.parse(localStorage.getItem(COLLAPSE_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveCollapseState(state) {
+  localStorage.setItem(COLLAPSE_KEY, JSON.stringify(state));
+}
+
 export function renderLearningPath(container, recommendedSlug) {
   const progress = getAllProgress();
   const slugToArticle = {};
@@ -63,9 +74,37 @@ export function renderLearningPath(container, recommendedSlug) {
   const readCount = manifest.filter((a) => progress[a.slug]?.read).length;
   const pct = Math.round((readCount / totalArticles) * 100);
 
-  const stagesHTML = STAGES.map((stage, si) =>
-    renderStage(stage, si, slugToArticle, progress, recommendedSlug),
-  ).join('');
+  // 计算每个阶段的状态,决定默认展开
+  const stageStates = STAGES.map((stage) => {
+    // chains 元素可能是数组(['a','b'])或对象({route,articles:['a']})
+    const allArticles = stage.chains.flatMap((c) =>
+      Array.isArray(c) ? c : (c.articles || []),
+    );
+    const stageRead = allArticles.filter((s) => progress[s]?.read).length;
+    const stageTotal = allArticles.length;
+    const hasRecommended = allArticles.includes(recommendedSlug);
+    const hasInProgress = allArticles.some((s) => progress[s]?.percent > 5 && !progress[s]?.read);
+    const isDone = stageRead === stageTotal;
+    const isStarted = stageRead > 0 || hasInProgress;
+    return {
+      id: stage.id,
+      stageRead, stageTotal,
+      isDone, isStarted,
+      // 默认展开:包含推荐卡的阶段,或进行中的阶段
+      shouldDefaultExpand: hasRecommended || (isStarted && !isDone),
+    };
+  });
+
+  const savedCollapse = loadCollapseState();
+
+  const stagesHTML = STAGES.map((stage, si) => {
+    const st = stageStates[si];
+    // 用户手动操作过就用记忆,否则用默认
+    const userTouched = stage.id in savedCollapse;
+    const isExpanded = userTouched ? savedCollapse[stage.id] : st.shouldDefaultExpand;
+
+    return renderStage(stage, si, slugToArticle, progress, recommendedSlug, st, isExpanded);
+  }).join('');
 
   container.innerHTML = `
     <div class="lp-map-container">
@@ -88,44 +127,69 @@ export function renderLearningPath(container, recommendedSlug) {
     </div>
   `;
 
+  // 卡片点击跳转
   container.querySelectorAll('.lp-node-card').forEach((el) => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
       location.hash = `#/article/${el.dataset.slug}`;
+    });
+  });
+
+  // 阶段折叠
+  container.querySelectorAll('.lp-station-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const station = toggle.closest('.lp-station');
+      const stageId = station.dataset.stage;
+      const body = station.querySelector('.lp-station-body-inner');
+      const chevron = toggle.querySelector('.lp-chevron');
+      const isCurrentlyOpen = !station.classList.contains('lp-collapsed');
+
+      if (isCurrentlyOpen) {
+        station.classList.add('lp-collapsed');
+        chevron.style.transform = 'rotate(180deg)';
+      } else {
+        station.classList.remove('lp-collapsed');
+        chevron.style.transform = 'rotate(0deg)';
+      }
+
+      // 记忆
+      const newState = { ...loadCollapseState(), [stageId]: !isCurrentlyOpen };
+      saveCollapseState(newState);
     });
   });
 }
 
-function renderStage(stage, stageIdx, slugToArticle, progress, recommendedSlug) {
-  const allArticles = stage.chains.flatMap((c) => c.articles || []);
-  const stageRead = allArticles.filter((s) => progress[s]?.read).length;
-  const stageTotal = allArticles.length;
-  const stageStarted = stageRead > 0;
-  const stageDone = stageRead === stageTotal;
-  const stationState = stageDone ? 'done' : stageStarted ? 'active' : 'idle';
+function renderStage(stage, stageIdx, slugToArticle, progress, recommendedSlug, st, isExpanded) {
+  const stationState = st.isDone ? 'done' : st.isStarted ? 'active' : 'idle';
 
-  const chainsHTML = stage.chains.map((chain) =>
-    renderChain(chain, slugToArticle, progress, recommendedSlug),
-  ).join('');
+  // 全局顺序编号计数器(跨 chain)
+  let globalIdx = 0;
+  const chainsHTML = stage.chains.map((chain) => {
+    const html = renderChain(chain, slugToArticle, progress, recommendedSlug, () => ++globalIdx);
+    return html;
+  }).join('');
 
   return `
-    <div class="lp-station lp-station-${stationState}">
+    <div class="lp-station lp-station-${stationState} ${!isExpanded ? 'lp-collapsed' : ''}" data-stage="${stage.id}">
       <div class="lp-station-dot lp-dot-${stationState}">
-        ${stageDone ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+        ${st.isDone ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
       </div>
       <div class="lp-station-body">
-        <div class="lp-station-head">
+        <div class="lp-station-toggle" role="button" tabindex="0" aria-expanded="${isExpanded}">
           <span class="lp-station-name">${stage.name}</span>
           <span class="lp-station-sub">${stage.subtitle}</span>
-          <span class="lp-station-progress ${stageDone ? 'all-done' : stageStarted ? 'partial' : ''}">${stageRead}/${stageTotal}</span>
+          <span class="lp-station-progress ${st.isDone ? 'all-done' : st.isStarted ? 'partial' : ''}">${st.stageRead}/${st.stageTotal}</span>
+          <svg class="lp-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform:${isExpanded ? 'rotate(0deg)' : 'rotate(180deg)'}"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
-        <div class="lp-station-chains">${chainsHTML}</div>
+        <div class="lp-station-body-inner">
+          <div class="lp-station-chains">${chainsHTML}</div>
+        </div>
       </div>
     </div>
   `;
 }
 
-function renderChain(chain, slugToArticle, progress, recommendedSlug) {
-  // chain 可以是数组(单链)或对象(带路线标签)
+function renderChain(chain, slugToArticle, progress, recommendedSlug, nextIdx) {
   const isObject = !Array.isArray(chain);
   const routeLabel = isObject ? chain.route : null;
   const articles = isObject ? chain.articles : chain;
@@ -133,17 +197,16 @@ function renderChain(chain, slugToArticle, progress, recommendedSlug) {
   const cards = articles
     .map((s) => slugToArticle[s])
     .filter(Boolean)
-    .map((a, i) => ({ card: renderCard(a, progress, recommendedSlug), isLast: i === articles.length - 1 }))
-    .map(({ card, isLast }) => isLast ? card : card + '<span class="lp-arrow">→</span>')
-    .join('');
+    .map((a) => renderCard(a, progress, recommendedSlug, String(nextIdx()).padStart(2, '0')))
+    .join('<span class="lp-arrow">→</span>');
 
   if (routeLabel) {
-    return `<div class="lp-chain-wrap lp-chain-labeled"><span class="lp-route-tag">${routeLabel}</span><div class="lp-chain">${cards}</div></div>`;
+    return `<div class="lp-chain-wrap lp-chain-labeled"><span class="lp-route-tag lp-tag-${routeLabel === 'RL-Free' ? 'teal' : 'amber'}">${routeLabel}</span><div class="lp-chain">${cards}</div></div>`;
   }
   return `<div class="lp-chain-wrap"><div class="lp-chain">${cards}</div></div>`;
 }
 
-function renderCard(article, progress, recommendedSlug) {
+function renderCard(article, progress, recommendedSlug, seqNum) {
   const status = getCardStatus(article.slug, progress, recommendedSlug);
   const diff = DIFF_STYLES[article.difficulty] || DIFF_STYLES.intermediate;
   const prereqText = formatPrereqs(article.prerequisites);
@@ -152,14 +215,12 @@ function renderCard(article, progress, recommendedSlug) {
     <div class="lp-node-card lp-status-${status}" data-slug="${article.slug}">
       ${status === 'recommended' ? '<span class="lp-next-badge">下一步</span>' : ''}
       <div class="lp-card-top">
-        <span class="lp-status-dot lp-dot-${status}">
-          ${status === 'read' ? '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
-        </span>
+        <span class="lp-seq-num">${seqNum}</span>
         <span class="lp-diff-badge ${diff.cls}">${diff.label}</span>
       </div>
       <div class="lp-card-title">${article.title}</div>
       <div class="lp-card-bottom">
-        ${prereqText ? `<span class="lp-prereq-chip" title="前置依赖: ${prereqText}">前置: ${prereqText}</span>` : '<span class="lp-prereq-none">无前置</span>'}
+        <span class="lp-prereq-chip" title="前置依赖: ${prereqText || '无'}">${prereqText ? '前置: ' + prereqText : '无前置'}</span>
         <span class="lp-card-time">${article.duration}min</span>
       </div>
     </div>
