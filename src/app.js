@@ -84,7 +84,20 @@ function renderTopbar(currentParts) {
     <button class="theme-toggle" id="theme-toggle" title="切换主题">
       ${document.body.dataset.theme === 'dark' ? '☀' : '☾'}
     </button>
+    <button class="hamburger-btn" id="hamburger-btn" title="菜单" aria-label="菜单">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   `;
+
+  // 移动端汉堡菜单
+  const hamburger = topbar.querySelector('#hamburger-btn');
+  hamburger.addEventListener('click', () => {
+    topbar.classList.toggle('nav-open');
+  });
+  // 点击导航链接后关闭菜单
+  topbar.querySelectorAll('.topbar-nav a').forEach((a) => {
+    a.addEventListener('click', () => topbar.classList.remove('nav-open'));
+  });
 
   topbar.querySelector('#theme-toggle').addEventListener('click', () => {
     toggleTheme();

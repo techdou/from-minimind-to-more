@@ -524,18 +524,20 @@
 /* 响应式:< 720px 移动端                                                */
 /* ================================================================== */
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   /* 翻转卡:单列 */
   .flip-cards-grid {
     grid-template-columns: 1fr;
   }
   .flip-card {
-    height: 156px;
+    min-height: 156px;
+    height: auto;
   }
 
   /* 对比卡:纵向堆叠,中间分隔线变水平 */
   .compare-grid {
     grid-template-columns: 1fr;
+    overflow: visible;
   }
   .compare-divider {
     width: auto;
@@ -547,8 +549,13 @@
         var(--border-strong) 15%,
         var(--border-strong) 85%,
         transparent 100%);
+    overflow: visible;
   }
-  /* VS 徽章位置:横向时仍居中,不需要调整 */
+  .compare-divider-vs {
+    font-size: 11px;
+    width: 28px;
+    height: 28px;
+  }
   .compare-col {
     padding: 16px;
   }
@@ -556,6 +563,11 @@
   /* 画廊:卡片略窄 */
   .card-gallery-item {
     flex-basis: 220px;
+  }
+  /* lightbox 关闭按钮在小屏上调整定位 */
+  .card-lightbox-close {
+    top: 12px;
+    right: 12px;
   }
 }
 
