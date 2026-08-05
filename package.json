@@ -5,12 +5,14 @@
   "description": "From Minimind to More —— 大模型互动学习平台",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:content && vite build",
+    "build": "npm run build:content && npm run build:search && vite build",
     "build:content": "node scripts/build-content.js",
+    "build:search": "node scripts/build-search-index.js",
     "preview": "vite preview",
     "deploy": "npm run build && npx wrangler pages deploy dist"
   },
   "dependencies": {
+    "flexsearch": "^0.8.212",
     "highlight.js": "^11.10.0",
     "js-yaml": "^4.1.0",
     "marked": "^4.3.0"

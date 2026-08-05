@@ -12,6 +12,7 @@ import { renderCategory } from './pages/category.js';
 import { renderArticle } from './pages/article.js';
 import { renderQuiz } from './pages/quiz.js';
 import { renderPodcast } from './pages/podcast.js';
+import { renderSearch } from './pages/search.js';
 import { initTheme, toggleTheme } from './core/theme.js';
 import manifest from './data/manifest.json';
 
@@ -42,6 +43,9 @@ async function router() {
       await renderQuiz(main, parts[1]);
     } else if (parts[0] === 'article' && parts[1] && parts[2] === 'podcast') {
       await renderPodcast(main, parts[1]);
+    } else if (parts[0] === 'search') {
+      const query = decodeURIComponent(parts[1] || '');
+      await renderSearch(main, query);
     } else if (parts[0] === 'article' && parts[1]) {
       await renderArticle(main, parts[1]);
     } else {
@@ -72,6 +76,9 @@ function renderTopbar(currentParts) {
       <a href="#/category/foundations" class="${currentPath === 'category/foundations' ? 'active' : ''}">基石</a>
       <a href="#/category/architecture" class="${currentPath === 'category/architecture' ? 'active' : ''}">架构</a>
       <a href="#/category/algorithms" class="${currentPath === 'category/algorithms' ? 'active' : ''}">算法</a>
+      <a href="#/search" class="${currentParts[0] === 'search' ? 'active' : ''}" title="搜索">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
     </nav>
     <div class="topbar-spacer"></div>
     <button class="theme-toggle" id="theme-toggle" title="切换主题">
