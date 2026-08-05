@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "直接提出质疑,语气坚定但不冒犯。",
+      "speech_text": "苏打,SFT 之后的模型已经会听话了,为什么还要搞 PPO 这套强化学习?感觉多此一举。"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "有力地强调自己的核心论点。",
+      "speech_text": "白桦,SFT 只能学标注数据里的分布,但标注数据有限,质量也参差。PPO 引入了奖励信号,模型可以自己生成、自己被打分、自己改进,这是从模仿到探索的飞跃。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "直接提出质疑,语气坚定但不冒犯。",
+      "speech_text": "可这代价也太大了吧?PPO 要四个模型同时跑——Actor、Critic、Reference、Reward。显存翻几倍,有几个团队玩得起?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "沉稳地阐述自己的观点,像在给同行做技术报告。",
+      "speech_text": "代价确实高,但每个模型都有用。Actor 是被训练的主角,Critic 估价值函数当教练,Reference 锁住不让模型跑偏,Reward 给打分。四个角色各司其职,这是 RLHF 的完整闭环。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "带着审视的提问,像学术讨论中的质询。",
+      "speech_text": "MiniMind 这种小项目也搞得起 PPO?它怎么训练奖励模型?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "有力地强调自己的核心论点。",
+      "speech_text": "MiniMind 很务实。它从 SFT 数据里摘了 1 万条高质量对话,让模型对问题生成回答,然后直接用现成的 InternLM2-1.8B-Reward 来打分,不自己训奖励模型。省了一大块工程。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "直接提出质疑,语气坚定但不冒犯。",
+      "speech_text": "用别人的奖励模型?那分数可靠吗?领域偏移怎么办?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "沉稳地阐述自己的观点,像在给同行做技术报告。",
+      "speech_text": "对学习项目够用了。工业级 PPO 确实要训自己的奖励模型,还要处理偏好数据的分布对齐。但 MiniMind 的重点是让你跑通流程,理解 PPO 的每一步:采样、打分、算优势、更新策略、加 KL 惩罚防止跑偏。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "带着审视的提问,像学术讨论中的质询。",
+      "speech_text": "PPO 的 clip 机制我始终没完全懂。为什么要截断策略更新?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "有力地强调自己的核心论点。",
+      "speech_text": "这是 PPO 区别于朴素策略梯度的核心。如果不限制,一次更新可能把策略改得太猛,直接崩掉。clip 机制把新旧策略的比率限制在一个区间内,比如 0.8 到 1.2,保证每步更新都是小步快走,训练稳定。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "被对方说服的语气,大方承认。",
+      "speech_text": "小步快走,我懂了。难怪 PPO 能统治 RLHF 这么多年,确实每个设计都有道理。但我还是觉得太重,GRPO 那种去掉 Critic 的方案更吸引我。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "辩论间隙的轻松调侃。",
+      "speech_text": "这正是下一讲要讲的。PPO 是基石,理解了它,GRPO 的精简才看得明白。DeepSeek-R1 能崛起,就是站在 PPO 的肩膀上做减法。"
+    }
+  ]
+}

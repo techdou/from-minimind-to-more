@@ -1,0 +1,80 @@
+{
+  "title": "GRPO:DeepSeek-R1 背后的强化学习算法",
+  "slug": "grpo",
+  "style": "interview",
+  "duration_estimate": "约3分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "苏打,DeepSeek-R1 火了之后,GRPO 这个词到处都是。它跟 PPO 到底啥关系?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "GRPO 就是 PPO 的精简版。PPO 最大的痛点是要一个 Critic 模型估价值,显存直接翻倍。GRPO 干掉了 Critic,改用组内相对优势来估——同一个 prompt 生成多个回答,组内排序算分,这成了基准线。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "组内排序?具体是怎么算的?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "比如一个 prompt,模型生成 4 到 8 个不同回答,奖励模型给每个打分。然后这组分数求平均当基线,比平均高的回答算正优势、被鼓励,低的算负优势、被抑制。本质上是用群体均值替代了 Critic 的估值。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "省了 Critic,代价呢?多采样不也费算力吗?",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "确实,GRPO 的采样开销更大。但 Critic 是一直驻留显存的固定成本,采样是训练时的临时开销,权衡下来省得多。尤其在推理任务上,奖励信号明确——数学题对就是对、代码能跑就是能跑,GRPO 效果爆炸。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "听起来很完美啊,有什么坑?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "坑不少。原生 GRPO 有长度偏差——模型发现答得越长分数可能越高,就开始凑字数作弊。还有 MoE 架构下训练方差爆炸的问题。所以衍生出一堆变体:Dr. GRPO 修长度偏差,DAPO 解耦裁剪释放探索,GSPO 把采样提升到序列级稳住 MoE。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "这么多变体,那 MiniMind 用的是哪个?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "MiniMind 实现的是标准 GRPO,先把核心流程跑通。数据集和 PPO 一样,都是 RLAIF 那套。理解了 GRPO,再看 DeepSeek-R1 怎么靠它实现长链推理的冷启动,就顺理成章了。",
+      "emotion": "轻松"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "懂了。GRPO 的精髓就是用群体采样换掉 Critic,在客观可验证的任务上特别强。难怪成了今年算法岗必考。",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "对。下一讲我们聊 SPO,那是个更狠的——既不要 Critic,又只要采样一个回答,把 GRPO 的采样开销也省了。",
+      "emotion": "轻松"
+    }
+  ]
+}

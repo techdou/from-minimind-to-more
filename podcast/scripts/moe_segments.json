@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "直接提出质疑,语气坚定但不冒犯。",
+      "speech_text": "苏打,我一直觉得 MoE 这个方向有点投机取巧。参数搞到几千亿,实际激活的却只有一小部分,这不是掩耳盗铃吗?稠密模型才是正道。"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "有力地强调自己的核心论点。",
+      "speech_text": "白桦你这话我得反驳。Scaling Law 告诉我们,模型越聪明,参数就得越多。但稠密模型每个 token 都要算全部参数,千亿规模推理一次成本高得离谱。MoE 解决的就是'参数量和计算量解耦'这个死结。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "带着审视的提问,像学术讨论中的质询。",
+      "speech_text": "解耦听起来美好,可它怎么实现的?总不能让模型自己挑要不要算吧。"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "沉稳地阐述自己的观点,像在给同行做技术报告。",
+      "speech_text": "还真就是让它自己挑。思路仿生人脑——你做数学题不会同时激活视觉区。MoE 把那个巨大的 FFN 层拆成多个独立子网络,叫'专家'。再加一个门控网络当路由,每个 token 进来,路由器决定派给哪几个专家。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "直接提出质疑,语气坚定但不冒犯。",
+      "speech_text": "派给几个?如果全派,那跟稠密有什么区别?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "有力地强调自己的核心论点。",
+      "speech_text": "关键就在稀疏激活。Top-K 路由,只选分数最高的 K 个。Mixtral 8x7B 是 8 个专家选 2 个,DeepSeek-V3 是 256 个选 8 个。其余专家的输出权重直接置零,根本不算。这就是条件计算。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "直接提出质疑,语气坚定但不冒犯。",
+      "speech_text": "那路由器怎么训练?万一它偷懒,所有 token 都派给同一个专家怎么办?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "沉稳地阐述自己的观点,像在给同行做技术报告。",
+      "speech_text": "这正是 MoE 的核心难题,叫负载均衡。早期做法是加一个辅助损失,惩罚专家被选次数不均。DeepSeek 更狠,搞了个无辅助损失的方案,给每个专家配一个动态偏置项,被选多了就降权,完全靠数学调出来。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "带着审视的提问,像学术讨论中的质询。",
+      "speech_text": "我承认架构精巧。但工程上呢?专家分散在不同卡上,通信开销不小吧?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "有力地强调自己的核心论点。",
+      "speech_text": "你说到点子上了。专家并行确实是大工程,token 要跨卡路由,All-to-All 通信是瓶颈。所以 MoE 是个系统工程问题,不只是算法。MiniMind 那种小规模的能跑,真上 DeepSeek 级别,工程挑战巨大。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "被对方说服的语气,大方承认。",
+      "speech_text": "好吧,我收回'投机取巧'的说法。参数容量上去了,单次计算却控制住了,这条路确实有它的道理。GPT-4 据说也是 MoE。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "辩论间隙的轻松调侃。",
+      "speech_text": "对。未来大模型大概率都是 MoE,稠密反而是少数派了。理解了它,才算摸到前沿的门槛。"
+    }
+  ]
+}

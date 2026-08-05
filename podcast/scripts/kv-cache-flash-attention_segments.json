@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着真实的困惑提问,像学生没跟上时的疑问。",
+      "speech_text": "苏打,大模型生成的时候是一个词一个词往外蹦,每出一个词就要把前面所有词重新算一遍?那不是越往后越慢?"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "你说的是最朴素的实现,确实慢。所以大家用了一个叫 KV Cache 的技巧。每算完一个词,把它对应的 Key 和 Value 向量存起来,下一步直接拿来用,不重算。就像你做饭,调料提前备好放案板上,用的时候直接抓。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着领悟的语气,像是终于想通了。",
+      "speech_text": "省了计算,但存这些 KV 不占显存吗?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "重点强调,语速略慢,让听众感受到这是关键。",
+      "speech_text": "占,而且占得很凶。KV Cache 的大小跟上下文长度成正比,长文本推理时它能吃掉几十 G 显存。这就是所谓的内存墙——推理速度被显存带宽卡死了。70B 的模型在 H100 上理论也就一秒 24 个词。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "像在认真提问,语气自然好奇,不要太正式。",
+      "speech_text": "那怎么办?有办法缩小 KV Cache 吗?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "这就是 GQA 和 MQA 的用武之地。MQA 最极端,所有 Query 头共享同一组 KV;GQA 折中一点,分组共享。MiniMind 和 LLaMA 3 都用 GQA,KV 头从 8 个砍到 2 个,Cache 直接缩到四分之一。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着真实的困惑提问,像学生没跟上时的疑问。",
+      "speech_text": "Cache 的问题解决了。可 Attention 本身的计算量呢?上下文一长,复杂度不是平方级增长?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "重点强调,语速略慢,让听众感受到这是关键。",
+      "speech_text": "对,这是另一个瓶颈。标准 Attention 要把 N 乘 N 的注意力矩阵完整算出来,写到显存再读回来,IO 开销巨大。Flash Attention 解决的就是这个。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "像在认真提问,语气自然好奇,不要太正式。",
+      "speech_text": "Flash Attention 怎么做到的?是把矩阵变小了吗?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "不是变小,是少搬运。它把矩阵分块,在 GPU 的高速 SRAM 里算完再合并,中间结果不写回主显存。数学上等价,但 IO 少了一大截。PyTorch 现在内置了这个函数,一行代码就能调。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着领悟的语气,像是终于想通了。",
+      "speech_text": "所以这俩是配合用的:KV Cache 解决重算,GQA 缩小 Cache,Flash Attention 解决长文本的 IO。推理加速的三件套。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "轻松自然的对话语气。",
+      "speech_text": "总结到位。下一篇我们聊 MoE,那是个更狠的优化——参数量涨上去,计算量却不涨。"
+    }
+  ]
+}

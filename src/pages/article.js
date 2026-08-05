@@ -14,6 +14,9 @@ import { enhanceCallouts } from '../core/callout.js';
 import { injectConceptImages } from '../core/concept-images.js';
 import { enhanceFormulaTooltips } from '../core/formula-tooltip.js';
 import { bindProgressBar, restoreScroll, getProgress } from '../core/progress.js';
+import { renderFlipCards } from '../components/flip-card.js';
+import { renderComparisonCards } from '../components/comparison-cards.js';
+import { renderCardGallery } from '../components/card-gallery.js';
 import manifest from '../data/manifest.json';
 
 export async function renderArticle(container, slug) {
@@ -82,6 +85,12 @@ export async function renderArticle(container, slug) {
 
   // 抽象概念配图注入(异步,图片可能需要加载)
   injectConceptImages(targetEl, slug).catch(() => {});
+
+  // 卡片式交互组件:翻转卡 / 对比卡 / 图片画廊
+  // 均做了空数据保护,无配置时直接 return;画廊内部对每张图做 HEAD 校验。
+  renderFlipCards(targetEl, slug);
+  renderComparisonCards(targetEl, slug);
+  renderCardGallery(targetEl, slug).catch(() => {});
 
   // 公式符号 hover 释义
   enhanceFormulaTooltips(targetEl, slug);

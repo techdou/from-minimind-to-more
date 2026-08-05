@@ -1,0 +1,144 @@
+{
+  "title": "超级拼装:把 MiniMind 的模块组装起来",
+  "slug": "assembly",
+  "style": "lecture",
+  "duration_estimate": "约3分钟",
+  "dialogue": [
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "白老师,前面我们讲了一堆模块——RMSNorm、Attention、RoPE、FeedForward、MoE。它们到底怎么拼成一个完整模型的?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "这一讲就是把零件装上流水线。MiniMind 是高度模块化的,每个核心类各司其职。先从控制台说起——MiniMindConfig,它定义了维度、层数、头数这些基础参数,还集成了 YaRN 和 MoE 的开关。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "配置类我理解了,像个总开关。那归一化层呢?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "归一化用 RMSNorm,上一讲讲过。它比标准 LayerNorm 少了减均值那一步,只做缩放,计算更快,数值更稳。LLaMA、Gemma 这些主流模型都这么干。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "Attention 模块呢?它里面塞了好多东西。",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "Attention 是核心。三个技术打包进去:GQA 降低 KV 头数省显存,RoPE 加上 YaRN 处理长文本外推,Flash Attention 自动检测环境,PyTorch 支持就直接调底层优化函数。三层叠加,推理和训练都飞起来。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "前馈网络这块有两种模式是吧?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "对。标准 FeedForward 用 SwiGLU 激活,输入过门控投影和上投影,相乘再 Swish 再下投影,比老式 ReLU 收敛更好。另一个是 MOEFeedForward,DeepSeek 风格的稀疏结构,开 MoE 开关就走这条路径。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "这些模块怎么串起来?一个 Transformer Block 的顺序是?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "输入先过 RMSNorm 进 Attention,做残差连接;再过 RMSNorm 进 FeedForward,再做残差。这样一个 Block 就成了。MiniMind 叠 8 层 Block,加上首部的 Embedding 层和尾部的输出投影,整个模型就拼完了。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "原来每个模块都对应前面讲过的技术,组装起来就是现代大模型。这下全串起来了。",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "没错。架构吃透了,下一篇我们就进训练环节,看预训练怎么把这堆参数从随机变成会说话。",
+      "emotion": "轻松"
+    }
+  ],
+  "timings": [
+    {
+      "start": 0,
+      "end": 10.72,
+      "duration": 10.72
+    },
+    {
+      "start": 11.120000000000001,
+      "end": 35.760000000000005,
+      "duration": 24.64
+    },
+    {
+      "start": 36.16,
+      "end": 40,
+      "duration": 3.84
+    },
+    {
+      "start": 40.4,
+      "end": 64.88,
+      "duration": 24.48
+    },
+    {
+      "start": 65.28,
+      "end": 68.96000000000001,
+      "duration": 3.68
+    },
+    {
+      "start": 69.36,
+      "end": 93.36,
+      "duration": 24
+    },
+    {
+      "start": 93.75999999999999,
+      "end": 96.63999999999999,
+      "duration": 2.88
+    },
+    {
+      "start": 97.03999999999999,
+      "end": 119.75999999999999,
+      "duration": 22.72
+    },
+    {
+      "start": 120.16,
+      "end": 124.64,
+      "duration": 4.48
+    },
+    {
+      "start": 125.03999999999999,
+      "end": 147.6,
+      "duration": 22.56
+    },
+    {
+      "start": 148,
+      "end": 155.68,
+      "duration": 7.68
+    },
+    {
+      "start": 156.08,
+      "end": 165.68,
+      "duration": 9.6
+    }
+  ],
+  "total_duration": 166.08,
+  "audio_url": "/podcast/audio/assembly.mp3"
+}

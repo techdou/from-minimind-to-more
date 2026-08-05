@@ -1,0 +1,74 @@
+{
+  "title": "SFT 监督微调:教模型听懂指令",
+  "slug": "sft",
+  "style": "quickfire",
+  "duration_estimate": "约2分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "冰糖!SFT 是干嘛的,一句话讲!",
+      "emotion": "轻松"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "监督微调,用带标注的问答数据,教预训练好的模型按指令回答。预训练只会续写,SFT 让它学会一问一答。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "和预训练的核心区别是啥?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "Loss Mask。预训练整段都算 loss,SFT 只对 Assistant 的回复部分算,prompt 部分被 Mask 掉。因为模型不需要学怎么提问,只需要学怎么回答。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "这个 Mask 怎么实现的?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "在长文本里找到回复的起始和结束位置,把那段之外的标签设成 -100。PyTorch 的交叉熵损失函数见到 -100 就自动忽略,不算梯度。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "训练代码和预训练像吗?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "核心训练引擎几乎一样。都是监督学习,差别全在 Dataset 怎么构造数据。梯度累加、梯度裁剪这些工程技巧也都共用。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "梯度累加和梯度裁剪各解决啥问题?快说!",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "梯度累加:显存不够跑大 batch,分几次前向、梯度累起来再更新,等效大 batch。梯度裁剪:梯度太大时强行截断,防止梯度爆炸让训练崩掉。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "收到!SFT = Loss Mask + 问答数据 + 工程技巧,搞定!",
+      "emotion": "恍然大悟"
+    }
+  ]
+}

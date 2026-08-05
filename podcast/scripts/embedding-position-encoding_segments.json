@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "白老师,上一讲我们说 Tokenizer 把文字变成了数字编号。可编号是离散的,'猫'是 8921,'狗'是 4412,模型怎么从这俩数字里看出它俩相似?"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "这正是 Embedding 要解决的问题。你可以把它想象成一张巨大的查表,每个编号对应一个高维向量,比如 512 维。模型实际处理的不是编号,而是这个向量。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "带着学生常见的困惑提问,语气温和。",
+      "speech_text": "那为什么不用最简单的 one-hot,每个词独占一维?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "one-hot 有两个致命问题。一是维度等于词表大小,几万维向量全是零,太浪费;二是任意两个 one-hot 向量相互垂直,距离都一样,模型根本分不出'猫和狗'近、还是'猫和汽车'近。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "领悟的语气,像是终于把知识点串联起来了。",
+      "speech_text": "所以 Embedding 向量是稠密的,而且能反映语义距离?这是怎么学出来的?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "对。核心是分布语义假设——一个词的意思由它的上下文决定。训练时,'猫'和'狗'都常和'喂''宠物'一起出现,反向传播就会把这两个向量在空间里越推越近。这就是语言学家 Firth 说的:看一个词的伴随词,就认识它。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "Embedding 我懂了。那位置编码又是干嘛的?跟 Embedding 有什么关系?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "Embedding 解决了'是什么',位置编码解决'在哪'。Transformer 是并行处理所有词的,它本身没有顺序概念。你得额外告诉模型,'我打你'和'你打我'的词向量虽然一样,但顺序不同,意思完全相反。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "带着学生常见的困惑提问,语气温和。",
+      "speech_text": "那位置信息怎么加进去?直接拼在向量后面吗?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "早期 GPT 用的是直接相加,把一个用正弦余弦算出来的位置向量加到 Embedding 上,这叫绝对位置编码。但现在主流是 RoPE,旋转位置编码,它不是加,而是把向量旋转一个角度,角度大小由位置决定。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "RoPE 为什么比绝对位置编码好?而且我听说它能外推到更长上下文?"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "RoPE 编码的是相对位置——两个词的注意力只跟它们的距离有关,跟绝对位置无关,泛化性更好。再配合 YaRN 这种调整旋转频率的技术,模型在 4k 上训练,也能外推到 32k 甚至更长。这也是现在长上下文模型的基石。"
+    }
+  ]
+}

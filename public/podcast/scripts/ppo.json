@@ -1,0 +1,144 @@
+{
+  "title": "PPO:大模型强化学习的基石",
+  "slug": "ppo",
+  "style": "debate",
+  "duration_estimate": "约3分钟",
+  "dialogue": [
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "苏打,SFT 之后的模型已经会听话了,为什么还要搞 PPO 这套强化学习?感觉多此一举。",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "白桦,SFT 只能学标注数据里的分布,但标注数据有限,质量也参差。PPO 引入了奖励信号,模型可以自己生成、自己被打分、自己改进,这是从模仿到探索的飞跃。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "可这代价也太大了吧?PPO 要四个模型同时跑——Actor、Critic、Reference、Reward。显存翻几倍,有几个团队玩得起?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "代价确实高,但每个模型都有用。Actor 是被训练的主角,Critic 估价值函数当教练,Reference 锁住不让模型跑偏,Reward 给打分。四个角色各司其职,这是 RLHF 的完整闭环。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "MiniMind 这种小项目也搞得起 PPO?它怎么训练奖励模型?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "MiniMind 很务实。它从 SFT 数据里摘了 1 万条高质量对话,让模型对问题生成回答,然后直接用现成的 InternLM2-1.8B-Reward 来打分,不自己训奖励模型。省了一大块工程。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "用别人的奖励模型?那分数可靠吗?领域偏移怎么办?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "对学习项目够用了。工业级 PPO 确实要训自己的奖励模型,还要处理偏好数据的分布对齐。但 MiniMind 的重点是让你跑通流程,理解 PPO 的每一步:采样、打分、算优势、更新策略、加 KL 惩罚防止跑偏。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "PPO 的 clip 机制我始终没完全懂。为什么要截断策略更新?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "这是 PPO 区别于朴素策略梯度的核心。如果不限制,一次更新可能把策略改得太猛,直接崩掉。clip 机制把新旧策略的比率限制在一个区间内,比如 0.8 到 1.2,保证每步更新都是小步快走,训练稳定。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "白桦",
+      "voice": "白桦",
+      "text": "小步快走,我懂了。难怪 PPO 能统治 RLHF 这么多年,确实每个设计都有道理。但我还是觉得太重,GRPO 那种去掉 Critic 的方案更吸引我。",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "这正是下一讲要讲的。PPO 是基石,理解了它,GRPO 的精简才看得明白。DeepSeek-R1 能崛起,就是站在 PPO 的肩膀上做减法。",
+      "emotion": "轻松"
+    }
+  ],
+  "timings": [
+    {
+      "start": 0,
+      "end": 8.8,
+      "duration": 8.8
+    },
+    {
+      "start": 9.200000000000001,
+      "end": 23.44,
+      "duration": 14.24
+    },
+    {
+      "start": 23.840000000000003,
+      "end": 35.36,
+      "duration": 11.52
+    },
+    {
+      "start": 35.760000000000005,
+      "end": 53.84,
+      "duration": 18.08
+    },
+    {
+      "start": 54.24,
+      "end": 59.84,
+      "duration": 5.6
+    },
+    {
+      "start": 60.24,
+      "end": 76.08,
+      "duration": 15.84
+    },
+    {
+      "start": 76.48,
+      "end": 83.2,
+      "duration": 6.72
+    },
+    {
+      "start": 83.60000000000001,
+      "end": 102.32000000000001,
+      "duration": 18.72
+    },
+    {
+      "start": 102.72,
+      "end": 108.48,
+      "duration": 5.76
+    },
+    {
+      "start": 108.88,
+      "end": 126.64,
+      "duration": 17.76
+    },
+    {
+      "start": 127.03999999999999,
+      "end": 139.68,
+      "duration": 12.64
+    },
+    {
+      "start": 140.07999999999998,
+      "end": 151.27999999999997,
+      "duration": 11.2
+    }
+  ],
+  "total_duration": 151.67999999999998,
+  "audio_url": "/podcast/audio/ppo.mp3"
+}

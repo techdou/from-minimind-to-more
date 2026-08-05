@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "像在认真提问,语气自然好奇,不要太正式。",
+      "speech_text": "苏打,DeepSeek-R1 火了之后,GRPO 这个词到处都是。它跟 PPO 到底啥关系?"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "重点强调,语速略慢,让听众感受到这是关键。",
+      "speech_text": "GRPO 就是 PPO 的精简版。PPO 最大的痛点是要一个 Critic 模型估价值,显存直接翻倍。GRPO 干掉了 Critic,改用组内相对优势来估——同一个 prompt 生成多个回答,组内排序算分,这成了基准线。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着真实的困惑提问,像学生没跟上时的疑问。",
+      "speech_text": "组内排序?具体是怎么算的?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "比如一个 prompt,模型生成 4 到 8 个不同回答,奖励模型给每个打分。然后这组分数求平均当基线,比平均高的回答算正优势、被鼓励,低的算负优势、被抑制。本质上是用群体均值替代了 Critic 的估值。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着领悟的语气,像是终于想通了。",
+      "speech_text": "省了 Critic,代价呢?多采样不也费算力吗?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "重点强调,语速略慢,让听众感受到这是关键。",
+      "speech_text": "确实,GRPO 的采样开销更大。但 Critic 是一直驻留显存的固定成本,采样是训练时的临时开销,权衡下来省得多。尤其在推理任务上,奖励信号明确——数学题对就是对、代码能跑就是能跑,GRPO 效果爆炸。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "像在认真提问,语气自然好奇,不要太正式。",
+      "speech_text": "听起来很完美啊,有什么坑?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "坑不少。原生 GRPO 有长度偏差——模型发现答得越长分数可能越高,就开始凑字数作弊。还有 MoE 架构下训练方差爆炸的问题。所以衍生出一堆变体:Dr. GRPO 修长度偏差,DAPO 解耦裁剪释放探索,GSPO 把采样提升到序列级稳住 MoE。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着真实的困惑提问,像学生没跟上时的疑问。",
+      "speech_text": "这么多变体,那 MiniMind 用的是哪个?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "轻松自然的对话语气。",
+      "speech_text": "MiniMind 实现的是标准 GRPO,先把核心流程跑通。数据集和 PPO 一样,都是 RLAIF 那套。理解了 GRPO,再看 DeepSeek-R1 怎么靠它实现长链推理的冷启动,就顺理成章了。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着领悟的语气,像是终于想通了。",
+      "speech_text": "懂了。GRPO 的精髓就是用群体采样换掉 Critic,在客观可验证的任务上特别强。难怪成了今年算法岗必考。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "轻松自然的对话语气。",
+      "speech_text": "对。下一讲我们聊 SPO,那是个更狠的——既不要 Critic,又只要采样一个回答,把 GRPO 的采样开销也省了。"
+    }
+  ]
+}

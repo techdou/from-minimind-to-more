@@ -1,0 +1,114 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "host_1",
+      "filename": "01_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "轻松活泼的快问快答节奏。",
+      "speech_text": "冰糖!SFT 是干嘛的,一句话讲!"
+    },
+    {
+      "index": 2,
+      "title": "guest_2",
+      "filename": "02_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "简洁清晰地回答,语速偏快但不急促。",
+      "speech_text": "监督微调,用带标注的问答数据,教预训练好的模型按指令回答。预训练只会续写,SFT 让它学会一问一答。"
+    },
+    {
+      "index": 3,
+      "title": "host_3",
+      "filename": "03_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "快速好奇地追问,语速明快。",
+      "speech_text": "和预训练的核心区别是啥?"
+    },
+    {
+      "index": 4,
+      "title": "guest_4",
+      "filename": "04_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "快速但有力地强调重点。",
+      "speech_text": "Loss Mask。预训练整段都算 loss,SFT 只对 Assistant 的回复部分算,prompt 部分被 Mask 掉。因为模型不需要学怎么提问,只需要学怎么回答。"
+    },
+    {
+      "index": 5,
+      "title": "host_5",
+      "filename": "05_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "干脆利落地提出疑问,不拖泥带水。",
+      "speech_text": "这个 Mask 怎么实现的?"
+    },
+    {
+      "index": 6,
+      "title": "guest_6",
+      "filename": "06_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "简洁清晰地回答,语速偏快但不急促。",
+      "speech_text": "在长文本里找到回复的起始和结束位置,把那段之外的标签设成 -100。PyTorch 的交叉熵损失函数见到 -100 就自动忽略,不算梯度。"
+    },
+    {
+      "index": 7,
+      "title": "host_7",
+      "filename": "07_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "快速好奇地追问,语速明快。",
+      "speech_text": "训练代码和预训练像吗?"
+    },
+    {
+      "index": 8,
+      "title": "guest_8",
+      "filename": "08_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "快速但有力地强调重点。",
+      "speech_text": "核心训练引擎几乎一样。都是监督学习,差别全在 Dataset 怎么构造数据。梯度累加、梯度裁剪这些工程技巧也都共用。"
+    },
+    {
+      "index": 9,
+      "title": "host_9",
+      "filename": "09_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "干脆利落地提出疑问,不拖泥带水。",
+      "speech_text": "梯度累加和梯度裁剪各解决啥问题?快说!"
+    },
+    {
+      "index": 10,
+      "title": "guest_10",
+      "filename": "10_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "简洁清晰地回答,语速偏快但不急促。",
+      "speech_text": "梯度累加:显存不够跑大 batch,分几次前向、梯度累起来再更新,等效大 batch。梯度裁剪:梯度太大时强行截断,防止梯度爆炸让训练崩掉。"
+    },
+    {
+      "index": 11,
+      "title": "host_11",
+      "filename": "11_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "恍然大悟的轻快语气。",
+      "speech_text": "收到!SFT = Loss Mask + 问答数据 + 工程技巧,搞定!"
+    }
+  ]
+}

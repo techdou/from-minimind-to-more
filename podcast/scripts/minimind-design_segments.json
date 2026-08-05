@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "像在认真提问,语气自然好奇,不要太正式。",
+      "speech_text": "苏打,我想动手训一个大模型练手,但 LLaMA 那种几十亿参数的,显卡根本扛不住。听说有个叫 MiniMind 的项目,最小才 26M 参数?"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "对,MiniMind 就是给学习用的。麻雀虽小,五脏俱全。它虽然只有 26M 参数,但架构全面对齐 LLaMA 3、DeepSeek 这些前沿模型,Decoder-Only Transformer,该有的全有。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着真实的困惑提问,像学生没跟上时的疑问。",
+      "speech_text": "Decoder-Only 是什么意思?为什么不用 BERT 那种 Encoder?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "重点强调,语速略慢,让听众感受到这是关键。",
+      "speech_text": "Decoder-Only 只做一件事:预测下一个词,叫 Next Token Prediction。它通过一个因果掩码,让当前词只能看到前面的词,看不到后面。BERT 是双向的,适合理解任务;但生成任务,GPT 这种单向架构才是主流,现在大模型基本都选它。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "像在认真提问,语气自然好奇,不要太正式。",
+      "speech_text": "26M 这么小,它的配置参数都是怎么取舍的?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "看它的配置类就清楚了。隐藏维度 512——LLaMA-7B 是 4096,它压缩了 8 倍;层数 8 层;词表只有 6400,大模型通常是 3 万到 10 万。还有个 GQA 的设计,Query 头 8 个,但 Key Value 头只有 2 个。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着领悟的语气,像是终于想通了。",
+      "speech_text": "Query 头和 KV 头数量不一样?这是什么操作?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "重点强调,语速略慢,让听众感受到这是关键。",
+      "speech_text": "这叫分组查询注意力,GQA。Key 和 Value 在推理时要缓存,头多了显存爆炸。少几个 KV 头,把节省的显存换来,效果却几乎不损失。LLaMA 3 也是这么干的,MiniMind 直接对齐。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着真实的困惑提问,像学生没跟上时的疑问。",
+      "speech_text": "它还支持 MoE?这么小的模型也能上混合专家?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "平稳清晰地讲解,语速适中,像知识博主。",
+      "speech_text": "能,有个 use_moe 开关。开了之后 FFN 层就变成 DeepSeek 风格的稀疏结构,每次只激活少数专家,参数容量上去了,计算量却没怎么涨。学习用刚刚好。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "茉莉",
+      "format": "wav",
+      "style_instruction": "带着领悟的语气,像是终于想通了。",
+      "speech_text": "懂了,小是参数小,架构思路一点都不旧。先把这套配置吃透,看大模型就顺手了。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "苏打",
+      "format": "wav",
+      "style_instruction": "轻松自然的对话语气。",
+      "speech_text": "没错。MiniMind 的价值就在这——用最小成本让你摸到所有现代设计。下一篇我们就拆它的推理加速,KV Cache 那块。"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "title": "Minimind 的设计:一只麻雀大小的 LLaMA",
+  "slug": "minimind-design",
+  "style": "interview",
+  "duration_estimate": "约3分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "苏打,我想动手训一个大模型练手,但 LLaMA 那种几十亿参数的,显卡根本扛不住。听说有个叫 MiniMind 的项目,最小才 26M 参数?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "对,MiniMind 就是给学习用的。麻雀虽小,五脏俱全。它虽然只有 26M 参数,但架构全面对齐 LLaMA 3、DeepSeek 这些前沿模型,Decoder-Only Transformer,该有的全有。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "Decoder-Only 是什么意思?为什么不用 BERT 那种 Encoder?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "Decoder-Only 只做一件事:预测下一个词,叫 Next Token Prediction。它通过一个因果掩码,让当前词只能看到前面的词,看不到后面。BERT 是双向的,适合理解任务;但生成任务,GPT 这种单向架构才是主流,现在大模型基本都选它。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "26M 这么小,它的配置参数都是怎么取舍的?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "看它的配置类就清楚了。隐藏维度 512——LLaMA-7B 是 4096,它压缩了 8 倍;层数 8 层;词表只有 6400,大模型通常是 3 万到 10 万。还有个 GQA 的设计,Query 头 8 个,但 Key Value 头只有 2 个。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "Query 头和 KV 头数量不一样?这是什么操作?",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "这叫分组查询注意力,GQA。Key 和 Value 在推理时要缓存,头多了显存爆炸。少几个 KV 头,把节省的显存换来,效果却几乎不损失。LLaMA 3 也是这么干的,MiniMind 直接对齐。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "它还支持 MoE?这么小的模型也能上混合专家?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "能,有个 use_moe 开关。开了之后 FFN 层就变成 DeepSeek 风格的稀疏结构,每次只激活少数专家,参数容量上去了,计算量却没怎么涨。学习用刚刚好。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "懂了,小是参数小,架构思路一点都不旧。先把这套配置吃透,看大模型就顺手了。",
+      "emotion": "恍然大悟"
+    },
+    {
+      "speaker": "苏打",
+      "voice": "苏打",
+      "text": "没错。MiniMind 的价值就在这——用最小成本让你摸到所有现代设计。下一篇我们就拆它的推理加速,KV Cache 那块。",
+      "emotion": "轻松"
+    }
+  ]
+}

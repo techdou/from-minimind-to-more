@@ -1,0 +1,574 @@
+/**
+ * cards.css —— 卡片式交互组件
+ *
+ * 涵盖三个组件:
+ *   1. .flip-cards-wrap      翻转知识卡(3D 翻面)
+ *   2. .compare-wrap         对比卡片组(左右两列 + VS 分隔线)
+ *   3. .card-gallery-wrap    知识卡片画廊(横向滚动 + snap)
+ *   + .card-lightbox         画廊点击放大的全屏遮罩
+ *
+ * 设计:
+ *   - 全部使用 tokens.css 的 CSS 变量(琥珀强调 #B45309)
+ *   - 不用 Tailwind 蓝紫
+ *   - 圆角 var(--radius) / var(--radius-lg)
+ *   - 暗色主题通过 [data-theme="dark"] 适配
+ *   - 响应式:< 720px 卡片堆叠
+ *
+ * 三类卡片都挂在文章正文 .markdown-body 内,所以下面用
+ * .reader-content .markdown-body 前缀避免污染其他页面。
+ */
+
+/* ================================================================== */
+/* 通用:卡片区块的间距与外层壳                                            */
+/* ================================================================== */
+
+.reader-content .markdown-body .flip-cards-wrap,
+.reader-content .markdown-body .compare-wrap,
+.reader-content .markdown-body .card-gallery-wrap {
+  margin: 36px 0;
+  padding: 0;
+}
+
+/* 区块标题(三组件共用样式) */
+.flip-cards-header,
+.compare-header,
+.card-gallery-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.flip-cards-title,
+.compare-title,
+.card-gallery-title {
+  margin: 0;
+  font-size: 1.05em;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flip-cards-title svg,
+.compare-title svg,
+.card-gallery-title svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.flip-cards-sub,
+.card-gallery-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+
+/* ================================================================== */
+/* 1. 翻转知识卡 flip-card                                             */
+/* ================================================================== */
+
+.flip-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* perspective 放在外层,inner 来做旋转 */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+  outline: none;
+  height: 168px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-bg);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+
+/* 正面:浅琥珀底,强调"待回答" */
+.flip-card-front {
+  background: linear-gradient(135deg, var(--panel-bg) 0%, var(--accent-soft) 100%);
+}
+
+/* 背面:稍深的 surface,强调"已揭晓" */
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+.flip-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.flip-card-no {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.flip-card-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--surface-hover);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.flip-card-q {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.flip-card-a {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.flip-card-hint {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: auto;
+  letter-spacing: 0.02em;
+}
+
+/* 悬停:轻微抬起,不抢旋转 */
+.flip-card:hover .flip-card-face,
+.flip-card:focus-visible .flip-card-face {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+.flip-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-lg);
+}
+
+/* ================================================================== */
+/* 2. 对比卡片组 comparison-cards                                      */
+/* ================================================================== */
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--panel-bg);
+  box-shadow: var(--shadow);
+}
+
+.compare-col {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.compare-col-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.compare-col-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.compare-col-sub {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.compare-col-right .compare-col-title {
+  color: var(--text);
+  /* 右侧用深色区分,避免左右完全对称 */
+}
+
+.compare-features {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.compare-features li::marker {
+  color: var(--accent);
+}
+
+.compare-pros-cons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.compare-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.compare-row-label {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+}
+
+.compare-row-pros {
+  background: rgba(22, 163, 74, 0.08);
+  color: var(--text);
+}
+.compare-row-pros .compare-row-label {
+  background: var(--success);
+  color: #fff;
+}
+
+.compare-row-cons {
+  background: rgba(220, 38, 38, 0.06);
+  color: var(--text);
+}
+.compare-row-cons .compare-row-label {
+  background: var(--danger);
+  color: #fff;
+}
+
+.compare-row-text {
+  color: var(--text-secondary);
+}
+
+/* 中间分隔线 + VS 徽章 */
+.compare-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(to bottom,
+      transparent 0%,
+      var(--border-strong) 15%,
+      var(--border-strong) 85%,
+      transparent 100%);
+  width: 1px;
+  margin: 0 auto;
+}
+
+.compare-divider-vs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--panel-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 4px 10px;
+  letter-spacing: 0.06em;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ================================================================== */
+/* 3. 知识卡片画廊 card-gallery                                        */
+/* ================================================================== */
+
+.card-gallery-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 14px 4px;
+  margin: 0 -4px;
+  /* 让横向滚动条低调一些 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.card-gallery-track::-webkit-scrollbar {
+  height: 8px;
+}
+.card-gallery-track::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+.card-gallery-track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card-gallery-item {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  margin: 0;
+  padding: 0;
+  cursor: zoom-in;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-gallery-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+.card-gallery-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.card-gallery-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--surface);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.card-gallery-item:hover .card-gallery-thumb img {
+  transform: scale(1.04);
+}
+[data-theme="dark"] .card-gallery-thumb img {
+  opacity: 0.95;
+}
+
+.card-gallery-caption {
+  padding: 10px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-gallery-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-gallery-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/* ================================================================== */
+/* 4. Lightbox(画廊放大查看)                                          */
+/* ================================================================== */
+
+.card-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 18, 16, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  cursor: zoom-out;
+  animation: card-lightbox-fade 0.2s ease;
+}
+
+.card-lightbox[hidden] {
+  display: none;
+}
+
+.card-lightbox-img {
+  max-width: 92vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  background: var(--panel-bg);
+  cursor: default;
+}
+
+.card-lightbox-caption {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f5f3ee;
+  font-size: 14px;
+  text-align: center;
+  max-width: 80vw;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.card-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+}
+.card-lightbox-close:hover {
+  background: var(--accent);
+  transform: scale(1.05);
+}
+
+.card-lightbox-open {
+  overflow: hidden;
+}
+
+@keyframes card-lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* ================================================================== */
+/* 响应式:< 720px 移动端                                                */
+/* ================================================================== */
+
+@media (max-width: 720px) {
+  /* 翻转卡:单列 */
+  .flip-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .flip-card {
+    height: 156px;
+  }
+
+  /* 对比卡:纵向堆叠,中间分隔线变水平 */
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+  .compare-divider {
+    width: auto;
+    height: 1px;
+    margin: 0;
+    background:
+      linear-gradient(to right,
+        transparent 0%,
+        var(--border-strong) 15%,
+        var(--border-strong) 85%,
+        transparent 100%);
+  }
+  /* VS 徽章位置:横向时仍居中,不需要调整 */
+  .compare-col {
+    padding: 16px;
+  }
+
+  /* 画廊:卡片略窄 */
+  .card-gallery-item {
+    flex-basis: 220px;
+  }
+}
+
+/* < 480px 进一步收窄 */
+@media (max-width: 480px) {
+  .flip-cards-header,
+  .compare-header,
+  .card-gallery-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .card-gallery-item {
+    flex-basis: 80vw;
+  }
+}

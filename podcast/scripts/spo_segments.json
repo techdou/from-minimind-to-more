@@ -1,0 +1,124 @@
+{
+  "segments": [
+    {
+      "index": 1,
+      "title": "guest_1",
+      "filename": "01_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "白老师,前面学了 PPO 和 GRPO。PPO 省不了 Critic,GRPO 省了 Critic 但要采样多个回答。听说 SPO 两样都能省?"
+    },
+    {
+      "index": 2,
+      "title": "host_2",
+      "filename": "02_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "总结得准。SPO 的核心一句话:像 GRPO 一样不用 Critic 省显存,又像 PPO 一样每个 prompt 只采一个回答省算力。鱼和熊掌它都想要。"
+    },
+    {
+      "index": 3,
+      "title": "guest_3",
+      "filename": "03_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "带着学生常见的困惑提问,语气温和。",
+      "speech_text": "那基准线从哪来?PPO 有 Critic 估,GRPO 有组内均值,SPO 啥都没有怎么算优势?"
+    },
+    {
+      "index": 4,
+      "title": "host_4",
+      "filename": "04_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "这就是 SPO 的巧思。它用了一个纯数学的追踪器,叫 AutoAdaptiveValueTracker。本质是指数移动平均,EMA。每次模型做完题拿到真实得分,就跟这个历史平均分比——高了就鼓励,低了就惩罚。不需要第二个模型,也不需要多次采样。"
+    },
+    {
+      "index": 5,
+      "title": "guest_5",
+      "filename": "05_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "带着学生常见的困惑提问,语气温和。",
+      "speech_text": "历史平均分听起来简单,但训练过程中模型在变,平均分不会过时吗?"
+    },
+    {
+      "index": 6,
+      "title": "host_6",
+      "filename": "06_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "问得好。SPO 用了基于 KL 散度的动态衰减来解决这个问题。它会实时监控模型回答风格的变化幅度,变化越剧烈,EMA 的更新动量就降得越多——半衰期机制。这样历史均值能跟着模型一起进化,不会被早期的旧数据带偏。"
+    },
+    {
+      "index": 7,
+      "title": "guest_7",
+      "filename": "07_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "除了动态基准,还有别的防崩机制吗?"
+    },
+    {
+      "index": 8,
+      "title": "host_8",
+      "filename": "08_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "像大学教授一样从容讲解,语速稳定,重点处适当停顿。",
+      "speech_text": "还有个关键的 KL 刹车。模型为了刷高分可能突然走火入魔,策略突变。SPO 一旦检测到 KL 散度超过阈值,就在数学层面踩刹车,限制更新幅度。保证训练平稳,不会一个 step 就崩。"
+    },
+    {
+      "index": 9,
+      "title": "guest_9",
+      "filename": "09_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "像助教帮忙提问,语气礼貌而好奇。",
+      "speech_text": "那 SPO 跟 GRPO 比,实际效果怎么样?"
+    },
+    {
+      "index": 10,
+      "title": "host_10",
+      "filename": "10_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "严肃地强调关键定义,语速放慢,确保学生记住。",
+      "speech_text": "算力上 SPO 优势明显,采样开销只有 GRPO 的几分之一。但因为只采一个样本,方差天然更大,对奖励信号的质量要求更高。它更适合奖励明确、计算预算紧张的场景。在学术界还是新东西,工业落地还在探索。"
+    },
+    {
+      "index": 11,
+      "title": "guest_11",
+      "filename": "11_guest.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "冰糖",
+      "format": "wav",
+      "style_instruction": "领悟的语气,像是终于把知识点串联起来了。",
+      "speech_text": "明白了。PPO 是基石,GRPO 去掉 Critic,SPO 再去掉多采样,一步步在省。算法演进就是不断做减法。"
+    },
+    {
+      "index": 12,
+      "title": "host_12",
+      "filename": "12_host.wav",
+      "model": "mimo-v2.5-tts",
+      "voice": "白桦",
+      "format": "wav",
+      "style_instruction": "轻松的课堂互动语气,带一点亲和力。",
+      "speech_text": "没错。下一讲换个口味,不聊算法,聊聊面试——大模型八股 100 问,看你能答对几道。"
+    }
+  ]
+}

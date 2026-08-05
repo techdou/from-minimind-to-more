@@ -1,0 +1,133 @@
+{
+  "title": "大模型面试八股:高频考点快问快答",
+  "slug": "interview-100",
+  "style": "quickfire",
+  "duration_estimate": "约2分钟",
+  "dialogue": [
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "冰糖!大模型面试八股那么多,核心就问几个方向。快速过一遍,先说 Transformer 基础最爱考啥?",
+      "emotion": "轻松"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "Self-Attention 的计算公式必须会写!还有为啥要多头、缩放因子除以根号 dk 是干嘛的、Pre-Norm 和 Post-Norm 区别。这四个是必考题。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "位置编码和分词器呢?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "RoPE 旋转位置编码原理必问,还有它和 ALiBi 的外推性对比。分词器要懂 BPE 算法、中文 token 通胀问题。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "推理优化这块问得凶吗?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "问得最凶!KV Cache 原理、为啥能加速、显存占用怎么算——这三个连环问。还有 GQA 和 MQA 区别、Flash Attention 解决了什么。全得答上来。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "训练和对齐呢?SFT、RLHF 那些怎么考?",
+      "emotion": "好奇"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "Loss Mask 是 SFT 的核心考点。RLHF 要讲清 PPO 四个模型各自干嘛、DPO 为什么跳过奖励模型、GRPO 怎么省 Critic。今年 GRPO 是绝对热点。",
+      "emotion": "平静"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "MoE 和长上下文这些前沿呢?",
+      "emotion": "疑问"
+    },
+    {
+      "speaker": "冰糖",
+      "voice": "冰糖",
+      "text": "MoE 的稀疏激活原理、负载均衡损失、专家并行通信。长上下文就考 YaRN、RoPE 外推。高级岗必问。",
+      "emotion": "强调"
+    },
+    {
+      "speaker": "茉莉",
+      "voice": "茉莉",
+      "text": "收到!基础架构、位置编码、推理优化、训练对齐、前沿架构——五大板块,八股全覆盖!",
+      "emotion": "恍然大悟"
+    }
+  ],
+  "timings": [
+    {
+      "start": 0,
+      "end": 7.84,
+      "duration": 7.84
+    },
+    {
+      "start": 8.24,
+      "end": 19.92,
+      "duration": 11.68
+    },
+    {
+      "start": 20.32,
+      "end": 22.4,
+      "duration": 2.08
+    },
+    {
+      "start": 22.8,
+      "end": 31.44,
+      "duration": 8.64
+    },
+    {
+      "start": 31.840000000000003,
+      "end": 34.080000000000005,
+      "duration": 2.24
+    },
+    {
+      "start": 34.480000000000004,
+      "end": 45.84,
+      "duration": 11.36
+    },
+    {
+      "start": 46.24,
+      "end": 50.24,
+      "duration": 4
+    },
+    {
+      "start": 50.64,
+      "end": 63.92,
+      "duration": 13.28
+    },
+    {
+      "start": 64.32,
+      "end": 66.88,
+      "duration": 2.56
+    },
+    {
+      "start": 67.27999999999999,
+      "end": 76.39999999999999,
+      "duration": 9.12
+    },
+    {
+      "start": 76.79999999999998,
+      "end": 84.63999999999999,
+      "duration": 7.84
+    }
+  ],
+  "total_duration": 85.03999999999998,
+  "audio_url": "/podcast/audio/interview-100.mp3"
+}
