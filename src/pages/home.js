@@ -52,9 +52,9 @@ export async function renderHome(container) {
     </div>
   `;
 
-  // 渲染学习路径图
+  // 渲染学习路径图(传入推荐 slug,打通横幅与路径联动)
   const pathMount = container.querySelector('#learning-path-mount');
-  renderLearningPath(pathMount);
+  renderLearningPath(pathMount, recommendation?.slug);
 
   // 卡片点击跳转
   container.querySelectorAll('.article-card').forEach((card) => {

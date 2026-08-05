@@ -487,9 +487,10 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ------------------------------------------------------------------ */
-/* 学习路径 - 游戏化学习地图                                             */
+/* 学习路径 - 地铁线路图 + 流式链条                                     */
 /* ------------------------------------------------------------------ */
 
+/* 容器 */
 .lp-map-container {
   background: var(--panel-bg);
   border: 1px solid var(--border);
@@ -498,7 +499,7 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: 48px;
 }
 
-/* 顶部进度区 */
+/* 顶部进度 */
 .lp-map-header {
   padding: 24px 28px 20px;
   border-bottom: 1px solid var(--border);
@@ -510,170 +511,95 @@ a:hover { color: var(--accent-hover); }
   justify-content: space-between;
   margin-bottom: 12px;
 }
-.lp-map-title-row h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-}
-.lp-map-stats {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.lp-map-pct {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: -0.02em;
-}
-.lp-map-count {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-.lp-map-progress-bar {
-  height: 6px;
-  background: var(--surface);
-  border-radius: 3px;
-  overflow: hidden;
-}
+.lp-map-title-row h3 { font-size: 18px; font-weight: 700; margin: 0; }
+.lp-map-stats { display: flex; align-items: baseline; gap: 8px; }
+.lp-map-pct { font-size: 28px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; }
+.lp-map-count { font-size: 13px; color: var(--text-muted); }
+.lp-map-progress-bar { height: 6px; background: var(--surface); border-radius: 3px; overflow: hidden; }
 .lp-map-progress-fill {
-  height: 100%;
+  height: 100%; border-radius: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-  border-radius: 3px;
   transition: width 0.6s ease;
 }
-.lp-map-hint {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin: 10px 0 0;
-}
 
-/* 阶段列表 */
-.lp-map-body {
-  padding: 8px 28px 28px;
-}
-
-.lp-stage {
-  display: flex;
-  gap: 20px;
-  padding: 20px 0;
+/* === P2: 左侧贯穿轨道线 === */
+.lp-track {
   position: relative;
+  padding: 24px 28px 28px 52px; /* 左侧留轨道空间 */
 }
+.lp-track-line {
+  position: absolute;
+  left: 38px; top: 36px; bottom: 36px;
+  width: 2px;
+  background: var(--border-strong);
+}
+[data-theme="dark"] .lp-track-line { background: rgba(255,255,255,0.12); }
 
-/* 左侧标记列(编号 + 连接线) */
-.lp-stage-marker {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-  width: 36px;
+/* === 站点(阶段) === */
+.lp-station {
+  position: relative;
+  margin-bottom: 28px;
 }
-.lp-stage-num {
-  width: 36px;
-  height: 36px;
+.lp-station:last-child { margin-bottom: 0; }
+
+/* 站点圆点 */
+.lp-station-dot {
+  position: absolute;
+  left: -36px;
+  top: 2px;
+  width: 16px; height: 16px;
   border-radius: 50%;
-  background: var(--surface);
-  border: 2px solid var(--border-strong);
-  color: var(--text-secondary);
-  font-size: 15px;
-  font-weight: 700;
+  border: 3px solid var(--border-strong);
+  background: var(--panel-bg);
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.2s;
-  z-index: 1;
-}
-.lp-stage-num.done {
-  background: var(--success);
-  border-color: var(--success);
   color: white;
+  transition: all 0.2s;
 }
-.lp-stage-complete .lp-stage-num {
-  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
+.lp-dot-idle { border-color: var(--border-strong); }
+.lp-dot-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
-
-/* 阶段间连接线 */
-.lp-stage-connector {
-  width: 2px;
-  flex: 1;
-  min-height: 24px;
-  background: var(--border-strong);
-  margin-top: 4px;
-  background: linear-gradient(to bottom, var(--border-strong) 40%, transparent);
+.lp-dot-done {
+  border-color: var(--success);
+  background: var(--success);
 }
 
-/* 右侧内容 */
-.lp-stage-content {
-  flex: 1;
-  min-width: 0;
-}
-.lp-stage-head {
+/* 站点标题行 */
+.lp-station-head {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
-.lp-stage-icon {
-  font-size: 22px;
-}
-.lp-stage-titles {
-  flex: 1;
-}
-.lp-stage-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-}
-.lp-stage-sub {
+.lp-station-name { font-size: 16px; font-weight: 600; color: var(--text); }
+.lp-station-sub { font-size: 12px; color: var(--text-muted); }
+.lp-station-progress {
   font-size: 12px;
   color: var(--text-muted);
-  margin-top: 1px;
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
 }
-.lp-stage-progress-badge {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 12px;
-  background: var(--surface);
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-.lp-stage-progress-badge.partial {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-.lp-stage-progress-badge.done {
-  background: rgba(22, 163, 74, 0.1);
-  color: var(--success);
-}
+.lp-station-progress.partial { color: var(--accent); }
+.lp-station-progress.all-done { color: var(--success); }
 
-/* 卡片行 */
-.lp-route-cards {
-  display: flex;
-  align-items: stretch;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.lp-route-cards.chain {
-  align-items: center;
-}
-.lp-chain-sep {
-  color: var(--text-muted);
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-/* 双路线 */
-.lp-routes {
+/* === P1: 流式链条 === */
+.lp-station-chains {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
-.lp-route {
+.lp-chain-wrap {
   display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.lp-chain-wrap.lp-chain-labeled {
   align-items: center;
-  gap: 10px;
 }
 .lp-route-tag {
   font-size: 11px;
@@ -682,108 +608,198 @@ a:hover { color: var(--accent-hover); }
   border-radius: 10px;
   flex-shrink: 0;
   letter-spacing: 0.03em;
+  white-space: nowrap;
 }
-.tag-teal {
+.lp-route-tag[style*="RL-Free"], .lp-route-tag:not(:empty) {
   background: rgba(3, 105, 161, 0.1);
   color: var(--info);
 }
-.tag-amber {
-  background: var(--accent-soft);
-  color: var(--accent);
+
+.lp-chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.lp-arrow {
+  color: var(--text-muted);
+  font-size: 14px;
+  flex-shrink: 0;
+  opacity: 0.5;
 }
 
-/* 文章卡片(精致版) */
-.lp-map-card {
+/* === P0: 文章卡片三态 === */
+.lp-node-card {
   position: relative;
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 280px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px 16px;
+  padding: 12px 14px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 140px;
-  flex: 1;
-  max-width: 200px;
+  transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  border-left: 3px solid transparent;
 }
-.lp-map-card:hover {
+.lp-node-card:hover {
   background: var(--panel-bg);
-  border-color: var(--accent);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
-.lp-card-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.35;
-  margin-bottom: 6px;
-}
-.lp-card-tags {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-.lp-card-diff {
-  font-size: 10px;
-  color: var(--text-muted);
-  background: var(--panel-bg);
-  padding: 1px 7px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-.lp-card-time {
-  font-size: 10px;
-  color: var(--text-muted);
-}
 
-/* 已读卡片 */
-.lp-card-read {
-  border-color: rgba(22, 163, 74, 0.3);
-  background: rgba(22, 163, 74, 0.04);
+/* 卡片头部:状态点+难度 */
+.lp-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
-.lp-card-read .lp-card-title {
-  color: var(--text-secondary);
-}
-.lp-card-read:hover {
-  border-color: var(--success);
-  background: rgba(22, 163, 74, 0.06);
-}
-.lp-card-check {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 20px;
-  height: 20px;
+.lp-status-dot {
+  width: 10px; height: 10px;
   border-radius: 50%;
-  background: var(--success);
-  color: white;
-  font-size: 11px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
-  z-index: 2;
+}
+.lp-dot-unread { background: var(--border-strong); }
+.lp-dot-reading { background: var(--accent); }
+.lp-dot-recommended { background: var(--accent); animation: lp-dot-pulse 1.5s ease-in-out infinite; }
+.lp-dot-read { background: var(--success); }
+@keyframes lp-dot-pulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(180,83,9,0.2); }
+  50% { transform: scale(1.15); box-shadow: 0 0 0 4px rgba(180,83,9,0.1); }
 }
 
-/* 进行中卡片 */
-.lp-card-in-progress {
-  border-color: var(--accent);
+/* === P3: 难度徽章分级配色 === */
+.lp-diff-badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+.diff-beginner { background: rgba(22,163,74,0.1); color: #16a34a; }
+.diff-intermediate { background: rgba(3,105,161,0.1); color: #0369a1; }
+.diff-advanced { background: rgba(180,83,9,0.1); color: #b45309; }
+.diff-expert { background: rgba(124,58,237,0.1); color: #7c3aed; }
+[data-theme="dark"] .diff-beginner { color: #4ade80; }
+[data-theme="dark"] .diff-intermediate { color: #38bdf8; }
+[data-theme="dark"] .diff-advanced { color: #fbbf24; }
+[data-theme="dark"] .diff-expert { color: #a78bfa; }
+
+/* 卡片标题:允许两行,不截断 */
+.lp-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+  min-height: 38px; /* 保证两行高度一致 */
+}
+
+/* 卡片底部:前置+时长 */
+.lp-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.lp-prereq-chip {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--panel-bg);
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  cursor: help;
+}
+.lp-prereq-none {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+.lp-card-time {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* === P0: 三态视觉 === */
+/* 未读:默认 */
+
+/* 在读:橙色左边条 */
+.lp-status-reading {
+  border-left-color: var(--accent);
+}
+
+/* 推荐:橙色左边条 + 下一步角标 + 脉冲 */
+.lp-status-recommended {
+  border-left-color: var(--accent);
   background: var(--accent-soft);
-  animation: lp-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 0 1px var(--accent-soft);
 }
-@keyframes lp-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(180, 83, 9, 0.1); }
-  50% { box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.08); }
+.lp-next-badge {
+  position: absolute;
+  top: -1px;
+  right: 10px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 0 0 6px 6px;
+}
+.lp-status-recommended:hover {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
 }
 
+/* 已读:✓ + 降灰 */
+.lp-status-read {
+  opacity: 0.55;
+}
+.lp-status-read .lp-card-title {
+  color: var(--text-secondary);
+}
+.lp-status-read:hover {
+  opacity: 0.75;
+  border-left-color: var(--success);
+}
+
+/* === 移动端 === */
 @media (max-width: 768px) {
   .lp-map-header { padding: 20px 16px 16px; }
-  .lp-map-body { padding: 4px 16px 20px; }
-  .lp-stage { gap: 12px; }
-  .lp-map-card { min-width: 120px; max-width: none; }
-  .lp-chain-sep { display: none; }
-  .lp-route-cards { flex-direction: column; }
-  .lp-route { flex-direction: column; align-items: flex-start; }
+  .lp-track { padding: 20px 16px 24px 44px; }
+  .lp-track-line { left: 30px; }
+  .lp-station-dot { left: -32px; }
+  .lp-node-card {
+    min-width: 100%;
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+  /* 横链转竖链 */
+  .lp-chain {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .lp-arrow {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+  .lp-chain-wrap.lp-chain-labeled {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 /* ------------------------------------------------------------------ */
