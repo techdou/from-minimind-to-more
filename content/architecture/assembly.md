@@ -76,9 +76,9 @@ MiniMind 由多个高度模块化的组件构成，以下再次总结各核心�
 
 ## 2. 整体架构组装原理
 
-![structure](https://github.com/jingyaogong/minimind/raw/master/images/LLM-structure.png)
+![structure](/assets/concepts/assembly.webp)
 
-![structure-moe](https://github.com/jingyaogong/minimind/raw/master/images/LLM-structure-moe.png)
+![structure-moe](/assets/concepts/moe-routing.webp)
 
 MiniMind 的数据流转遵循标准的自回归（Auto-Regressive）生成范式，其组装逻辑如下：
 

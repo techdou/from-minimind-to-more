@@ -54,11 +54,11 @@ $$\text{Speed} = \frac{3350 \text{ GB/s}}{140 \text{ GB}} \approx 24 \text{ Toke
 
 如图所示，在解码器的自回归生成过程中，给定一个输入，模型预测下一个词元，然后在下一步中将组合输入进行下一次预测。
 
-![img](https://miro.medium.com/v2/resize:fit:1400/0*sexO6adGhaKr7aH0.gif)
+![img](/assets/external/0_sexO6adGhaKr7aH0.gif.gif)
 
 这种自回归行为会重复一些操作，我们可以通过放大解码器中计算的掩码缩放点积注意力计算来更好地理解这一点。
 
-![img](https://miro.medium.com/v2/resize:fit:1400/1*8xqD4AYTwn6mQXNw0uhDCg.gif)
+![img](/assets/external/1_8xqD4AYTwn6mQXNw0uhDCg.gif.gif)
 
 由于解码器是因果的（即，一个标记的注意力仅取决于其前面的标记），因此在每个生成步骤中，我们都在重新计算同一个先前标记的注意力，而我们实际上只想计算新标记的注意力。
 
@@ -99,7 +99,7 @@ $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)
 
 通过缓存之前的键值对，我们可以专注于计算新token的注意力。
 
-![img](https://miro.medium.com/v2/resize:fit:1400/1*uyuyOW1VBqmF5Gtv225XHQ.gif)
+![img](/assets/external/1_uyuyOW1VBqmF5Gtv225XHQ.gif.gif)
 
 ### 3.2 为什么不缓存 Query (Q)？
 
@@ -124,7 +124,7 @@ $$M_{KV} = 2 \times N_{layers} \times N_{heads} \times D_{head} \times L_{seq} \
 
 为了缓解KV Cache带来的显存压力，研究界提出了一系列改进的注意力结构。这一演进过程本质上是在**模型表现力（Quality）**与**显存效率（Efficiency）**之间寻找最佳平衡点。
 
-![img](https://camo.githubusercontent.com/96963fe92e1c743b7ede42513f411f36e7fd0f9ff12a6fa7108283a33628117d/68747470733a2f2f696d672d626c6f672e6373646e696d672e636e2f696d675f636f6e766572742f32663663626566383332333964616335633538383937643736346139646262332e776562703f782d6f73732d70726f636573733d696d6167652f666f726d61742c706e67)
+![img](/assets/external/68747470733a2f2f696d672d626c6f672e637364.png)
 
 ### 4.1 Multi-Head Attention (MHA)：多头注意力
 

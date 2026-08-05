@@ -18,7 +18,7 @@ const CONCEPT_MAP = [
   { slug: 'embedding-position-encoding', titleKeywords: ['Embedding', '向量空间', '基石'], image: 'position-encoding.webp', caption: '位置编码演进:从绝对到旋转' },
   // minimind-design (2张)
   { slug: 'minimind-design', titleKeywords: ['整体', '架构', '设计', '配置'], image: 'norm-minimind-arch.webp', caption: 'Minimind 架构:Embedding → N×Block → LM Head' },
-  { slug: 'minimind-design', titleKeywords: ['Embedding', '共享', '权重'], image: 'norm-shared-embedding.webp', caption: '共享 Embedding:输入查表和输出投影用同一套权重' },
+  { slug: 'minimind-design', titleKeywords: ['配置表', '架构设计', 'Block', '全局视野'], image: 'norm-shared-embedding.webp', caption: '共享 Embedding:输入查表和输出投影用同一套权重' },
 
   // === 架构篇 ===
   // normalization (5张)
@@ -37,43 +37,43 @@ const CONCEPT_MAP = [
   { slug: 'moe', titleKeywords: ['负载均衡', '辅助损失', '均衡'], image: 'moe-aux-loss.webp', caption: '辅助损失:鼓励 token 均匀分配到各专家' },
   { slug: 'moe', titleKeywords: ['容量', 'Capacity', '溢出'], image: 'moe-capacity.webp', caption: '容量因子:每个专家有处理上限,溢出的 token 丢弃' },
   // assembly (3张)
-  { slug: 'assembly', titleKeywords: ['残差', 'Residual'], image: 'asm-residual.webp', caption: '残差连接:输出 = x + F(x),信号跳过变换直通' },
+  { slug: 'assembly', titleKeywords: ['基础组件', '核心模块'], image: 'asm-residual.webp', caption: '残差连接:输出 = x + F(x),信号跳过变换直通' },
   { slug: 'assembly', titleKeywords: ['前馈', 'FFN', 'SwiGLU', 'FeedForward'], image: 'asm-ffn-swiglu.webp', caption: 'FFN + SwiGLU:先扩大维度再门控,非线性表达更强' },
   { slug: 'assembly', titleKeywords: ['拼装', '整体', '模型骨架', '核心模块'], image: 'assembly.webp', caption: '完整 Transformer 架构:Embedding→Block→LM Head' },
 
   // === 算法篇 ===
   // pretrain (4张)
-  { slug: 'pretrain', titleKeywords: ['因果', '语言建模', 'CLM', '预训练数据'], image: 'pretrain-clm.webp', caption: '因果语言建模:预测下一个 token' },
-  { slug: 'pretrain', titleKeywords: ['梯度累加', 'accumulation'], image: 'pt-grad-accum.webp', caption: '梯度累加:小 batch 多次累加等价大 batch' },
+  { slug: 'pretrain', titleKeywords: ['lm_dataset', '数据管道', 'PretrainDataset'], image: 'pretrain-clm.webp', caption: '因果语言建模:预测下一个 token' },
+  { slug: 'pretrain', titleKeywords: ['train_pretrain', '核心训练', '训练引擎'], image: 'pt-grad-accum.webp', caption: '梯度累加:小 batch 多次累加等价大 batch' },
   { slug: 'pretrain', titleKeywords: ['学习率', '调度', 'warmup', 'Cosine'], image: 'pt-cosine-lr.webp', caption: '余弦学习率调度:先升后降,平滑收敛' },
-  { slug: 'pretrain', titleKeywords: ['掩码', 'Mask', '因果'], image: 'pt-causal-mask.webp', caption: '因果注意力掩码:只看过去不看未来' },
+  { slug: 'pretrain', titleKeywords: ['trainer_utils', '基础设施'], image: 'pt-causal-mask.webp', caption: '因果注意力掩码:只看过去不看未来' },
   // sft (3张)
   { slug: 'sft', titleKeywords: ['Loss Mask', '掩码', 'Masking', '训练引擎', '数据管道'], image: 'sft-loss-mask.webp', caption: 'Loss Masking:user 部分不计损失,只学 assistant' },
   { slug: 'sft', titleKeywords: ['数据', '格式', 'Chat', '模板'], image: 'sft-data-format.webp', caption: 'SFT 数据格式:指令-输入-输出三元组' },
   // rl-overview (4张)
   { slug: 'rl-overview', titleKeywords: ['RLHF', '三阶段', '对齐', 'Actor-Critic'], image: 'rl-three-stage.webp', caption: 'RLHF 三阶段:SFT→RM→PPO' },
   { slug: 'rl-overview', titleKeywords: ['TRPO', '信任区域', '信任'], image: 'rl-trpo-region.webp', caption: 'TRPO 信任区域:KL 散度有上限,保证策略更新安全' },
-  { slug: 'rl-overview', titleKeywords: ['奖励黑客', 'Reward Hack'], image: 'rl-reward-hack.webp', caption: '奖励黑客:模型学会骗奖励模型' },
+  { slug: 'rl-overview', titleKeywords: ['引言', '范式', '范式转移'], image: 'rl-reward-hack.webp', caption: '奖励黑客:模型学会骗奖励模型' },
   // dpo (3张)
   { slug: 'dpo', titleKeywords: ['数据管道', '核心训练', '偏好', 'DPO'], image: 'dpo-vs-rlhf.webp', caption: 'DPO vs RLHF:跳过 RM 直接从偏好学' },
-  { slug: 'dpo', titleKeywords: ['Bradby', 'Terry', '数学', '推导'], image: 'dpo-bt-model.webp', caption: 'Bradley-Terry 模型:偏好 = 隐含奖励的指数' },
-  { slug: 'dpo', titleKeywords: ['损失', 'Loss', '交叉熵'], image: 'dpo-loss-detail.webp', caption: 'DPO 损失:本质是 chosen vs rejected 的二分类' },
+  { slug: 'dpo', titleKeywords: ['数据管道', 'lm_dataset', 'DPODataset'], image: 'dpo-bt-model.webp', caption: 'Bradley-Terry 模型:偏好 = 隐含奖励的指数' },
+  { slug: 'dpo', titleKeywords: ['核心训练', 'train_DPO', '训练引擎'], image: 'dpo-loss-detail.webp', caption: 'DPO 损失:本质是 chosen vs rejected 的二分类' },
   // ppo (5张)
   { slug: 'ppo', titleKeywords: ['Critic模型', 'Critic', 'Reward', 'ppo_train', '训练代码'], image: 'ppo-four-models.webp', caption: 'PPO 四模型:Actor+Critic+Reference+Reward' },
   { slug: 'ppo', titleKeywords: ['calculate_rewards', 'ppo_train_epoch', 'GAE', '优势'], image: 'ppo-gae.webp', caption: 'GAE 广义优势估计:偏差与方差的权衡' },
   { slug: 'ppo', titleKeywords: ['Clip', '裁剪', 'ratio', 'ppo_train_epoch'], image: 'ppo-clip-detail.webp', caption: 'PPO Clip:限制策略更新幅度在 [1-ε, 1+ε] 内' },
-  { slug: 'ppo', titleKeywords: ['KL', '散度', '惩罚', 'Reference'], image: 'ppo-kl-penalty.webp', caption: 'KL 散度惩罚:别离 SFT 模型太远' },
+  { slug: 'ppo', titleKeywords: ['Critic', 'Reference', 'ref_model', 'init'], image: 'ppo-kl-penalty.webp', caption: 'KL 散度惩罚:别离 SFT 模型太远' },
   // grpo (4张)
   { slug: 'grpo', titleKeywords: ['GRPO流程', '训练流程', '核心输入', '组内', '相对'], image: 'grpo-group-detail.webp', caption: 'GRPO 组内排序:N 个回答排序定优劣,去 Critic' },
   { slug: 'grpo', titleKeywords: ['Dr.GRPO', 'DAPO', 'GSPO', '变体', '区别'], image: 'grpo-dr-detail.webp', caption: 'Dr.GRPO:修正长度偏差,防止凑字数作弊' },
   { slug: 'grpo', titleKeywords: ['DAPO', '解耦'], image: 'grpo-dapo.webp', caption: 'DAPO:解耦裁剪,释放长文本探索潜力' },
   // spo (3张)
   { slug: 'spo', titleKeywords: ['算法核心', 'ValueTracker', 'EMA', '追踪'], image: 'spo-ema-tracker.webp', caption: 'EMA 追踪器:平滑历史回报做 baseline' },
-  { slug: 'spo', titleKeywords: ['序列', 'Sequence', 'token级'], image: 'spo-seq-vs-token.webp', caption: 'Token 级 vs 序列级:长链推理用序列级更稳' },
+  { slug: 'spo', titleKeywords: ['初始化', '衰减', '动态', '安全裁剪'], image: 'spo-seq-vs-token.webp', caption: 'Token 级 vs 序列级:长链推理用序列级更稳' },
 
   // === 拓展篇 ===
   { slug: 'inference-training-optimization', titleKeywords: ['Prefill', 'Decode', '两阶段', '推理'], image: 'inf-two-phase.webp', caption: '推理两阶段:Prefill 计算墙 vs Decode 存储墙' },
-  { slug: 'inference-training-optimization', titleKeywords: ['并行', '数据并行', '张量并行', '流水线'], image: 'inf-parallel-strategy.webp', caption: '训练并行策略:DP+TP+PP 混合使用' },
+  { slug: 'inference-training-optimization', titleKeywords: ['推理加速', '加速策略', '量化'], image: 'inf-parallel-strategy.webp', caption: '推理优化:量化+KV压缩+算子融合多管齐下' },
 ];
 
 const _existsCache = new Set();
