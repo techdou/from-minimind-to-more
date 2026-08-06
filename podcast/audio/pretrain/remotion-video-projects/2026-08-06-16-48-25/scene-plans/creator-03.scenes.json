@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 139040,
+    "duration": 8800,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 8800
+      }
+    ],
+    "semanticTags": [
+      "明白了,预训练是"
+    ],
+    "visualHint": "明白了,预训练是打地基,让模型先学会说话。学会了基础,才能教它怎么听话。"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 148240,
+    "duration": 8000,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 8000
+      }
+    ],
+    "semanticTags": [
+      "总结得准。预训练"
+    ],
+    "visualHint": "总结得准。预训练完的模型会接龙、会续写,但还不会按指令做事。那得靠 SFT 来教"
+  }
+]

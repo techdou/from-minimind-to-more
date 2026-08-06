@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "苏打,大模型生成"
+      ],
+      "visualHint": "苏打,大模型生成的时候是一个词一个词往外蹦,每出一个词就要把前面所有词重新算一遍"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "你说的是最朴素的"
+      ],
+      "visualHint": "你说的是最朴素的实现,确实慢。所以大家用了一个叫 KV Cache 的技巧。每算"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "省了计算,但存这"
+      ],
+      "visualHint": "省了计算,但存这些 KV 不占显存吗?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "占,而且占得很凶"
+      ],
+      "visualHint": "占,而且占得很凶。KV Cache 的大小跟上下文长度成正比,长文本推理时它能吃"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "那怎么办?有办法"
+      ],
+      "visualHint": "那怎么办?有办法缩小 KV Cache 吗?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "这就是 GQA "
+      ],
+      "visualHint": "这就是 GQA 和 MQA 的用武之地。MQA 最极端,所有 Query 头共享"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "Cache 的问"
+      ],
+      "visualHint": "Cache 的问题解决了。可 Attention 本身的计算量呢?上下文一长,复"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "对,这是另一个瓶"
+      ],
+      "visualHint": "对,这是另一个瓶颈。标准 Attention 要把 N 乘 N 的注意力矩阵完整"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "Flash At"
+      ],
+      "visualHint": "Flash Attention 怎么做到的?是把矩阵变小了吗?"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "不是变小,是少搬"
+      ],
+      "visualHint": "不是变小,是少搬运。它把矩阵分块,在 GPU 的高速 SRAM 里算完再合并,中"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "所以这俩是配合用"
+      ],
+      "visualHint": "所以这俩是配合用的:KV Cache 解决重算,GQA 缩小 Cache,Fla"
+    },
+    {
+      "sceneId": "scene_012",
+      "fromIndex": 12,
+      "toIndex": 12,
+      "semanticTags": [
+        "总结到位。下一篇"
+      ],
+      "visualHint": "总结到位。下一篇我们聊 MoE,那是个更狠的优化——参数量涨上去,计算量却不涨。"
+    }
+  ]
+}

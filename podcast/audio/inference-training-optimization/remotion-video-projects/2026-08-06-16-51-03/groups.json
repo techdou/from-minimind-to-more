@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "冰糖,大模型推理"
+      ],
+      "visualHint": "冰糖,大模型推理为什么慢?不是算力不够吗?"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "不只是算力。推理"
+      ],
+      "visualHint": "不只是算力。推理分两个阶段,瓶颈完全不同。第一个阶段叫 Prefill,并行处理"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "显存带宽?就是数"
+      ],
+      "visualHint": "显存带宽?就是数据从内存搬到芯片的速度?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "对。Decode"
+      ],
+      "visualHint": "对。Decode 阶段每生成一个 token,都要加载整个模型权重和之前所有的 "
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "那怎么优化?有哪"
+      ],
+      "visualHint": "那怎么优化?有哪些方向?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "推理优化三大方向"
+      ],
+      "visualHint": "推理优化三大方向:KV Cache 压缩(GQA/MQA 减少 KV 体积)、算"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "量化会损失精度吗"
+      ],
+      "visualHint": "量化会损失精度吗?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "会有轻微损失,但"
+      ],
+      "visualHint": "会有轻微损失,但 INT8 几乎无损,INT4 在大模型上也能接受。关键是用得够"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "收到。推理慢主要"
+      ],
+      "visualHint": "收到。推理慢主要卡存储墙,优化靠 KV 压缩+算子融合+量化。"
+    }
+  ]
+}

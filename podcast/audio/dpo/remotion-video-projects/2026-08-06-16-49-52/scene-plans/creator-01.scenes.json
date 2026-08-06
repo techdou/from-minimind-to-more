@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 13279,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 13279
+      }
+    ],
+    "semanticTags": [
+      "苏打,我始终认为"
+    ],
+    "visualHint": "苏打,我始终认为 RLHF 才是正道。训练一个奖励模型,再用 PPO 做策略优化"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 13679,
+    "duration": 14400,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 14400
+      }
+    ],
+    "semanticTags": [
+      "我理解你的顾虑,"
+    ],
+    "visualHint": "我理解你的顾虑,但你想想 RLHF 的代价。要同时维护四个模型——Actor、C"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 28479,
+    "duration": 8640,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 8640
+      }
+    ],
+    "semanticTags": [
+      "但奖励模型能对任"
+    ],
+    "visualHint": "但奖励模型能对任意回答打分,DPO 只能用已有的偏好数据对。数据量不够怎么办?"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 37519,
+    "duration": 15520,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15520
+      }
+    ],
+    "semanticTags": [
+      "这正是 DPO "
+    ],
+    "visualHint": "这正是 DPO 的定位——它不是 RLHF 的替代,而是当你已经有偏好数据时的更"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 53439,
+    "duration": 7360,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 7360
+      }
+    ],
+    "semanticTags": [
+      "DPO 的损失函"
+    ],
+    "visualHint": "DPO 的损失函数我看了,本质是在做 chosen 和 rejected 的对比"
+  }
+]

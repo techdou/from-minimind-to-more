@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 130400,
+    "duration": 8160,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 8160
+      }
+    ],
+    "semanticTags": [
+      "懂了,小是参数小"
+    ],
+    "visualHint": "懂了,小是参数小,架构思路一点都不旧。先把这套配置吃透,看大模型就顺手了。"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 138960,
+    "duration": 9440,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 9440
+      }
+    ],
+    "semanticTags": [
+      "没错。MiniM"
+    ],
+    "visualHint": "没错。MiniMind 的价值就在这——用最小成本让你摸到所有现代设计。下一篇我"
+  }
+]

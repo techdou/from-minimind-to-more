@@ -11,3 +11,10 @@ output/
 podcast/audio/**/*.wav
 podcast/audio/**/manifest.json
 podcast/audio/**/subtitles.srt
+
+# Remotion 视频工程产物(源码保留,out/ 渲染产物和音频排除)
+podcast/audio/**/remotion-video-projects/**/out/
+podcast/audio/**/remotion-video-projects/**/public/audio.mp3
+
+# 成品视频统一放 public/podcast/video/ 进 git,podcast/video/ 是中间副本
+podcast/video/

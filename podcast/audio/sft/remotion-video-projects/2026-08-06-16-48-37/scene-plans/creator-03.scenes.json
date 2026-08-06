@@ -1,0 +1,18 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 72000,
+    "duration": 5439,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5439
+      }
+    ],
+    "semanticTags": [
+      "收到!SFT ="
+    ],
+    "visualHint": "收到!SFT = Loss Mask + 问答数据 + 工程技巧,搞定!"
+  }
+]

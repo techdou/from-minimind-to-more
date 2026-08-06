@@ -1,0 +1,25 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 148780,
+    "duration": 22750,
+    "segments": [
+      {
+        "text": "原来是位置决定的。那今天算把归一化的几个关键点理清了。",
+        "relativeStart": 0,
+        "relativeDuration": 7040
+      },
+      {
+        "text": "对。总结一下:归一化是为了训练稳定,NLP 用 LayerNorm 不用\r\nBatchNorm,主流模型用 RMSNorm 省计算,Pre-Norm\r\n比较稳。下一篇我们会讲 KV Cache,那是推理加速的关键。",
+        "relativeStart": 7390,
+        "relativeDuration": 15360
+      }
+    ],
+    "semanticTags": [
+      "总结",
+      "收尾",
+      "下集预告"
+    ],
+    "visualHint": "总结卡片逐条点亮：训练稳定 / LayerNorm / RMSNorm / Pre-Norm 四个关键点以琥珀项目符号列出，结尾切换「下一篇：KV Cache」预告条幅"
+  }
+]

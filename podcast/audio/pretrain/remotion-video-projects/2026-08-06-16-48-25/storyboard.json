@@ -1,0 +1,198 @@
+{
+  "totalDuration": 156240,
+  "sceneCount": 12,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 10080,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 10080
+        }
+      ],
+      "semanticTags": [
+        "苏打,架构拼好了"
+      ],
+      "visualHint": "苏打,架构拼好了,可参数全是随机初始化的,模型啥也不会。预训练这一步到底在干什么"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 10480,
+      "duration": 20000,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 20000
+        }
+      ],
+      "semanticTags": [
+        "预训练就是让模型"
+      ],
+      "visualHint": "预训练就是让模型学会语言的统计规律。任务只有一个:给定前面的词,预测下一个词。比"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 30879,
+      "duration": 7200,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 7200
+        }
+      ],
+      "semanticTags": [
+        "MiniMind"
+      ],
+      "visualHint": "MiniMind 的预训练数据长啥样?是维基百科那种长文章吗?"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 38479,
+      "duration": 20640,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 20640
+        }
+      ],
+      "semanticTags": [
+        "有意思的是,它的"
+      ],
+      "visualHint": "有意思的是,它的 pretrain_hq.jsonl 其实是一问一答的短对话。这"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 59519,
+      "duration": 4481,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 4481
+        }
+      ],
+      "semanticTags": [
+        "为啥要这么混?预"
+      ],
+      "visualHint": "为啥要这么混?预训练不就应该吃纯文本吗?"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 64400,
+      "duration": 21600,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 21600
+        }
+      ],
+      "semanticTags": [
+        "为了让模型提前熟"
+      ],
+      "visualHint": "为了让模型提前熟悉特殊符号和对话模式。你看那些数据里到处是 im_end 这种结"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 86400,
+      "duration": 8000,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 8000
+        }
+      ],
+      "semanticTags": [
+        "原来预训练阶段还"
+      ],
+      "visualHint": "原来预训练阶段还可以这样预热。那数据是怎么喂给模型的?直接把整段文本塞进去?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 94800,
+      "duration": 20640,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 20640
+        }
+      ],
+      "semanticTags": [
+        "要经过数据管道处"
+      ],
+      "visualHint": "要经过数据管道处理。PretrainDataset 类读 JSONL,用 Tok"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 115840,
+      "duration": 6720,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 6720
+        }
+      ],
+      "semanticTags": [
+        "不 Mask 是"
+      ],
+      "visualHint": "不 Mask 是什么意思?SFT 不是要对 prompt 部分做 Mask 吗?"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 122960,
+      "duration": 15680,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 15680
+        }
+      ],
+      "semanticTags": [
+        "对,这是关键区别"
+      ],
+      "visualHint": "对,这是关键区别。预训练是纯无监督,模型学习的是整段文本的分布,所以每个位置都要"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 139040,
+      "duration": 8800,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 8800
+        }
+      ],
+      "semanticTags": [
+        "明白了,预训练是"
+      ],
+      "visualHint": "明白了,预训练是打地基,让模型先学会说话。学会了基础,才能教它怎么听话。"
+    },
+    {
+      "id": "scene_012",
+      "startTime": 148240,
+      "duration": 8000,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 8000
+        }
+      ],
+      "semanticTags": [
+        "总结得准。预训练"
+      ],
+      "visualHint": "总结得准。预训练完的模型会接龙、会续写,但还不会按指令做事。那得靠 SFT 来教"
+    }
+  ]
+}

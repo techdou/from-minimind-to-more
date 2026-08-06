@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 64400,
+    "duration": 21600,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 21600
+      }
+    ],
+    "semanticTags": [
+      "为了让模型提前熟"
+    ],
+    "visualHint": "为了让模型提前熟悉特殊符号和对话模式。你看那些数据里到处是 im_end 这种结"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 86400,
+    "duration": 8000,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 8000
+      }
+    ],
+    "semanticTags": [
+      "原来预训练阶段还"
+    ],
+    "visualHint": "原来预训练阶段还可以这样预热。那数据是怎么喂给模型的?直接把整段文本塞进去?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 94800,
+    "duration": 20640,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 20640
+      }
+    ],
+    "semanticTags": [
+      "要经过数据管道处"
+    ],
+    "visualHint": "要经过数据管道处理。PretrainDataset 类读 JSONL,用 Tok"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 115840,
+    "duration": 6720,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 6720
+      }
+    ],
+    "semanticTags": [
+      "不 Mask 是"
+    ],
+    "visualHint": "不 Mask 是什么意思?SFT 不是要对 prompt 部分做 Mask 吗?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 122960,
+    "duration": 15680,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15680
+      }
+    ],
+    "semanticTags": [
+      "对,这是关键区别"
+    ],
+    "visualHint": "对,这是关键区别。预训练是纯无监督,模型学习的是整段文本的分布,所以每个位置都要"
+  }
+]

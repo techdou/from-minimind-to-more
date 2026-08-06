@@ -1,0 +1,198 @@
+{
+  "totalDuration": 148400,
+  "sceneCount": 12,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 12000,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 12000
+        }
+      ],
+      "semanticTags": [
+        "苏打,我想动手训"
+      ],
+      "visualHint": "苏打,我想动手训一个大模型练手,但 LLaMA 那种几十亿参数的,显卡根本扛不住"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 12400,
+      "duration": 15039,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 15039
+        }
+      ],
+      "semanticTags": [
+        "对,MiniMi"
+      ],
+      "visualHint": "对,MiniMind 就是给学习用的。麻雀虽小,五脏俱全。它虽然只有 26M 参"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 27839,
+      "duration": 5920,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 5920
+        }
+      ],
+      "semanticTags": [
+        "Decoder-"
+      ],
+      "visualHint": "Decoder-Only 是什么意思?为什么不用 BERT 那种 Encoder"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 34159,
+      "duration": 24160,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 24160
+        }
+      ],
+      "semanticTags": [
+        "Decoder-"
+      ],
+      "visualHint": "Decoder-Only 只做一件事:预测下一个词,叫 Next Token P"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 58719,
+      "duration": 4480,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 4480
+        }
+      ],
+      "semanticTags": [
+        "26M 这么小,"
+      ],
+      "visualHint": "26M 这么小,它的配置参数都是怎么取舍的?"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 63599,
+      "duration": 19200,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 19200
+        }
+      ],
+      "semanticTags": [
+        "看它的配置类就清"
+      ],
+      "visualHint": "看它的配置类就清楚了。隐藏维度 512——LLaMA-7B 是 4096,它压缩"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 83199,
+      "duration": 4640,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 4640
+        }
+      ],
+      "semanticTags": [
+        "Query 头和"
+      ],
+      "visualHint": "Query 头和 KV 头数量不一样?这是什么操作?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 88239,
+      "duration": 20800,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 20800
+        }
+      ],
+      "semanticTags": [
+        "这叫分组查询注意"
+      ],
+      "visualHint": "这叫分组查询注意力,GQA。Key 和 Value 在推理时要缓存,头多了显存爆"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 109439,
+      "duration": 5920,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 5920
+        }
+      ],
+      "semanticTags": [
+        "它还支持 MoE"
+      ],
+      "visualHint": "它还支持 MoE?这么小的模型也能上混合专家?"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 115760,
+      "duration": 14240,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 14240
+        }
+      ],
+      "semanticTags": [
+        "能,有个 use"
+      ],
+      "visualHint": "能,有个 use_moe 开关。开了之后 FFN 层就变成 DeepSeek 风"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 130400,
+      "duration": 8160,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 8160
+        }
+      ],
+      "semanticTags": [
+        "懂了,小是参数小"
+      ],
+      "visualHint": "懂了,小是参数小,架构思路一点都不旧。先把这套配置吃透,看大模型就顺手了。"
+    },
+    {
+      "id": "scene_012",
+      "startTime": 138960,
+      "duration": 9440,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 9440
+        }
+      ],
+      "semanticTags": [
+        "没错。MiniM"
+      ],
+      "visualHint": "没错。MiniMind 的价值就在这——用最小成本让你摸到所有现代设计。下一篇我"
+    }
+  ]
+}

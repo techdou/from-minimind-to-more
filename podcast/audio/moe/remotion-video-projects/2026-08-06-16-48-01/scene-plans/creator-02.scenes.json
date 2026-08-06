@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 63599,
+    "duration": 17920,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 17920
+      }
+    ],
+    "semanticTags": [
+      "关键就在稀疏激活"
+    ],
+    "visualHint": "关键就在稀疏激活。Top-K 路由,只选分数最高的 K 个。Mixtral 8x"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 81919,
+    "duration": 5760,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 5760
+      }
+    ],
+    "semanticTags": [
+      "那路由器怎么训练"
+    ],
+    "visualHint": "那路由器怎么训练?万一它偷懒,所有 token 都派给同一个专家怎么办?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 88079,
+    "duration": 19041,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 19041
+      }
+    ],
+    "semanticTags": [
+      "这正是 MoE "
+    ],
+    "visualHint": "这正是 MoE 的核心难题,叫负载均衡。早期做法是加一个辅助损失,惩罚专家被选次"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 107520,
+    "duration": 8320,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 8320
+      }
+    ],
+    "semanticTags": [
+      "我承认架构精巧。"
+    ],
+    "visualHint": "我承认架构精巧。但工程上呢?专家分散在不同卡上,通信开销不小吧?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 116240,
+    "duration": 17120,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 17120
+      }
+    ],
+    "semanticTags": [
+      "你说到点子上了。"
+    ],
+    "visualHint": "你说到点子上了。专家并行确实是大工程,token 要跨卡路由,All-to-Al"
+  }
+]

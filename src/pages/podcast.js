@@ -37,9 +37,19 @@ export async function renderPodcast(container, slug) {
     if (!ct.includes('application/json')) throw new Error('not json');
     const dialogue = await resp.json();
 
+    // 优先探测视频(视频版已包含音频轨,体验更好)
+    let videoUrl = null;
+    try {
+      const videoResp = await fetch(`/podcast/video/${slug}.mp4`, { method: 'HEAD' });
+      const vct = videoResp.headers.get('content-type') || '';
+      if (videoResp.ok && (vct.includes('video') || vct.includes('octet-stream'))) {
+        videoUrl = `/podcast/video/${slug}.mp4`;
+      }
+    } catch {}
+
     // audio_url 可能在 dialogue 对象里,也可能需要单独探测
     let audioUrl = dialogue.audio_url || null;
-    if (!audioUrl) {
+    if (!audioUrl && !videoUrl) {
       try {
         const audioResp = await fetch(`/podcast/audio/${slug}.mp3`, { method: 'HEAD' });
         const ct = audioResp.headers.get('content-type') || '';
@@ -49,7 +59,7 @@ export async function renderPodcast(container, slug) {
       } catch {}
     }
 
-    new PodcastPlayer(mount, dialogue, { audioUrl });
+    new PodcastPlayer(mount, dialogue, { audioUrl, videoUrl });
   } catch (err) {
     mount.innerHTML = `
       <div class="quiz-empty">

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 10240,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 10240
+      }
+    ],
+    "semanticTags": [
+      "苏打,大模型生成"
+    ],
+    "visualHint": "苏打,大模型生成的时候是一个词一个词往外蹦,每出一个词就要把前面所有词重新算一遍"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 10640,
+    "duration": 19680,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 19680
+      }
+    ],
+    "semanticTags": [
+      "你说的是最朴素的"
+    ],
+    "visualHint": "你说的是最朴素的实现,确实慢。所以大家用了一个叫 KV Cache 的技巧。每算"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 30719,
+    "duration": 4800,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4800
+      }
+    ],
+    "semanticTags": [
+      "省了计算,但存这"
+    ],
+    "visualHint": "省了计算,但存这些 KV 不占显存吗?"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 35919,
+    "duration": 22720,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 22720
+      }
+    ],
+    "semanticTags": [
+      "占,而且占得很凶"
+    ],
+    "visualHint": "占,而且占得很凶。KV Cache 的大小跟上下文长度成正比,长文本推理时它能吃"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 59039,
+    "duration": 5600,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5600
+      }
+    ],
+    "semanticTags": [
+      "那怎么办?有办法"
+    ],
+    "visualHint": "那怎么办?有办法缩小 KV Cache 吗?"
+  }
+]

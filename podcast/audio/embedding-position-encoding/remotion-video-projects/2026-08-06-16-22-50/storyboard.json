@@ -1,0 +1,220 @@
+{
+  "totalDuration": 178800,
+  "sceneCount": 12,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 13439,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 13439
+        }
+      ],
+      "semanticTags": [
+        "开场",
+        "提问",
+        "Tokenizer回顾"
+      ],
+      "visualHint": "中央大问号 + 编号 8921 与 4412 两个 token 并排出现,用红色叉号暗示离散编号看不出相似,左右留白承托"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 13839,
+      "duration": 18721,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 18721
+        }
+      ],
+      "semanticTags": [
+        "概念定义",
+        "Embedding",
+        "查表"
+      ],
+      "visualHint": "先出现一张巨型查表主视觉,表头编号指向一列高维向量(512 维),再用箭头点出'模型处理的是向量'"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 32960,
+      "duration": 4160,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 4160
+        }
+      ],
+      "semanticTags": [
+        "提问",
+        "one-hot"
+      ],
+      "visualHint": "冰糖提问气泡居中,背景出现 one-hot 向量的提示符号(零、零、一),营造疑问氛围"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 37520,
+      "duration": 22240,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 22240
+        }
+      ],
+      "semanticTags": [
+        "解释",
+        "one-hot问题",
+        "维度与距离"
+      ],
+      "visualHint": "左右对比:左侧'几万维全零'堆叠图,右侧三个相互垂直的箭头示意距离都一样,用红色标记两个致命问题"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 60160,
+      "duration": 6400,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 6400
+        }
+      ],
+      "semanticTags": [
+        "转折",
+        "稠密向量",
+        "语义距离"
+      ],
+      "visualHint": "冰糖提问气泡,背景从稀疏 one-hot 渐变成稠密向量点阵,暗示'稠密+语义距离'两大特征"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 66960,
+      "duration": 25280,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 25280
+        }
+      ],
+      "semanticTags": [
+        "原理",
+        "分布语义",
+        "上下文"
+      ],
+      "visualHint": "中央展示'猫''狗'两个词共享上下文(喂、宠物)的关系图,Firth 引言作为引语标签出现"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 92640,
+      "duration": 5600,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 5600
+        }
+      ],
+      "semanticTags": [
+        "转折",
+        "引入位置编码"
+      ],
+      "visualHint": "冰糖提问气泡,左右分栏出现'Embedding'已掌握与'位置编码'待揭晓,营造新话题入口"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 98640,
+      "duration": 23360,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 23360
+        }
+      ],
+      "semanticTags": [
+        "概念定义",
+        "位置编码",
+        "顺序"
+      ],
+      "visualHint": "对比'我打你'与'你打我'两组词向量相同但顺序相反,用方向箭头标出意思相反"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 122400,
+      "duration": 4000,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 4000
+        }
+      ],
+      "semanticTags": [
+        "提问",
+        "融合方式"
+      ],
+      "visualHint": "冰糖提问气泡居中,背景出现拼接符号(+ 号与问号),引出'怎么加进去'的疑问"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 126800,
+      "duration": 22240,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 22240
+        }
+      ],
+      "semanticTags": [
+        "解释",
+        "绝对位置编码",
+        "RoPE引入"
+      ],
+      "visualHint": "左右对比:左侧正余弦波形加到向量(绝对位置编码),右侧向量旋转一个角度(RoPE),用旋转箭头突出旋转概念"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 149440,
+      "duration": 5280,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 5280
+        }
+      ],
+      "semanticTags": [
+        "提问",
+        "RoPE优势",
+        "外推"
+      ],
+      "visualHint": "冰糖提问气泡,背景出现长度尺从 4k 向 32k+ 延伸的刻度线,暗示外推疑问"
+    },
+    {
+      "id": "scene_012",
+      "startTime": 155120,
+      "duration": 23680,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 23680
+        }
+      ],
+      "semanticTags": [
+        "总结",
+        "RoPE原理",
+        "YaYN",
+        "长上下文"
+      ],
+      "visualHint": "中央展示'相对位置=距离'的核心等式,右侧 YaYN 调频示意 + 长上下文基石收束标签"
+    }
+  ]
+}

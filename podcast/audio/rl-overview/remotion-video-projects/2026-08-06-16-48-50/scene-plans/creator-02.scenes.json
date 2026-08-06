@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 34479,
+    "duration": 13440,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 13440
+      }
+    ],
+    "semanticTags": [
+      "GRPO 是 P"
+    ],
+    "visualHint": "GRPO 是 PPO 的简化版。PPO 要 Actor 和 Critic 两个模"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 48319,
+    "duration": 3040,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 3040
+      }
+    ],
+    "semanticTags": [
+      "Actor-Cr"
+    ],
+    "visualHint": "Actor-Critic 是什么概念?快说。"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 51759,
+    "duration": 10400,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 10400
+      }
+    ],
+    "semanticTags": [
+      "Actor 是策"
+    ],
+    "visualHint": "Actor 是策略网络负责做决策,Critic 是价值网络负责评价决策好坏。一个"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 62559,
+    "duration": 1920,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 1920
+      }
+    ],
+    "semanticTags": [
+      "学习路线怎么走?"
+    ],
+    "visualHint": "学习路线怎么走?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 64879,
+    "duration": 10080,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 10080
+      }
+    ],
+    "semanticTags": [
+      "先理解 Acto"
+    ],
+    "visualHint": "先理解 Actor-Critic,再学 PPO,然后看 DPO 作为对比,最后上"
+  }
+]

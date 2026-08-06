@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 10720,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 10720
+      }
+    ],
+    "semanticTags": [
+      "白老师,前面我们"
+    ],
+    "visualHint": "白老师,前面我们讲了一堆模块——RMSNorm、Attention、RoPE、F"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 11120,
+    "duration": 24640,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 24640
+      }
+    ],
+    "semanticTags": [
+      "这一讲就是把零件"
+    ],
+    "visualHint": "这一讲就是把零件装上流水线。MiniMind 是高度模块化的,每个核心类各司其职"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 36160,
+    "duration": 3840,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 3840
+      }
+    ],
+    "semanticTags": [
+      "配置类我理解了,"
+    ],
+    "visualHint": "配置类我理解了,像个总开关。那归一化层呢?"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 40399,
+    "duration": 24480,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 24480
+      }
+    ],
+    "semanticTags": [
+      "归一化用 RMS"
+    ],
+    "visualHint": "归一化用 RMSNorm,上一讲讲过。它比标准 LayerNorm 少了减均值那"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 65280,
+    "duration": 3680,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 3680
+      }
+    ],
+    "semanticTags": [
+      "Attentio"
+    ],
+    "visualHint": "Attention 模块呢?它里面塞了好多东西。"
+  }
+]

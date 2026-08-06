@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 65039,
+    "duration": 23040,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 23040
+      }
+    ],
+    "semanticTags": [
+      "这就是 GQA "
+    ],
+    "visualHint": "这就是 GQA 和 MQA 的用武之地。MQA 最极端,所有 Query 头共享"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 88479,
+    "duration": 8960,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 8960
+      }
+    ],
+    "semanticTags": [
+      "Cache 的问"
+    ],
+    "visualHint": "Cache 的问题解决了。可 Attention 本身的计算量呢?上下文一长,复"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 97840,
+    "duration": 16960,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 16960
+      }
+    ],
+    "semanticTags": [
+      "对,这是另一个瓶"
+    ],
+    "visualHint": "对,这是另一个瓶颈。标准 Attention 要把 N 乘 N 的注意力矩阵完整"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 115200,
+    "duration": 4480,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4480
+      }
+    ],
+    "semanticTags": [
+      "Flash At"
+    ],
+    "visualHint": "Flash Attention 怎么做到的?是把矩阵变小了吗?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 120080,
+    "duration": 16480,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 16480
+      }
+    ],
+    "semanticTags": [
+      "不是变小,是少搬"
+    ],
+    "visualHint": "不是变小,是少搬运。它把矩阵分块,在 GPU 的高速 SRAM 里算完再合并,中"
+  }
+]

@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "苏打,架构拼好了"
+      ],
+      "visualHint": "苏打,架构拼好了,可参数全是随机初始化的,模型啥也不会。预训练这一步到底在干什么"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "预训练就是让模型"
+      ],
+      "visualHint": "预训练就是让模型学会语言的统计规律。任务只有一个:给定前面的词,预测下一个词。比"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "MiniMind"
+      ],
+      "visualHint": "MiniMind 的预训练数据长啥样?是维基百科那种长文章吗?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "有意思的是,它的"
+      ],
+      "visualHint": "有意思的是,它的 pretrain_hq.jsonl 其实是一问一答的短对话。这"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "为啥要这么混?预"
+      ],
+      "visualHint": "为啥要这么混?预训练不就应该吃纯文本吗?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "为了让模型提前熟"
+      ],
+      "visualHint": "为了让模型提前熟悉特殊符号和对话模式。你看那些数据里到处是 im_end 这种结"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "原来预训练阶段还"
+      ],
+      "visualHint": "原来预训练阶段还可以这样预热。那数据是怎么喂给模型的?直接把整段文本塞进去?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "要经过数据管道处"
+      ],
+      "visualHint": "要经过数据管道处理。PretrainDataset 类读 JSONL,用 Tok"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "不 Mask 是"
+      ],
+      "visualHint": "不 Mask 是什么意思?SFT 不是要对 prompt 部分做 Mask 吗?"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "对,这是关键区别"
+      ],
+      "visualHint": "对,这是关键区别。预训练是纯无监督,模型学习的是整段文本的分布,所以每个位置都要"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "明白了,预训练是"
+      ],
+      "visualHint": "明白了,预训练是打地基,让模型先学会说话。学会了基础,才能教它怎么听话。"
+    },
+    {
+      "sceneId": "scene_012",
+      "fromIndex": 12,
+      "toIndex": 12,
+      "semanticTags": [
+        "总结得准。预训练"
+      ],
+      "visualHint": "总结得准。预训练完的模型会接龙、会续写,但还不会按指令做事。那得靠 SFT 来教"
+    }
+  ]
+}

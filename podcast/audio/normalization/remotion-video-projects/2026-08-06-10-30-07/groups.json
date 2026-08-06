@@ -1,0 +1,81 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": ["开场", "提问", "LayerNorm引入"],
+      "visualHint": "米色背景上大标题「归一化 Normalization」居中淡入，琥珀色高亮关键词 LayerNorm，主角苏打提问气泡从左侧滑入"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": ["比喻", "信号稳定", "调音量"],
+      "visualHint": "左右双栏布局：左侧绘制深层网络信号柱（逐层放大爆炸 / 逐层缩小消失），右侧茉莉用「调音量旋钮」比喻，琥珀色箭头归位到正常区间"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": ["追问", "BatchNorm对比"],
+      "visualHint": "上半屏浮现 BatchNorm 卡片（带问号），下半屏留白引出疑问，琥珀色对比标签悬挂在右侧"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": ["解释", "BatchNorm缺陷", "LayerNorm优势"],
+      "visualHint": "三栏对比展开：第一栏列 BatchNorm 两大硬伤（padding 污染、batch=1），第二栏画 LayerNorm「单样本自顾自」示意，第三栏琥珀色结论条「NLP 用 LayerNorm」落下"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": ["转折", "RMSNorm引入", "提问"],
+      "visualHint": "中央切换到 LLaMA 代码片段高亮 RMSNorm，琥珀色问号弹出形成 LayerNorm → RMSNorm 对比钩子"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": ["解释", "RMSNorm原理", "去均值"],
+      "visualHint": "公式分步展开：先显示 LayerNorm = 减均值 + 除标准差，再用琥珀删除线划掉「减均值」，浮现 RMSNorm 仅保留缩放的简化公式"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": ["质疑", "工程取舍", "提问"],
+      "visualHint": "米色背景中央放大「省一点点有意义吗？」疑问句，琥珀色天平图标轻微晃动表示权衡"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": ["解释", "累积效应", "主流模型"],
+      "visualHint": "左→右时间线展开：单层省一点 → 几千亿 token 累积放大成琥珀色大数字，右侧浮现 Gemma / LLaMA / Mistral 三个模型徽标并列"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": ["面试题", "Pre-Norm", "Post-Norm引入"],
+      "visualHint": "中央分屏浮现 Pre-Norm 与 Post-Norm 两个标题卡片，琥珀色「面试题」标签钉在左上角"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": ["解释", "归一化位置", "稳定性对比"],
+      "visualHint": "双结构图对比展开：左画 Post-Norm（残差后归一化，标注训练不稳定、易发散），右画 Pre-Norm（残差前归一化，标注训练稳定），底部琥珀色结论条「大模型用 Pre-Norm」"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 12,
+      "semanticTags": ["总结", "收尾", "下集预告"],
+      "visualHint": "总结卡片逐条点亮：训练稳定 / LayerNorm / RMSNorm / Pre-Norm 四个关键点以琥珀项目符号列出，结尾切换「下一篇：KV Cache」预告条幅"
+    }
+  ]
+}

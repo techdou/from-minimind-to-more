@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 148000,
+    "duration": 7680,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 7680
+      }
+    ],
+    "semanticTags": [
+      "原来每个模块都对"
+    ],
+    "visualHint": "原来每个模块都对应前面讲过的技术,组装起来就是现代大模型。这下全串起来了。"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 156080,
+    "duration": 9600,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 9600
+      }
+    ],
+    "semanticTags": [
+      "没错。架构吃透了"
+    ],
+    "visualHint": "没错。架构吃透了,下一篇我们就进训练环节,看预训练怎么把这堆参数从随机变成会说话"
+  }
+]

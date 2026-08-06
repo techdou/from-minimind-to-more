@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 60559,
+    "duration": 23520,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 23520
+      }
+    ],
+    "semanticTags": [
+      "确实,GRPO "
+    ],
+    "visualHint": "确实,GRPO 的采样开销更大。但 Critic 是一直驻留显存的固定成本,采样"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 84479,
+    "duration": 3200,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 3200
+      }
+    ],
+    "semanticTags": [
+      "听起来很完美啊,"
+    ],
+    "visualHint": "听起来很完美啊,有什么坑?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 88079,
+    "duration": 25280,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 25280
+      }
+    ],
+    "semanticTags": [
+      "坑不少。原生 G"
+    ],
+    "visualHint": "坑不少。原生 GRPO 有长度偏差——模型发现答得越长分数可能越高,就开始凑字数"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 113760,
+    "duration": 4000,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4000
+      }
+    ],
+    "semanticTags": [
+      "这么多变体,那 "
+    ],
+    "visualHint": "这么多变体,那 MiniMind 用的是哪个?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 118160,
+    "duration": 15200,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15200
+      }
+    ],
+    "semanticTags": [
+      "MiniMind"
+    ],
+    "visualHint": "MiniMind 实现的是标准 GRPO,先把核心流程跑通。数据集和 PPO 一"
+  }
+]

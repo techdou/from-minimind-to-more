@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 8800,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 8800
+      }
+    ],
+    "semanticTags": [
+      "苏打,SFT 之"
+    ],
+    "visualHint": "苏打,SFT 之后的模型已经会听话了,为什么还要搞 PPO 这套强化学习?感觉多"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 9200,
+    "duration": 14240,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 14240
+      }
+    ],
+    "semanticTags": [
+      "白桦,SFT 只"
+    ],
+    "visualHint": "白桦,SFT 只能学标注数据里的分布,但标注数据有限,质量也参差。PPO 引入了"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 23839,
+    "duration": 11520,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 11520
+      }
+    ],
+    "semanticTags": [
+      "可这代价也太大了"
+    ],
+    "visualHint": "可这代价也太大了吧?PPO 要四个模型同时跑——Actor、Critic、Ref"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 35759,
+    "duration": 18080,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 18080
+      }
+    ],
+    "semanticTags": [
+      "代价确实高,但每"
+    ],
+    "visualHint": "代价确实高,但每个模型都有用。Actor 是被训练的主角,Critic 估价值函"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 54239,
+    "duration": 5600,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 5600
+      }
+    ],
+    "semanticTags": [
+      "MiniMind"
+    ],
+    "visualHint": "MiniMind 这种小项目也搞得起 PPO?它怎么训练奖励模型?"
+  }
+]

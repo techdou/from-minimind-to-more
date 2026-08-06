@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 61199,
+    "duration": 15040,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15040
+      }
+    ],
+    "semanticTags": [
+      "推导是严谨的。D"
+    ],
+    "visualHint": "推导是严谨的。DPO 的核心贡献是证明了:在 Bradley-Terry 偏好模"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 76639,
+    "duration": 7840,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 7840
+      }
+    ],
+    "semanticTags": [
+      "把 RL 转成分"
+    ],
+    "visualHint": "把 RL 转成分类?这个角度倒是新颖。那训练代码比 PPO 简单多少?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 84879,
+    "duration": 15681,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15681
+      }
+    ],
+    "semanticTags": [
+      "简单非常多。DP"
+    ],
+    "visualHint": "简单非常多。DPO 的代码结构和 SFT 几乎一样,就是换了损失函数。不需要 C"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 100960,
+    "duration": 10240,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 10240
+      }
+    ],
+    "semanticTags": [
+      "好吧,我承认在工"
+    ],
+    "visualHint": "好吧,我承认在工程效率上 DPO 确实有优势。但极端情况下呢?比如偏好数据有矛盾"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 111600,
+    "duration": 14720,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 14720
+      }
+    ],
+    "semanticTags": [
+      "你说到点子上了。"
+    ],
+    "visualHint": "你说到点子上了。DPO 对数据质量更敏感,因为它没有奖励模型做平滑。所以实践中,"
+  }
+]

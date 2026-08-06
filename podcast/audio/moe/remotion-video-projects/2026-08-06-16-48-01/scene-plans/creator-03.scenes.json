@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 133760,
+    "duration": 12320,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 12320
+      }
+    ],
+    "semanticTags": [
+      "好吧,我收回'投"
+    ],
+    "visualHint": "好吧,我收回'投机取巧'的说法。参数容量上去了,单次计算却控制住了,这条路确实有"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 146480,
+    "duration": 8000,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 8000
+      }
+    ],
+    "semanticTags": [
+      "对。未来大模型大"
+    ],
+    "visualHint": "对。未来大模型大概率都是 MoE,稠密反而是少数派了。理解了它,才算摸到前沿的门"
+  }
+]

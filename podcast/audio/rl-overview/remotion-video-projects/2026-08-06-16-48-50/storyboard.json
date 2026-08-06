@@ -1,0 +1,182 @@
+{
+  "totalDuration": 81279,
+  "sceneCount": 11,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 5280,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 5280
+        }
+      ],
+      "semanticTags": [
+        "冰糖!快速过一遍"
+      ],
+      "visualHint": "冰糖!快速过一遍大模型强化学习,给我三句话讲清楚它干嘛的。"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 5680,
+      "duration": 12320,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 12320
+        }
+      ],
+      "semanticTags": [
+        "好。第一,预训练"
+      ],
+      "visualHint": "好。第一,预训练让模型会说话但不懂规矩。第二,强化学习通过奖励信号教会它听话。第"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 18399,
+      "duration": 2880,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 2880
+        }
+      ],
+      "semanticTags": [
+        "PPO 和 DP"
+      ],
+      "visualHint": "PPO 和 DPO 有什么区别?一句话。"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 21679,
+      "duration": 9280,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 9280
+        }
+      ],
+      "semanticTags": [
+        "PPO 要训练一"
+      ],
+      "visualHint": "PPO 要训练一个奖励模型再做强化学习,流程复杂;DPO 直接从偏好数据学,跳过"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 31359,
+      "duration": 2720,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 2720
+        }
+      ],
+      "semanticTags": [
+        "那 GRPO 呢"
+      ],
+      "visualHint": "那 GRPO 呢?最近很火。"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 34479,
+      "duration": 13440,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 13440
+        }
+      ],
+      "semanticTags": [
+        "GRPO 是 P"
+      ],
+      "visualHint": "GRPO 是 PPO 的简化版。PPO 要 Actor 和 Critic 两个模"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 48319,
+      "duration": 3040,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 3040
+        }
+      ],
+      "semanticTags": [
+        "Actor-Cr"
+      ],
+      "visualHint": "Actor-Critic 是什么概念?快说。"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 51759,
+      "duration": 10400,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 10400
+        }
+      ],
+      "semanticTags": [
+        "Actor 是策"
+      ],
+      "visualHint": "Actor 是策略网络负责做决策,Critic 是价值网络负责评价决策好坏。一个"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 62559,
+      "duration": 1920,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 1920
+        }
+      ],
+      "semanticTags": [
+        "学习路线怎么走?"
+      ],
+      "visualHint": "学习路线怎么走?"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 64879,
+      "duration": 10080,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 10080
+        }
+      ],
+      "semanticTags": [
+        "先理解 Acto"
+      ],
+      "visualHint": "先理解 Actor-Critic,再学 PPO,然后看 DPO 作为对比,最后上"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 75359,
+      "duration": 5920,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 5920
+        }
+      ],
+      "semanticTags": [
+        "收到!Actor"
+      ],
+      "visualHint": "收到!Actor-Critic → PPO → DPO → GRPO,搞定。"
+    }
+  ]
+}

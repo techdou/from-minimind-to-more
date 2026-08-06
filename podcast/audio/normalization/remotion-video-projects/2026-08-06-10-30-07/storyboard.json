@@ -1,0 +1,208 @@
+{
+  "totalDuration": 171530,
+  "sceneCount": 11,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 8640,
+      "segments": [
+        {
+          "text": "苏打,我最近看 Transformer 的代码,发现到处都是 LayerNorm。\r\n这个归一化到底在干嘛?为什么不能省掉?",
+          "relativeStart": 0,
+          "relativeDuration": 8640
+        }
+      ],
+      "semanticTags": [
+        "开场",
+        "提问",
+        "LayerNorm引入"
+      ],
+      "visualHint": "米色背景上大标题「归一化 Normalization」居中淡入，琥珀色高亮关键词 LayerNorm，主角苏打提问气泡从左侧滑入"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 8990,
+      "duration": 18240,
+      "segments": [
+        {
+          "text": "你可以把它想象成调音量。神经网络很深,信号一层层传下去,有的越传越大最后爆炸,\r\n有的越传越小最后消失。归一化就是每过几层就把音量调回正常,让训练能稳定进行。",
+          "relativeStart": 0,
+          "relativeDuration": 18240
+        }
+      ],
+      "semanticTags": [
+        "比喻",
+        "信号稳定",
+        "调音量"
+      ],
+      "visualHint": "左右双栏布局：左侧绘制深层网络信号柱（逐层放大爆炸 / 逐层缩小消失），右侧茉莉用「调音量旋钮」比喻，琥珀色箭头归位到正常区间"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 27580,
+      "duration": 7840,
+      "segments": [
+        {
+          "text": "那为什么不用计算机视觉里那个 BatchNorm 呢?我在 CV 课上学过,\r\n挺好用的。",
+          "relativeStart": 0,
+          "relativeDuration": 7840
+        }
+      ],
+      "semanticTags": [
+        "追问",
+        "BatchNorm对比"
+      ],
+      "visualHint": "上半屏浮现 BatchNorm 卡片（带问号），下半屏留白引出疑问，琥珀色对比标签悬挂在右侧"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 35770,
+      "duration": 24480,
+      "segments": [
+        {
+          "text": "好问题。BatchNorm 是按 batch 统计的,但 NLP 有两个硬伤:一是句子长度不固定,\r\npadding 会污染统计;二是大模型训练时 batch size 经常是\r\n1,batch 太小统计就不准。所以 NLP 用的是 LayerNorm,\r\n它只看单个样本自己,跟 batch 无关。",
+          "relativeStart": 0,
+          "relativeDuration": 24480
+        }
+      ],
+      "semanticTags": [
+        "解释",
+        "BatchNorm缺陷",
+        "LayerNorm优势"
+      ],
+      "visualHint": "三栏对比展开：第一栏列 BatchNorm 两大硬伤（padding 污染、batch=1），第二栏画 LayerNorm「单样本自顾自」示意，第三栏琥珀色结论条「NLP 用 LayerNorm」落下"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 60600,
+      "duration": 8960,
+      "segments": [
+        {
+          "text": "明白了。我还有个困惑,看 LLaMA 的代码,用的不是 LayerNorm\r\n而是 RMSNorm,这俩什么区别?",
+          "relativeStart": 0,
+          "relativeDuration": 8960
+        }
+      ],
+      "semanticTags": [
+        "转折",
+        "RMSNorm引入",
+        "提问"
+      ],
+      "visualHint": "中央切换到 LLaMA 代码片段高亮 RMSNorm，琥珀色问号弹出形成 LayerNorm → RMSNorm 对比钩子"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 69910,
+      "duration": 20640,
+      "segments": [
+        {
+          "text": "RMSNorm 是 LayerNorm 的极简版。LayerNorm 做两件事:减均值(居中)和除标准差(缩放)。\r\n有人发现,居中那一步其实不是必须的,光做缩放效果差不多,但计算更快。RMSNorm\r\n就是只保留缩放,省掉了均值计算。",
+          "relativeStart": 0,
+          "relativeDuration": 20640
+        }
+      ],
+      "semanticTags": [
+        "解释",
+        "RMSNorm原理",
+        "去均值"
+      ],
+      "visualHint": "公式分步展开：先显示 LayerNorm = 减均值 + 除标准差，再用琥珀删除线划掉「减均值」，浮现 RMSNorm 仅保留缩放的简化公式"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 90900,
+      "duration": 5760,
+      "segments": [
+        {
+          "text": "省一点点计算有意义吗?感觉差别不大。",
+          "relativeStart": 0,
+          "relativeDuration": 5760
+        }
+      ],
+      "semanticTags": [
+        "质疑",
+        "工程取舍",
+        "提问"
+      ],
+      "visualHint": "米色背景中央放大「省一点点有意义吗？」疑问句，琥珀色天平图标轻微晃动表示权衡"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 97010,
+      "duration": 21120,
+      "segments": [
+        {
+          "text": "单次看差别小,但 LLM 推理是海量的,每层省一点,几千亿 token\r\n累积下来就很可观。所以现在主流模型,Gemma、LLaMA、Mistral\r\n都用 RMSNorm。这是一个工程上很务实的取舍。",
+          "relativeStart": 0,
+          "relativeDuration": 21120
+        }
+      ],
+      "semanticTags": [
+        "解释",
+        "累积效应",
+        "主流模型"
+      ],
+      "visualHint": "左→右时间线展开：单层省一点 → 几千亿 token 累积放大成琥珀色大数字，右侧浮现 Gemma / LLaMA / Mistral 三个模型徽标并列"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 118480,
+      "duration": 7680,
+      "segments": [
+        {
+          "text": "最后一个问题,我面试被问过:Pre-Norm 和 Post-Norm 是什么?\r\n为什么现在都用 Pre-Norm?",
+          "relativeStart": 0,
+          "relativeDuration": 7680
+        }
+      ],
+      "semanticTags": [
+        "面试题",
+        "Pre-Norm",
+        "Post-Norm引入"
+      ],
+      "visualHint": "中央分屏浮现 Pre-Norm 与 Post-Norm 两个标题卡片，琥珀色「面试题」标签钉在左上角"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 126510,
+      "duration": 21920,
+      "segments": [
+        {
+          "text": "这是归一化放在哪的问题。Post-Norm 是原始 Transformer\r\n的做法,归一化放在残差连接之后;Pre-Norm 是放在之前。区别在于:Post-Norm\r\n表达能力更强但训练不稳定,深层网络容易发散;Pre-Norm 训练更稳,\r\n所以现在深一点的大模型基本都用 Pre-Norm。",
+          "relativeStart": 0,
+          "relativeDuration": 21920
+        }
+      ],
+      "semanticTags": [
+        "解释",
+        "归一化位置",
+        "稳定性对比"
+      ],
+      "visualHint": "双结构图对比展开：左画 Post-Norm（残差后归一化，标注训练不稳定、易发散），右画 Pre-Norm（残差前归一化，标注训练稳定），底部琥珀色结论条「大模型用 Pre-Norm」"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 148780,
+      "duration": 22750,
+      "segments": [
+        {
+          "text": "原来是位置决定的。那今天算把归一化的几个关键点理清了。",
+          "relativeStart": 0,
+          "relativeDuration": 7040
+        },
+        {
+          "text": "对。总结一下:归一化是为了训练稳定,NLP 用 LayerNorm 不用\r\nBatchNorm,主流模型用 RMSNorm 省计算,Pre-Norm\r\n比较稳。下一篇我们会讲 KV Cache,那是推理加速的关键。",
+          "relativeStart": 7390,
+          "relativeDuration": 15360
+        }
+      ],
+      "semanticTags": [
+        "总结",
+        "收尾",
+        "下集预告"
+      ],
+      "visualHint": "总结卡片逐条点亮：训练稳定 / LayerNorm / RMSNorm / Pre-Norm 四个关键点以琥珀项目符号列出，结尾切换「下一篇：KV Cache」预告条幅"
+    }
+  ]
+}

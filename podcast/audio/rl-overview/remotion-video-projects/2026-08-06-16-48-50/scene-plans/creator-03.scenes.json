@@ -1,0 +1,18 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 75359,
+    "duration": 5920,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5920
+      }
+    ],
+    "semanticTags": [
+      "收到!Actor"
+    ],
+    "visualHint": "收到!Actor-Critic → PPO → DPO → GRPO,搞定。"
+  }
+]

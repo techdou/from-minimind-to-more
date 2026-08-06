@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 13119,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 13119
+      }
+    ],
+    "semanticTags": [
+      "苏打,我一直觉得"
+    ],
+    "visualHint": "苏打,我一直觉得 MoE 这个方向有点投机取巧。参数搞到几千亿,实际激活的却只有"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 13519,
+    "duration": 17441,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 17441
+      }
+    ],
+    "semanticTags": [
+      "白桦你这话我得反"
+    ],
+    "visualHint": "白桦你这话我得反驳。Scaling Law 告诉我们,模型越聪明,参数就得越多。"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 31359,
+    "duration": 7520,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 7520
+      }
+    ],
+    "semanticTags": [
+      "解耦听起来美好,"
+    ],
+    "visualHint": "解耦听起来美好,可它怎么实现的?总不能让模型自己挑要不要算吧。"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 39279,
+    "duration": 18560,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 18560
+      }
+    ],
+    "semanticTags": [
+      "还真就是让它自己"
+    ],
+    "visualHint": "还真就是让它自己挑。思路仿生人脑——你做数学题不会同时激活视觉区。MoE 把那个"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 58239,
+    "duration": 4960,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 4960
+      }
+    ],
+    "semanticTags": [
+      "派给几个?如果全"
+    ],
+    "visualHint": "派给几个?如果全派,那跟稠密有什么区别?"
+  }
+]

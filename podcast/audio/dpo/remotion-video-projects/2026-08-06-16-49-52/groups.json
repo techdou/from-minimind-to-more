@@ -1,0 +1,103 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "苏打,我始终认为"
+      ],
+      "visualHint": "苏打,我始终认为 RLHF 才是正道。训练一个奖励模型,再用 PPO 做策略优化"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "我理解你的顾虑,"
+      ],
+      "visualHint": "我理解你的顾虑,但你想想 RLHF 的代价。要同时维护四个模型——Actor、C"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "但奖励模型能对任"
+      ],
+      "visualHint": "但奖励模型能对任意回答打分,DPO 只能用已有的偏好数据对。数据量不够怎么办?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "这正是 DPO "
+      ],
+      "visualHint": "这正是 DPO 的定位——它不是 RLHF 的替代,而是当你已经有偏好数据时的更"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "DPO 的损失函"
+      ],
+      "visualHint": "DPO 的损失函数我看了,本质是在做 chosen 和 rejected 的对比"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "推导是严谨的。D"
+      ],
+      "visualHint": "推导是严谨的。DPO 的核心贡献是证明了:在 Bradley-Terry 偏好模"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "把 RL 转成分"
+      ],
+      "visualHint": "把 RL 转成分类?这个角度倒是新颖。那训练代码比 PPO 简单多少?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "简单非常多。DP"
+      ],
+      "visualHint": "简单非常多。DPO 的代码结构和 SFT 几乎一样,就是换了损失函数。不需要 C"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "好吧,我承认在工"
+      ],
+      "visualHint": "好吧,我承认在工程效率上 DPO 确实有优势。但极端情况下呢?比如偏好数据有矛盾"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "你说到点子上了。"
+      ],
+      "visualHint": "你说到点子上了。DPO 对数据质量更敏感,因为它没有奖励模型做平滑。所以实践中,"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "这个结论我同意。"
+      ],
+      "visualHint": "这个结论我同意。DPO 求效率,RLHF 求精度,组合使用是最佳实践。"
+    }
+  ]
+}

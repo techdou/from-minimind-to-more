@@ -1,0 +1,90 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 66960,
+    "duration": 25280,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 25280
+      }
+    ],
+    "semanticTags": [
+      "原理",
+      "分布语义",
+      "上下文"
+    ],
+    "visualHint": "中央展示'猫''狗'两个词共享上下文(喂、宠物)的关系图,Firth 引言作为引语标签出现"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 92640,
+    "duration": 5600,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 5600
+      }
+    ],
+    "semanticTags": [
+      "转折",
+      "引入位置编码"
+    ],
+    "visualHint": "冰糖提问气泡,左右分栏出现'Embedding'已掌握与'位置编码'待揭晓,营造新话题入口"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 98640,
+    "duration": 23360,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 23360
+      }
+    ],
+    "semanticTags": [
+      "概念定义",
+      "位置编码",
+      "顺序"
+    ],
+    "visualHint": "对比'我打你'与'你打我'两组词向量相同但顺序相反,用方向箭头标出意思相反"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 122400,
+    "duration": 4000,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 4000
+      }
+    ],
+    "semanticTags": [
+      "提问",
+      "融合方式"
+    ],
+    "visualHint": "冰糖提问气泡居中,背景出现拼接符号(+ 号与问号),引出'怎么加进去'的疑问"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 126800,
+    "duration": 22240,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 22240
+      }
+    ],
+    "semanticTags": [
+      "解释",
+      "绝对位置编码",
+      "RoPE引入"
+    ],
+    "visualHint": "左右对比:左侧正余弦波形加到向量(绝对位置编码),右侧向量旋转一个角度(RoPE),用旋转箭头突出旋转概念"
+  }
+]

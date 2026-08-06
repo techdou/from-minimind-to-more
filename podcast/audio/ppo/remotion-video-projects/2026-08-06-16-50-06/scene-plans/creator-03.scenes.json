@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 127040,
+    "duration": 12640,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 12640
+      }
+    ],
+    "semanticTags": [
+      "小步快走,我懂了"
+    ],
+    "visualHint": "小步快走,我懂了。难怪 PPO 能统治 RLHF 这么多年,确实每个设计都有道理"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 140080,
+    "duration": 11200,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 11200
+      }
+    ],
+    "semanticTags": [
+      "这正是下一讲要讲"
+    ],
+    "visualHint": "这正是下一讲要讲的。PPO 是基石,理解了它,GRPO 的精简才看得明白。Dee"
+  }
+]

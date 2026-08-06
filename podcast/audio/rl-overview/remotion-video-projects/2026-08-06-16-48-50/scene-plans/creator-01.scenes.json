@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 5280,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5280
+      }
+    ],
+    "semanticTags": [
+      "冰糖!快速过一遍"
+    ],
+    "visualHint": "冰糖!快速过一遍大模型强化学习,给我三句话讲清楚它干嘛的。"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 5680,
+    "duration": 12320,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 12320
+      }
+    ],
+    "semanticTags": [
+      "好。第一,预训练"
+    ],
+    "visualHint": "好。第一,预训练让模型会说话但不懂规矩。第二,强化学习通过奖励信号教会它听话。第"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 18399,
+    "duration": 2880,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 2880
+      }
+    ],
+    "semanticTags": [
+      "PPO 和 DP"
+    ],
+    "visualHint": "PPO 和 DPO 有什么区别?一句话。"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 21679,
+    "duration": 9280,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 9280
+      }
+    ],
+    "semanticTags": [
+      "PPO 要训练一"
+    ],
+    "visualHint": "PPO 要训练一个奖励模型再做强化学习,流程复杂;DPO 直接从偏好数据学,跳过"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 31359,
+    "duration": 2720,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 2720
+      }
+    ],
+    "semanticTags": [
+      "那 GRPO 呢"
+    ],
+    "visualHint": "那 GRPO 呢?最近很火。"
+  }
+]

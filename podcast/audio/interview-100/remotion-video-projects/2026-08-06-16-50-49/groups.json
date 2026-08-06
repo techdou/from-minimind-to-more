@@ -1,0 +1,103 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "冰糖!大模型面试"
+      ],
+      "visualHint": "冰糖!大模型面试八股那么多,核心就问几个方向。快速过一遍,先说 Transfor"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "Self-Att"
+      ],
+      "visualHint": "Self-Attention 的计算公式必须会写!还有为啥要多头、缩放因子除以根"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "位置编码和分词器"
+      ],
+      "visualHint": "位置编码和分词器呢?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "RoPE 旋转位"
+      ],
+      "visualHint": "RoPE 旋转位置编码原理必问,还有它和 ALiBi 的外推性对比。分词器要懂 "
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "推理优化这块问得"
+      ],
+      "visualHint": "推理优化这块问得凶吗?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "问得最凶!KV "
+      ],
+      "visualHint": "问得最凶!KV Cache 原理、为啥能加速、显存占用怎么算——这三个连环问。还"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "训练和对齐呢?S"
+      ],
+      "visualHint": "训练和对齐呢?SFT、RLHF 那些怎么考?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "Loss Mas"
+      ],
+      "visualHint": "Loss Mask 是 SFT 的核心考点。RLHF 要讲清 PPO 四个模型各"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "MoE 和长上下"
+      ],
+      "visualHint": "MoE 和长上下文这些前沿呢?"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "MoE 的稀疏激"
+      ],
+      "visualHint": "MoE 的稀疏激活原理、负载均衡损失、专家并行通信。长上下文就考 YaRN、Ro"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "收到!基础架构、"
+      ],
+      "visualHint": "收到!基础架构、位置编码、推理优化、训练对齐、前沿架构——五大板块,八股全覆盖!"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 12000,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 12000
+      }
+    ],
+    "semanticTags": [
+      "苏打,我想动手训"
+    ],
+    "visualHint": "苏打,我想动手训一个大模型练手,但 LLaMA 那种几十亿参数的,显卡根本扛不住"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 12400,
+    "duration": 15039,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15039
+      }
+    ],
+    "semanticTags": [
+      "对,MiniMi"
+    ],
+    "visualHint": "对,MiniMind 就是给学习用的。麻雀虽小,五脏俱全。它虽然只有 26M 参"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 27839,
+    "duration": 5920,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5920
+      }
+    ],
+    "semanticTags": [
+      "Decoder-"
+    ],
+    "visualHint": "Decoder-Only 是什么意思?为什么不用 BERT 那种 Encoder"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 34159,
+    "duration": 24160,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 24160
+      }
+    ],
+    "semanticTags": [
+      "Decoder-"
+    ],
+    "visualHint": "Decoder-Only 只做一件事:预测下一个词,叫 Next Token P"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 58719,
+    "duration": 4480,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4480
+      }
+    ],
+    "semanticTags": [
+      "26M 这么小,"
+    ],
+    "visualHint": "26M 这么小,它的配置参数都是怎么取舍的?"
+  }
+]

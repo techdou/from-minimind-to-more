@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "苏打,DeepS"
+      ],
+      "visualHint": "苏打,DeepSeek-R1 火了之后,GRPO 这个词到处都是。它跟 PPO "
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "GRPO 就是 "
+      ],
+      "visualHint": "GRPO 就是 PPO 的精简版。PPO 最大的痛点是要一个 Critic 模型"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "组内排序?具体是"
+      ],
+      "visualHint": "组内排序?具体是怎么算的?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "比如一个 pro"
+      ],
+      "visualHint": "比如一个 prompt,模型生成 4 到 8 个不同回答,奖励模型给每个打分。然"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "省了 Criti"
+      ],
+      "visualHint": "省了 Critic,代价呢?多采样不也费算力吗?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "确实,GRPO "
+      ],
+      "visualHint": "确实,GRPO 的采样开销更大。但 Critic 是一直驻留显存的固定成本,采样"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "听起来很完美啊,"
+      ],
+      "visualHint": "听起来很完美啊,有什么坑?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "坑不少。原生 G"
+      ],
+      "visualHint": "坑不少。原生 GRPO 有长度偏差——模型发现答得越长分数可能越高,就开始凑字数"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "这么多变体,那 "
+      ],
+      "visualHint": "这么多变体,那 MiniMind 用的是哪个?"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "MiniMind"
+      ],
+      "visualHint": "MiniMind 实现的是标准 GRPO,先把核心流程跑通。数据集和 PPO 一"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "懂了。GRPO "
+      ],
+      "visualHint": "懂了。GRPO 的精髓就是用群体采样换掉 Critic,在客观可验证的任务上特别"
+    },
+    {
+      "sceneId": "scene_012",
+      "fromIndex": 12,
+      "toIndex": 12,
+      "semanticTags": [
+        "对。下一讲我们聊"
+      ],
+      "visualHint": "对。下一讲我们聊 SPO,那是个更狠的——既不要 Critic,又只要采样一个回"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "totalDuration": 77439,
+  "sceneCount": 11,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 3520,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 3520
+        }
+      ],
+      "semanticTags": [
+        "冰糖!SFT 是"
+      ],
+      "visualHint": "冰糖!SFT 是干嘛的,一句话讲!"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 3919,
+      "duration": 9280,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 9280
+        }
+      ],
+      "semanticTags": [
+        "监督微调,用带标"
+      ],
+      "visualHint": "监督微调,用带标注的问答数据,教预训练好的模型按指令回答。预训练只会续写,SFT"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 13599,
+      "duration": 2401,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 2401
+        }
+      ],
+      "semanticTags": [
+        "和预训练的核心区"
+      ],
+      "visualHint": "和预训练的核心区别是啥?"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 16399,
+      "duration": 11840,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 11840
+        }
+      ],
+      "semanticTags": [
+        "Loss Mas"
+      ],
+      "visualHint": "Loss Mask。预训练整段都算 loss,SFT 只对 Assistant "
+    },
+    {
+      "id": "scene_005",
+      "startTime": 28639,
+      "duration": 1600,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 1600
+        }
+      ],
+      "semanticTags": [
+        "这个 Mask "
+      ],
+      "visualHint": "这个 Mask 怎么实现的?"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 30639,
+      "duration": 11361,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 11361
+        }
+      ],
+      "semanticTags": [
+        "在长文本里找到回"
+      ],
+      "visualHint": "在长文本里找到回复的起始和结束位置,把那段之外的标签设成 -100。PyTorc"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 42399,
+      "duration": 2241,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 2241
+        }
+      ],
+      "semanticTags": [
+        "训练代码和预训练"
+      ],
+      "visualHint": "训练代码和预训练像吗?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 45039,
+      "duration": 9921,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 9921
+        }
+      ],
+      "semanticTags": [
+        "核心训练引擎几乎"
+      ],
+      "visualHint": "核心训练引擎几乎一样。都是监督学习,差别全在 Dataset 怎么构造数据。梯度"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 55359,
+      "duration": 3360,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 3360
+        }
+      ],
+      "semanticTags": [
+        "梯度累加和梯度裁"
+      ],
+      "visualHint": "梯度累加和梯度裁剪各解决啥问题?快说!"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 59119,
+      "duration": 12480,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 12480
+        }
+      ],
+      "semanticTags": [
+        "梯度累加:显存不"
+      ],
+      "visualHint": "梯度累加:显存不够跑大 batch,分几次前向、梯度累起来再更新,等效大 bat"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 72000,
+      "duration": 5439,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 5439
+        }
+      ],
+      "semanticTags": [
+        "收到!SFT ="
+      ],
+      "visualHint": "收到!SFT = Loss Mask + 问答数据 + 工程技巧,搞定!"
+    }
+  ]
+}

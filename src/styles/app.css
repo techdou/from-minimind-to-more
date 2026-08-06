@@ -1173,6 +1173,16 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
+.podcast-video-wrap {
+  background: #000;
+  border-bottom: 1px solid var(--border);
+}
+.podcast-video {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  background: #000;
+}
 .podcast-controls {
   display: flex;
   align-items: center;

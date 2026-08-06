@@ -1,0 +1,18 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 126720,
+    "duration": 7680,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 7680
+      }
+    ],
+    "semanticTags": [
+      "这个结论我同意。"
+    ],
+    "visualHint": "这个结论我同意。DPO 求效率,RLHF 求精度,组合使用是最佳实践。"
+  }
+]

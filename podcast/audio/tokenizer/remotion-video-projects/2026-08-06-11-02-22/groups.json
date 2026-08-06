@@ -1,0 +1,74 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": ["开场", "提问"],
+      "visualHint": "助教冰糖头像左侧出现，右侧大字标题『Tokenizer 是什么？』逐字打出，琥珀色重点字高亮"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": ["定义", "Token化", "文字到数字"],
+      "visualHint": "中央水平流程图：『人类文字』→（切块图标）→『带编号的小块』→『数字』，三段从左到右依次淡入"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": ["追问", "切分粒度"],
+      "visualHint": "左右对比卡片：左卡『按字切』右卡『按词切』，中间悬一个大问号，制造悬念"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": ["子词方案", "BPE引入", "权衡动机"],
+      "visualHint": "横向光谱条：字 ← 子词(subword) → 词，子词位置琥珀色高亮；下方再浮出『BPE』字样作为主流算法标签"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 6,
+      "semanticTags": ["BPE原理", "合并过程", "词表控制"],
+      "visualHint": "字符对合并动画：单字符 → 统计高频对 → 合并为新 token，逐轮叠加；右侧侧栏实时显示合并次数与词表大小计数"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 7,
+      "toIndex": 8,
+      "semanticTags": ["词表大小", "效果成本权衡", "GPT对比"],
+      "visualHint": "天平图：左盘『效果（信息量）』右盘『成本（embedding 参数）』；下方并排标注 GPT-2 5万 / GPT-4 10万两个数字徽章"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": ["追问", "分词影响", "模型表现"],
+      "visualHint": "中央警示图标 + 问号，标题『分词不好会怎样？』，简洁过渡，引出反面案例"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": ["实例", "代码缩进", "中文Token通胀"],
+      "visualHint": "上下双区：上区 Python 代码缩进错乱演示（空格/换行被打乱）；下区中英文 token 数对比柱状图，中文柱明显高于英文"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": ["领悟", "成本意识"],
+      "visualHint": "助教冰糖头像 + 亮起灯泡图标，关键词『成本』放大并轻微脉冲，收束本节认知"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 12,
+      "toIndex": 12,
+      "semanticTags": ["总结", "下集预告", "Embedding"],
+      "visualHint": "三要点纵向列表（桥梁 / BPE 子词 / 词表权衡）逐条收束，底部右箭头指向下集标题『Embedding：语义真正开始的地方』"
+    }
+  ]
+}

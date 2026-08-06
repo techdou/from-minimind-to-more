@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 60239,
+    "duration": 15840,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 15840
+      }
+    ],
+    "semanticTags": [
+      "MiniMind"
+    ],
+    "visualHint": "MiniMind 很务实。它从 SFT 数据里摘了 1 万条高质量对话,让模型对"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 76480,
+    "duration": 6720,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 6720
+      }
+    ],
+    "semanticTags": [
+      "用别人的奖励模型"
+    ],
+    "visualHint": "用别人的奖励模型?那分数可靠吗?领域偏移怎么办?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 83600,
+    "duration": 18720,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 18720
+      }
+    ],
+    "semanticTags": [
+      "对学习项目够用了"
+    ],
+    "visualHint": "对学习项目够用了。工业级 PPO 确实要训自己的奖励模型,还要处理偏好数据的分布"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 102720,
+    "duration": 5760,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 5760
+      }
+    ],
+    "semanticTags": [
+      "PPO 的 cl"
+    ],
+    "visualHint": "PPO 的 clip 机制我始终没完全懂。为什么要截断策略更新?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 108880,
+    "duration": 17760,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 17760
+      }
+    ],
+    "semanticTags": [
+      "这是 PPO 区"
+    ],
+    "visualHint": "这是 PPO 区别于朴素策略梯度的核心。如果不限制,一次更新可能把策略改得太猛,"
+  }
+]

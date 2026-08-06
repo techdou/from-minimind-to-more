@@ -16,9 +16,12 @@ export class PodcastPlayer {
     this.container = container;
     this.dialogue = dialogue;
     this.audioUrl = options.audioUrl || dialogue.audio_url || null;
+    // 视频版(优先于音频):视频已含音频轨,体验更好
+    this.videoUrl = options.videoUrl || dialogue.video_url || null;
     this.currentIndex = 0;
     this.isPlaying = false;
     this.audio = null;
+    this.video = null;
     this.timings = []; // 每句的开始/结束时间(秒)
     // dialogue 可能是数组(旧格式)或对象(含 dialogue 数组 + timings)
     this.dialogueLines = Array.isArray(this.dialogue) ? this.dialogue : this.dialogue.dialogue;
@@ -64,6 +67,18 @@ export class PodcastPlayer {
 
     this.container.innerHTML = `
       <div class="podcast-player">
+        ${this.videoUrl ? `
+          <div class="podcast-video-wrap">
+            <video
+              id="podcast-video"
+              class="podcast-video"
+              src="${this.videoUrl}"
+              preload="metadata"
+              playsinline
+              controls
+            ></video>
+          </div>
+        ` : ''}
         <div class="podcast-controls">
           <button class="podcast-play-btn" id="podcast-play">▶</button>
           <div class="podcast-time">
@@ -100,6 +115,7 @@ export class PodcastPlayer {
     this.progressBar = this.container.querySelector('#podcast-progress-bar');
     this.currentTimeEl = this.container.querySelector('#podcast-current');
     this.transcriptEl = this.container.querySelector('#podcast-transcript');
+    this.videoEl = this.container.querySelector('#podcast-video');
   }
 
   bindEvents() {
@@ -111,10 +127,29 @@ export class PodcastPlayer {
         this.speed = parseFloat(btn.dataset.speed);
         this.container.querySelectorAll('[data-speed]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        if (this.video) this.video.playbackRate = this.speed;
         if (this.audio) this.audio.playbackRate = this.speed;
       });
     });
     this.speed = 1;
+
+    // video 元素自带的 play/pause 事件同步 controls 按钮状态
+    if (this.videoEl) {
+      this.videoEl.addEventListener('play', () => {
+        if (!this.isPlaying) {
+          this.isPlaying = true;
+          this.playBtn.textContent = '⏸';
+          this.highlightLine(this.currentIndex);
+        }
+      });
+      this.videoEl.addEventListener('pause', () => {
+        if (this.isPlaying && this.videoEl.paused) {
+          this.isPlaying = false;
+          this.playBtn.textContent = '▶';
+          if (this.simTimer) clearInterval(this.simTimer);
+        }
+      });
+    }
 
     // 点击对白跳转
     this.lines.forEach((line, i) => {
@@ -137,7 +172,21 @@ export class PodcastPlayer {
     // 确保当前句有高亮(首次播放时第一句不会被 updateProgress 触发)
     this.highlightLine(this.currentIndex);
 
-    if (this.audioUrl && !this.audio) {
+    // 优先视频
+    if (this.videoEl && !this.video) {
+      this.video = this.videoEl;
+      this.video.playbackRate = this.speed;
+      this.video.addEventListener('timeupdate', () => {
+        if (this.isPlaying) this.updateFromVideo();
+      });
+      this.video.addEventListener('ended', () => this.pause());
+      this.video.play().catch(() => {
+        this.video = null;
+        this.play();
+      });
+    } else if (this.video) {
+      this.video.play();
+    } else if (this.audioUrl && !this.audio) {
       this.audio = new Audio(this.audioUrl);
       this.audio.playbackRate = this.speed;
       this.audio.addEventListener('timeupdate', () => {
@@ -159,6 +208,7 @@ export class PodcastPlayer {
   pause() {
     this.isPlaying = false;
     this.playBtn.textContent = '▶';
+    if (this.video) this.video.pause();
     if (this.audio) this.audio.pause();
     if (this.simTimer) clearInterval(this.simTimer);
   }
@@ -178,6 +228,10 @@ export class PodcastPlayer {
 
   updateFromAudio() {
     this.updateProgress(this.audio.currentTime);
+  }
+
+  updateFromVideo() {
+    if (this.video) this.updateProgress(this.video.currentTime);
   }
 
   updateProgress(time) {
@@ -223,6 +277,7 @@ export class PodcastPlayer {
   seekTo(index) {
     this.currentIndex = index;
     const time = this.timings[index]?.start || 0;
+    if (this.video) this.video.currentTime = time;
     if (this.audio) this.audio.currentTime = time;
     this.highlightLine(index);
     this.progressBar.style.width = (time / this.totalDuration * 100) + '%';

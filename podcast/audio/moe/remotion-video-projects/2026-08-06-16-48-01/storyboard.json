@@ -1,0 +1,198 @@
+{
+  "totalDuration": 154480,
+  "sceneCount": 12,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 13119,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 13119
+        }
+      ],
+      "semanticTags": [
+        "苏打,我一直觉得"
+      ],
+      "visualHint": "苏打,我一直觉得 MoE 这个方向有点投机取巧。参数搞到几千亿,实际激活的却只有"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 13519,
+      "duration": 17441,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 17441
+        }
+      ],
+      "semanticTags": [
+        "白桦你这话我得反"
+      ],
+      "visualHint": "白桦你这话我得反驳。Scaling Law 告诉我们,模型越聪明,参数就得越多。"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 31359,
+      "duration": 7520,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 7520
+        }
+      ],
+      "semanticTags": [
+        "解耦听起来美好,"
+      ],
+      "visualHint": "解耦听起来美好,可它怎么实现的?总不能让模型自己挑要不要算吧。"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 39279,
+      "duration": 18560,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 18560
+        }
+      ],
+      "semanticTags": [
+        "还真就是让它自己"
+      ],
+      "visualHint": "还真就是让它自己挑。思路仿生人脑——你做数学题不会同时激活视觉区。MoE 把那个"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 58239,
+      "duration": 4960,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 4960
+        }
+      ],
+      "semanticTags": [
+        "派给几个?如果全"
+      ],
+      "visualHint": "派给几个?如果全派,那跟稠密有什么区别?"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 63599,
+      "duration": 17920,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 17920
+        }
+      ],
+      "semanticTags": [
+        "关键就在稀疏激活"
+      ],
+      "visualHint": "关键就在稀疏激活。Top-K 路由,只选分数最高的 K 个。Mixtral 8x"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 81919,
+      "duration": 5760,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 5760
+        }
+      ],
+      "semanticTags": [
+        "那路由器怎么训练"
+      ],
+      "visualHint": "那路由器怎么训练?万一它偷懒,所有 token 都派给同一个专家怎么办?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 88079,
+      "duration": 19041,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 19041
+        }
+      ],
+      "semanticTags": [
+        "这正是 MoE "
+      ],
+      "visualHint": "这正是 MoE 的核心难题,叫负载均衡。早期做法是加一个辅助损失,惩罚专家被选次"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 107520,
+      "duration": 8320,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 8320
+        }
+      ],
+      "semanticTags": [
+        "我承认架构精巧。"
+      ],
+      "visualHint": "我承认架构精巧。但工程上呢?专家分散在不同卡上,通信开销不小吧?"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 116240,
+      "duration": 17120,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 17120
+        }
+      ],
+      "semanticTags": [
+        "你说到点子上了。"
+      ],
+      "visualHint": "你说到点子上了。专家并行确实是大工程,token 要跨卡路由,All-to-Al"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 133760,
+      "duration": 12320,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 12320
+        }
+      ],
+      "semanticTags": [
+        "好吧,我收回'投"
+      ],
+      "visualHint": "好吧,我收回'投机取巧'的说法。参数容量上去了,单次计算却控制住了,这条路确实有"
+    },
+    {
+      "id": "scene_012",
+      "startTime": 146480,
+      "duration": 8000,
+      "segments": [
+        {
+          "text": "苏打:",
+          "relativeStart": 0,
+          "relativeDuration": 8000
+        }
+      ],
+      "semanticTags": [
+        "对。未来大模型大"
+      ],
+      "visualHint": "对。未来大模型大概率都是 MoE,稠密反而是少数派了。理解了它,才算摸到前沿的门"
+    }
+  ]
+}

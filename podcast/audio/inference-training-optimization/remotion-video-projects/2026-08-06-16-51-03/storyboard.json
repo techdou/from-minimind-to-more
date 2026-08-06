@@ -1,0 +1,150 @@
+{
+  "totalDuration": 81439,
+  "sceneCount": 9,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 3520,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 3520
+        }
+      ],
+      "semanticTags": [
+        "冰糖,大模型推理"
+      ],
+      "visualHint": "冰糖,大模型推理为什么慢?不是算力不够吗?"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 3919,
+      "duration": 14241,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 14241
+        }
+      ],
+      "semanticTags": [
+        "不只是算力。推理"
+      ],
+      "visualHint": "不只是算力。推理分两个阶段,瓶颈完全不同。第一个阶段叫 Prefill,并行处理"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 18559,
+      "duration": 5120,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 5120
+        }
+      ],
+      "semanticTags": [
+        "显存带宽?就是数"
+      ],
+      "visualHint": "显存带宽?就是数据从内存搬到芯片的速度?"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 24079,
+      "duration": 12640,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 12640
+        }
+      ],
+      "semanticTags": [
+        "对。Decode"
+      ],
+      "visualHint": "对。Decode 阶段每生成一个 token,都要加载整个模型权重和之前所有的 "
+    },
+    {
+      "id": "scene_005",
+      "startTime": 37119,
+      "duration": 2080,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 2080
+        }
+      ],
+      "semanticTags": [
+        "那怎么优化?有哪"
+      ],
+      "visualHint": "那怎么优化?有哪些方向?"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 39599,
+      "duration": 20000,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 20000
+        }
+      ],
+      "semanticTags": [
+        "推理优化三大方向"
+      ],
+      "visualHint": "推理优化三大方向:KV Cache 压缩(GQA/MQA 减少 KV 体积)、算"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 59999,
+      "duration": 2080,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 2080
+        }
+      ],
+      "semanticTags": [
+        "量化会损失精度吗"
+      ],
+      "visualHint": "量化会损失精度吗?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 62479,
+      "duration": 12000,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 12000
+        }
+      ],
+      "semanticTags": [
+        "会有轻微损失,但"
+      ],
+      "visualHint": "会有轻微损失,但 INT8 几乎无损,INT4 在大模型上也能接受。关键是用得够"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 74879,
+      "duration": 6560,
+      "segments": [
+        {
+          "text": "茉莉:",
+          "relativeStart": 0,
+          "relativeDuration": 6560
+        }
+      ],
+      "semanticTags": [
+        "收到。推理慢主要"
+      ],
+      "visualHint": "收到。推理慢主要卡存储墙,优化靠 KV 压缩+算子融合+量化。"
+    }
+  ]
+}

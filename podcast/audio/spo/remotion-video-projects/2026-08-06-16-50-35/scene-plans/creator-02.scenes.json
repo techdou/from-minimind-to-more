@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 73359,
+    "duration": 25440,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 25440
+      }
+    ],
+    "semanticTags": [
+      "问得好。SPO "
+    ],
+    "visualHint": "问得好。SPO 用了基于 KL 散度的动态衰减来解决这个问题。它会实时监控模型回"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 99200,
+    "duration": 3040,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 3040
+      }
+    ],
+    "semanticTags": [
+      "除了动态基准,还"
+    ],
+    "visualHint": "除了动态基准,还有别的防崩机制吗?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 102640,
+    "duration": 20320,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 20320
+      }
+    ],
+    "semanticTags": [
+      "还有个关键的 K"
+    ],
+    "visualHint": "还有个关键的 KL 刹车。模型为了刷高分可能突然走火入魔,策略突变。SPO 一旦"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 123360,
+    "duration": 4000,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 4000
+      }
+    ],
+    "semanticTags": [
+      "那 SPO 跟 "
+    ],
+    "visualHint": "那 SPO 跟 GRPO 比,实际效果怎么样?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 127760,
+    "duration": 26240,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 26240
+      }
+    ],
+    "semanticTags": [
+      "算力上 SPO "
+    ],
+    "visualHint": "算力上 SPO 优势明显,采样开销只有 GRPO 的几分之一。但因为只采一个样本"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 149440,
+    "duration": 5280,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 5280
+      }
+    ],
+    "semanticTags": [
+      "提问",
+      "RoPE优势",
+      "外推"
+    ],
+    "visualHint": "冰糖提问气泡,背景出现长度尺从 4k 向 32k+ 延伸的刻度线,暗示外推疑问"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 155120,
+    "duration": 23680,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 23680
+      }
+    ],
+    "semanticTags": [
+      "总结",
+      "RoPE原理",
+      "YaYN",
+      "长上下文"
+    ],
+    "visualHint": "中央展示'相对位置=距离'的核心等式,右侧 YaYN 调频示意 + 长上下文基石收束标签"
+  }
+]

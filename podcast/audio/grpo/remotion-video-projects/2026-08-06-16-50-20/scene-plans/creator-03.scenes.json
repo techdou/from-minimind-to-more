@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 133760,
+    "duration": 10720,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 10720
+      }
+    ],
+    "semanticTags": [
+      "懂了。GRPO "
+    ],
+    "visualHint": "懂了。GRPO 的精髓就是用群体采样换掉 Critic,在客观可验证的任务上特别"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 144880,
+    "duration": 9120,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 9120
+      }
+    ],
+    "semanticTags": [
+      "对。下一讲我们聊"
+    ],
+    "visualHint": "对。下一讲我们聊 SPO,那是个更狠的——既不要 Critic,又只要采样一个回"
+  }
+]

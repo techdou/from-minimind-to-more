@@ -1,0 +1,103 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "冰糖!SFT 是"
+      ],
+      "visualHint": "冰糖!SFT 是干嘛的,一句话讲!"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "监督微调,用带标"
+      ],
+      "visualHint": "监督微调,用带标注的问答数据,教预训练好的模型按指令回答。预训练只会续写,SFT"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "和预训练的核心区"
+      ],
+      "visualHint": "和预训练的核心区别是啥?"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "Loss Mas"
+      ],
+      "visualHint": "Loss Mask。预训练整段都算 loss,SFT 只对 Assistant "
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "这个 Mask "
+      ],
+      "visualHint": "这个 Mask 怎么实现的?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "在长文本里找到回"
+      ],
+      "visualHint": "在长文本里找到回复的起始和结束位置,把那段之外的标签设成 -100。PyTorc"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "训练代码和预训练"
+      ],
+      "visualHint": "训练代码和预训练像吗?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "核心训练引擎几乎"
+      ],
+      "visualHint": "核心训练引擎几乎一样。都是监督学习,差别全在 Dataset 怎么构造数据。梯度"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "梯度累加和梯度裁"
+      ],
+      "visualHint": "梯度累加和梯度裁剪各解决啥问题?快说!"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "梯度累加:显存不"
+      ],
+      "visualHint": "梯度累加:显存不够跑大 batch,分几次前向、梯度累起来再更新,等效大 bat"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "收到!SFT ="
+      ],
+      "visualHint": "收到!SFT = Loss Mask + 问答数据 + 工程技巧,搞定!"
+    }
+  ]
+}

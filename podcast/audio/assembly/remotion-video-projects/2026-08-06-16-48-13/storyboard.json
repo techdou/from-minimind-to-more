@@ -1,0 +1,198 @@
+{
+  "totalDuration": 165680,
+  "sceneCount": 12,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 10720,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 10720
+        }
+      ],
+      "semanticTags": [
+        "白老师,前面我们"
+      ],
+      "visualHint": "白老师,前面我们讲了一堆模块——RMSNorm、Attention、RoPE、F"
+    },
+    {
+      "id": "scene_002",
+      "startTime": 11120,
+      "duration": 24640,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 24640
+        }
+      ],
+      "semanticTags": [
+        "这一讲就是把零件"
+      ],
+      "visualHint": "这一讲就是把零件装上流水线。MiniMind 是高度模块化的,每个核心类各司其职"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 36160,
+      "duration": 3840,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 3840
+        }
+      ],
+      "semanticTags": [
+        "配置类我理解了,"
+      ],
+      "visualHint": "配置类我理解了,像个总开关。那归一化层呢?"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 40399,
+      "duration": 24480,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 24480
+        }
+      ],
+      "semanticTags": [
+        "归一化用 RMS"
+      ],
+      "visualHint": "归一化用 RMSNorm,上一讲讲过。它比标准 LayerNorm 少了减均值那"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 65280,
+      "duration": 3680,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 3680
+        }
+      ],
+      "semanticTags": [
+        "Attentio"
+      ],
+      "visualHint": "Attention 模块呢?它里面塞了好多东西。"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 69360,
+      "duration": 24000,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 24000
+        }
+      ],
+      "semanticTags": [
+        "Attentio"
+      ],
+      "visualHint": "Attention 是核心。三个技术打包进去:GQA 降低 KV 头数省显存,R"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 93760,
+      "duration": 2880,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 2880
+        }
+      ],
+      "semanticTags": [
+        "前馈网络这块有两"
+      ],
+      "visualHint": "前馈网络这块有两种模式是吧?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 97040,
+      "duration": 22720,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 22720
+        }
+      ],
+      "semanticTags": [
+        "对。标准 Fee"
+      ],
+      "visualHint": "对。标准 FeedForward 用 SwiGLU 激活,输入过门控投影和上投影"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 120160,
+      "duration": 4480,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 4480
+        }
+      ],
+      "semanticTags": [
+        "这些模块怎么串起"
+      ],
+      "visualHint": "这些模块怎么串起来?一个 Transformer Block 的顺序是?"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 125040,
+      "duration": 22560,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 22560
+        }
+      ],
+      "semanticTags": [
+        "输入先过 RMS"
+      ],
+      "visualHint": "输入先过 RMSNorm 进 Attention,做残差连接;再过 RMSNor"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 148000,
+      "duration": 7680,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 7680
+        }
+      ],
+      "semanticTags": [
+        "原来每个模块都对"
+      ],
+      "visualHint": "原来每个模块都对应前面讲过的技术,组装起来就是现代大模型。这下全串起来了。"
+    },
+    {
+      "id": "scene_012",
+      "startTime": 156080,
+      "duration": 9600,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 9600
+        }
+      ],
+      "semanticTags": [
+        "没错。架构吃透了"
+      ],
+      "visualHint": "没错。架构吃透了,下一篇我们就进训练环节,看预训练怎么把这堆参数从随机变成会说话"
+    }
+  ]
+}

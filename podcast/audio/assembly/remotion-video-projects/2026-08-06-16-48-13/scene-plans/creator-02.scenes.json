@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 69360,
+    "duration": 24000,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 24000
+      }
+    ],
+    "semanticTags": [
+      "Attentio"
+    ],
+    "visualHint": "Attention 是核心。三个技术打包进去:GQA 降低 KV 头数省显存,R"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 93760,
+    "duration": 2880,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 2880
+      }
+    ],
+    "semanticTags": [
+      "前馈网络这块有两"
+    ],
+    "visualHint": "前馈网络这块有两种模式是吧?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 97040,
+    "duration": 22720,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 22720
+      }
+    ],
+    "semanticTags": [
+      "对。标准 Fee"
+    ],
+    "visualHint": "对。标准 FeedForward 用 SwiGLU 激活,输入过门控投影和上投影"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 120160,
+    "duration": 4480,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 4480
+      }
+    ],
+    "semanticTags": [
+      "这些模块怎么串起"
+    ],
+    "visualHint": "这些模块怎么串起来?一个 Transformer Block 的顺序是?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 125040,
+    "duration": 22560,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 22560
+      }
+    ],
+    "semanticTags": [
+      "输入先过 RMS"
+    ],
+    "visualHint": "输入先过 RMSNorm 进 Attention,做残差连接;再过 RMSNor"
+  }
+]

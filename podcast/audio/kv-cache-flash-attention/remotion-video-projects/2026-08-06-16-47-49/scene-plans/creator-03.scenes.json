@@ -1,0 +1,34 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 136960,
+    "duration": 10880,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 10880
+      }
+    ],
+    "semanticTags": [
+      "所以这俩是配合用"
+    ],
+    "visualHint": "所以这俩是配合用的:KV Cache 解决重算,GQA 缩小 Cache,Fla"
+  },
+  {
+    "id": "scene_012",
+    "startTime": 148240,
+    "duration": 7520,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 7520
+      }
+    ],
+    "semanticTags": [
+      "总结到位。下一篇"
+    ],
+    "visualHint": "总结到位。下一篇我们聊 MoE,那是个更狠的优化——参数量涨上去,计算量却不涨。"
+  }
+]

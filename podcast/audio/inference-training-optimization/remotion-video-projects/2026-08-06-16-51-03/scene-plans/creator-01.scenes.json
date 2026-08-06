@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 3520,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 3520
+      }
+    ],
+    "semanticTags": [
+      "冰糖,大模型推理"
+    ],
+    "visualHint": "冰糖,大模型推理为什么慢?不是算力不够吗?"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 3919,
+    "duration": 14241,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 14241
+      }
+    ],
+    "semanticTags": [
+      "不只是算力。推理"
+    ],
+    "visualHint": "不只是算力。推理分两个阶段,瓶颈完全不同。第一个阶段叫 Prefill,并行处理"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 18559,
+    "duration": 5120,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5120
+      }
+    ],
+    "semanticTags": [
+      "显存带宽?就是数"
+    ],
+    "visualHint": "显存带宽?就是数据从内存搬到芯片的速度?"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 24079,
+    "duration": 12640,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 12640
+      }
+    ],
+    "semanticTags": [
+      "对。Decode"
+    ],
+    "visualHint": "对。Decode 阶段每生成一个 token,都要加载整个模型权重和之前所有的 "
+  },
+  {
+    "id": "scene_005",
+    "startTime": 37119,
+    "duration": 2080,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 2080
+      }
+    ],
+    "semanticTags": [
+      "那怎么优化?有哪"
+    ],
+    "visualHint": "那怎么优化?有哪些方向?"
+  }
+]

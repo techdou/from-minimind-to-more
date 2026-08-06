@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 7839,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 7839
+      }
+    ],
+    "semanticTags": [
+      "苏打,DeepS"
+    ],
+    "visualHint": "苏打,DeepSeek-R1 火了之后,GRPO 这个词到处都是。它跟 PPO "
+  },
+  {
+    "id": "scene_002",
+    "startTime": 8240,
+    "duration": 23199,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 23199
+      }
+    ],
+    "semanticTags": [
+      "GRPO 就是 "
+    ],
+    "visualHint": "GRPO 就是 PPO 的精简版。PPO 最大的痛点是要一个 Critic 模型"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 31839,
+    "duration": 4320,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4320
+      }
+    ],
+    "semanticTags": [
+      "组内排序?具体是"
+    ],
+    "visualHint": "组内排序?具体是怎么算的?"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 36559,
+    "duration": 18400,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 18400
+      }
+    ],
+    "semanticTags": [
+      "比如一个 pro"
+    ],
+    "visualHint": "比如一个 prompt,模型生成 4 到 8 个不同回答,奖励模型给每个打分。然"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 55359,
+    "duration": 4800,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4800
+      }
+    ],
+    "semanticTags": [
+      "省了 Criti"
+    ],
+    "visualHint": "省了 Critic,代价呢?多采样不也费算力吗?"
+  }
+]

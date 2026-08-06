@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 63599,
+    "duration": 19200,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 19200
+      }
+    ],
+    "semanticTags": [
+      "看它的配置类就清"
+    ],
+    "visualHint": "看它的配置类就清楚了。隐藏维度 512——LLaMA-7B 是 4096,它压缩"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 83199,
+    "duration": 4640,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4640
+      }
+    ],
+    "semanticTags": [
+      "Query 头和"
+    ],
+    "visualHint": "Query 头和 KV 头数量不一样?这是什么操作?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 88239,
+    "duration": 20800,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 20800
+      }
+    ],
+    "semanticTags": [
+      "这叫分组查询注意"
+    ],
+    "visualHint": "这叫分组查询注意力,GQA。Key 和 Value 在推理时要缓存,头多了显存爆"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 109439,
+    "duration": 5920,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 5920
+      }
+    ],
+    "semanticTags": [
+      "它还支持 MoE"
+    ],
+    "visualHint": "它还支持 MoE?这么小的模型也能上混合专家?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 115760,
+    "duration": 14240,
+    "segments": [
+      {
+        "text": "苏打:",
+        "relativeStart": 0,
+        "relativeDuration": 14240
+      }
+    ],
+    "semanticTags": [
+      "能,有个 use"
+    ],
+    "visualHint": "能,有个 use_moe 开关。开了之后 FFN 层就变成 DeepSeek 风"
+  }
+]

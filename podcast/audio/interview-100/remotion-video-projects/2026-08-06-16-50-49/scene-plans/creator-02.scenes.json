@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_006",
+    "startTime": 34479,
+    "duration": 11360,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 11360
+      }
+    ],
+    "semanticTags": [
+      "问得最凶!KV "
+    ],
+    "visualHint": "问得最凶!KV Cache 原理、为啥能加速、显存占用怎么算——这三个连环问。还"
+  },
+  {
+    "id": "scene_007",
+    "startTime": 46239,
+    "duration": 4000,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 4000
+      }
+    ],
+    "semanticTags": [
+      "训练和对齐呢?S"
+    ],
+    "visualHint": "训练和对齐呢?SFT、RLHF 那些怎么考?"
+  },
+  {
+    "id": "scene_008",
+    "startTime": 50639,
+    "duration": 13280,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 13280
+      }
+    ],
+    "semanticTags": [
+      "Loss Mas"
+    ],
+    "visualHint": "Loss Mask 是 SFT 的核心考点。RLHF 要讲清 PPO 四个模型各"
+  },
+  {
+    "id": "scene_009",
+    "startTime": 64319,
+    "duration": 2560,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 2560
+      }
+    ],
+    "semanticTags": [
+      "MoE 和长上下"
+    ],
+    "visualHint": "MoE 和长上下文这些前沿呢?"
+  },
+  {
+    "id": "scene_010",
+    "startTime": 67280,
+    "duration": 9120,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 9120
+      }
+    ],
+    "semanticTags": [
+      "MoE 的稀疏激"
+    ],
+    "visualHint": "MoE 的稀疏激活原理、负载均衡损失、专家并行通信。长上下文就考 YaRN、Ro"
+  }
+]

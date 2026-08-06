@@ -1,0 +1,82 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 3520,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 3520
+      }
+    ],
+    "semanticTags": [
+      "冰糖!SFT 是"
+    ],
+    "visualHint": "冰糖!SFT 是干嘛的,一句话讲!"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 3919,
+    "duration": 9280,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 9280
+      }
+    ],
+    "semanticTags": [
+      "监督微调,用带标"
+    ],
+    "visualHint": "监督微调,用带标注的问答数据,教预训练好的模型按指令回答。预训练只会续写,SFT"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 13599,
+    "duration": 2401,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 2401
+      }
+    ],
+    "semanticTags": [
+      "和预训练的核心区"
+    ],
+    "visualHint": "和预训练的核心区别是啥?"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 16399,
+    "duration": 11840,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 11840
+      }
+    ],
+    "semanticTags": [
+      "Loss Mas"
+    ],
+    "visualHint": "Loss Mask。预训练整段都算 loss,SFT 只对 Assistant "
+  },
+  {
+    "id": "scene_005",
+    "startTime": 28639,
+    "duration": 1600,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 1600
+      }
+    ],
+    "semanticTags": [
+      "这个 Mask "
+    ],
+    "visualHint": "这个 Mask 怎么实现的?"
+  }
+]

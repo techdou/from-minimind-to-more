@@ -1,0 +1,18 @@
+[
+  {
+    "id": "scene_011",
+    "startTime": 76800,
+    "duration": 7840,
+    "segments": [
+      {
+        "text": "茉莉:",
+        "relativeStart": 0,
+        "relativeDuration": 7840
+      }
+    ],
+    "semanticTags": [
+      "收到!基础架构、"
+    ],
+    "visualHint": "收到!基础架构、位置编码、推理优化、训练对齐、前沿架构——五大板块,八股全覆盖!"
+  }
+]

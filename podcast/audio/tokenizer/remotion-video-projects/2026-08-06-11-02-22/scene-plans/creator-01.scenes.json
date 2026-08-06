@@ -1,0 +1,95 @@
+[
+  {
+    "id": "scene_001",
+    "startTime": 0,
+    "duration": 7360,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 7360
+      }
+    ],
+    "semanticTags": [
+      "开场",
+      "提问"
+    ],
+    "visualHint": "助教冰糖头像左侧出现，右侧大字标题『Tokenizer 是什么？』逐字打出，琥珀色重点字高亮"
+  },
+  {
+    "id": "scene_002",
+    "startTime": 7760,
+    "duration": 18079,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 18079
+      }
+    ],
+    "semanticTags": [
+      "定义",
+      "Token化",
+      "文字到数字"
+    ],
+    "visualHint": "中央水平流程图：『人类文字』→（切块图标）→『带编号的小块』→『数字』，三段从左到右依次淡入"
+  },
+  {
+    "id": "scene_003",
+    "startTime": 26239,
+    "duration": 4320,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 4320
+      }
+    ],
+    "semanticTags": [
+      "追问",
+      "切分粒度"
+    ],
+    "visualHint": "左右对比卡片：左卡『按字切』右卡『按词切』，中间悬一个大问号，制造悬念"
+  },
+  {
+    "id": "scene_004",
+    "startTime": 30959,
+    "duration": 24961,
+    "segments": [
+      {
+        "text": "白桦:",
+        "relativeStart": 0,
+        "relativeDuration": 24961
+      }
+    ],
+    "semanticTags": [
+      "子词方案",
+      "BPE引入",
+      "权衡动机"
+    ],
+    "visualHint": "横向光谱条：字 ← 子词(subword) → 词，子词位置琥珀色高亮；下方再浮出『BPE』字样作为主流算法标签"
+  },
+  {
+    "id": "scene_005",
+    "startTime": 56320,
+    "duration": 20240,
+    "segments": [
+      {
+        "text": "冰糖:",
+        "relativeStart": 0,
+        "relativeDuration": 2399
+      },
+      {
+        "text": "白桦:",
+        "relativeStart": 2799,
+        "relativeDuration": 17441
+      }
+    ],
+    "semanticTags": [
+      "BPE原理",
+      "合并过程",
+      "词表控制"
+    ],
+    "visualHint": "字符对合并动画：单字符 → 统计高频对 → 合并为新 token，逐轮叠加；右侧侧栏实时显示合并次数与词表大小计数"
+  }
+]

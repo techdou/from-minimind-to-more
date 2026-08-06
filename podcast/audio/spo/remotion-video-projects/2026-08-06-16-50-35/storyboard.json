@@ -1,0 +1,198 @@
+{
+  "totalDuration": 173520,
+  "sceneCount": 12,
+  "scenes": [
+    {
+      "id": "scene_001",
+      "startTime": 0,
+      "duration": 10880,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 10880
+        }
+      ],
+      "semanticTags": [
+        "白老师,前面学了"
+      ],
+      "visualHint": "白老师,前面学了 PPO 和 GRPO。PPO 省不了 Critic,GRPO "
+    },
+    {
+      "id": "scene_002",
+      "startTime": 11280,
+      "duration": 18239,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 18239
+        }
+      ],
+      "semanticTags": [
+        "总结得准。SPO"
+      ],
+      "visualHint": "总结得准。SPO 的核心一句话:像 GRPO 一样不用 Critic 省显存,又"
+    },
+    {
+      "id": "scene_003",
+      "startTime": 29919,
+      "duration": 9120,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 9120
+        }
+      ],
+      "semanticTags": [
+        "那基准线从哪来?"
+      ],
+      "visualHint": "那基准线从哪来?PPO 有 Critic 估,GRPO 有组内均值,SPO 啥都"
+    },
+    {
+      "id": "scene_004",
+      "startTime": 39439,
+      "duration": 27040,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 27040
+        }
+      ],
+      "semanticTags": [
+        "这就是 SPO "
+      ],
+      "visualHint": "这就是 SPO 的巧思。它用了一个纯数学的追踪器,叫 AutoAdaptiveV"
+    },
+    {
+      "id": "scene_005",
+      "startTime": 66879,
+      "duration": 6080,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 6080
+        }
+      ],
+      "semanticTags": [
+        "历史平均分听起来"
+      ],
+      "visualHint": "历史平均分听起来简单,但训练过程中模型在变,平均分不会过时吗?"
+    },
+    {
+      "id": "scene_006",
+      "startTime": 73359,
+      "duration": 25440,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 25440
+        }
+      ],
+      "semanticTags": [
+        "问得好。SPO "
+      ],
+      "visualHint": "问得好。SPO 用了基于 KL 散度的动态衰减来解决这个问题。它会实时监控模型回"
+    },
+    {
+      "id": "scene_007",
+      "startTime": 99200,
+      "duration": 3040,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 3040
+        }
+      ],
+      "semanticTags": [
+        "除了动态基准,还"
+      ],
+      "visualHint": "除了动态基准,还有别的防崩机制吗?"
+    },
+    {
+      "id": "scene_008",
+      "startTime": 102640,
+      "duration": 20320,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 20320
+        }
+      ],
+      "semanticTags": [
+        "还有个关键的 K"
+      ],
+      "visualHint": "还有个关键的 KL 刹车。模型为了刷高分可能突然走火入魔,策略突变。SPO 一旦"
+    },
+    {
+      "id": "scene_009",
+      "startTime": 123360,
+      "duration": 4000,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 4000
+        }
+      ],
+      "semanticTags": [
+        "那 SPO 跟 "
+      ],
+      "visualHint": "那 SPO 跟 GRPO 比,实际效果怎么样?"
+    },
+    {
+      "id": "scene_010",
+      "startTime": 127760,
+      "duration": 26240,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 26240
+        }
+      ],
+      "semanticTags": [
+        "算力上 SPO "
+      ],
+      "visualHint": "算力上 SPO 优势明显,采样开销只有 GRPO 的几分之一。但因为只采一个样本"
+    },
+    {
+      "id": "scene_011",
+      "startTime": 154400,
+      "duration": 9920,
+      "segments": [
+        {
+          "text": "冰糖:",
+          "relativeStart": 0,
+          "relativeDuration": 9920
+        }
+      ],
+      "semanticTags": [
+        "明白了。PPO "
+      ],
+      "visualHint": "明白了。PPO 是基石,GRPO 去掉 Critic,SPO 再去掉多采样,一步"
+    },
+    {
+      "id": "scene_012",
+      "startTime": 164720,
+      "duration": 8800,
+      "segments": [
+        {
+          "text": "白桦:",
+          "relativeStart": 0,
+          "relativeDuration": 8800
+        }
+      ],
+      "semanticTags": [
+        "没错。下一讲换个"
+      ],
+      "visualHint": "没错。下一讲换个口味,不聊算法,聊聊面试——大模型八股 100 问,看你能答对几"
+    }
+  ]
+}

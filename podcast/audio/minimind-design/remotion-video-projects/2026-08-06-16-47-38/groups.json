@@ -1,0 +1,112 @@
+{
+  "groups": [
+    {
+      "sceneId": "scene_001",
+      "fromIndex": 1,
+      "toIndex": 1,
+      "semanticTags": [
+        "苏打,我想动手训"
+      ],
+      "visualHint": "苏打,我想动手训一个大模型练手,但 LLaMA 那种几十亿参数的,显卡根本扛不住"
+    },
+    {
+      "sceneId": "scene_002",
+      "fromIndex": 2,
+      "toIndex": 2,
+      "semanticTags": [
+        "对,MiniMi"
+      ],
+      "visualHint": "对,MiniMind 就是给学习用的。麻雀虽小,五脏俱全。它虽然只有 26M 参"
+    },
+    {
+      "sceneId": "scene_003",
+      "fromIndex": 3,
+      "toIndex": 3,
+      "semanticTags": [
+        "Decoder-"
+      ],
+      "visualHint": "Decoder-Only 是什么意思?为什么不用 BERT 那种 Encoder"
+    },
+    {
+      "sceneId": "scene_004",
+      "fromIndex": 4,
+      "toIndex": 4,
+      "semanticTags": [
+        "Decoder-"
+      ],
+      "visualHint": "Decoder-Only 只做一件事:预测下一个词,叫 Next Token P"
+    },
+    {
+      "sceneId": "scene_005",
+      "fromIndex": 5,
+      "toIndex": 5,
+      "semanticTags": [
+        "26M 这么小,"
+      ],
+      "visualHint": "26M 这么小,它的配置参数都是怎么取舍的?"
+    },
+    {
+      "sceneId": "scene_006",
+      "fromIndex": 6,
+      "toIndex": 6,
+      "semanticTags": [
+        "看它的配置类就清"
+      ],
+      "visualHint": "看它的配置类就清楚了。隐藏维度 512——LLaMA-7B 是 4096,它压缩"
+    },
+    {
+      "sceneId": "scene_007",
+      "fromIndex": 7,
+      "toIndex": 7,
+      "semanticTags": [
+        "Query 头和"
+      ],
+      "visualHint": "Query 头和 KV 头数量不一样?这是什么操作?"
+    },
+    {
+      "sceneId": "scene_008",
+      "fromIndex": 8,
+      "toIndex": 8,
+      "semanticTags": [
+        "这叫分组查询注意"
+      ],
+      "visualHint": "这叫分组查询注意力,GQA。Key 和 Value 在推理时要缓存,头多了显存爆"
+    },
+    {
+      "sceneId": "scene_009",
+      "fromIndex": 9,
+      "toIndex": 9,
+      "semanticTags": [
+        "它还支持 MoE"
+      ],
+      "visualHint": "它还支持 MoE?这么小的模型也能上混合专家?"
+    },
+    {
+      "sceneId": "scene_010",
+      "fromIndex": 10,
+      "toIndex": 10,
+      "semanticTags": [
+        "能,有个 use"
+      ],
+      "visualHint": "能,有个 use_moe 开关。开了之后 FFN 层就变成 DeepSeek 风"
+    },
+    {
+      "sceneId": "scene_011",
+      "fromIndex": 11,
+      "toIndex": 11,
+      "semanticTags": [
+        "懂了,小是参数小"
+      ],
+      "visualHint": "懂了,小是参数小,架构思路一点都不旧。先把这套配置吃透,看大模型就顺手了。"
+    },
+    {
+      "sceneId": "scene_012",
+      "fromIndex": 12,
+      "toIndex": 12,
+      "semanticTags": [
+        "没错。MiniM"
+      ],
+      "visualHint": "没错。MiniMind 的价值就在这——用最小成本让你摸到所有现代设计。下一篇我"
+    }
+  ]
+}
