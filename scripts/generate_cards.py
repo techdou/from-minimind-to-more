@@ -6,8 +6,9 @@ import time
 import os
 
 GENERATOR = os.path.expanduser("~/.agents/skills/image2-api/scripts/generate_image.py")
-# 相对本脚本位置定位输出目录,不再硬编码绝对路径(换机也能跑)
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public", "assets", "cards")
+# 相对仓库根目录定位输出目录(本脚本在 scripts/ 下,取上一级)
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.path.join(REPO_ROOT, "public", "assets", "cards")
 
 # Unified style prefix for all cards
 STYLE = (
