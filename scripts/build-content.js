@@ -12,6 +12,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import yaml from 'js-yaml';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -31,38 +32,21 @@ const ORDER_OVERRIDE = {
   optional: { 'inference-training-optimization': 1 },
 };
 
-// 简易 YAML frontmatter 解析(不引入额外依赖处理复杂情况)
-function parseFrontmatter(raw) {
+// YAML frontmatter 解析(js-yaml,依赖早已在 package.json)
+// 解析失败时打警告并返回空 fm——不静默吞掉,避免元数据丢了还不知情
+function parseFrontmatter(raw, fileLabel = '') {
   // 统一换行
   const normalized = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   const match = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) return { fm: {}, body: normalized };
 
-  const yamlStr = match[1];
-  const body = match[2];
-  const fm = {};
-
-  let currentKey = null;
-  for (const line of yamlStr.split('\n')) {
-    if (line.match(/^(\w+):\s*(.*)$/)) {
-      const [, key, val] = line.match(/^(\w+):\s*(.*)$/);
-      if (val === '' || val === '[]') {
-        currentKey = key;
-        if (val === '[]') { fm[key] = []; currentKey = null; }
-        continue;
-      }
-      // 去引号
-      fm[key] = val.replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
-      if (/^\d+$/.test(fm[key])) fm[key] = parseInt(fm[key], 10);
-      currentKey = null;
-    } else if (line.match(/^\s+-\s+/) && currentKey) {
-      const val = line.replace(/^\s+-\s+/, '').replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
-      if (!fm[currentKey]) fm[currentKey] = [];
-      fm[currentKey].push(val);
-    }
+  let fm = {};
+  try {
+    fm = yaml.load(match[1]) || {};
+  } catch (err) {
+    console.warn(`[警告] frontmatter 解析失败 ${fileLabel}: ${err.message.split('\n')[0]}`);
   }
-
-  return { fm, body };
+  return { fm, body: match[2] };
 }
 
 // 预提取 TOC(从正文 H2/H3)
@@ -74,7 +58,8 @@ function extractTOCFromText(body) {
   let inCodeBlock = false;
 
   for (const line of lines) {
-    if (line.match(/^```/)) {
+    // 围栏代码块:``` 或 ~~~ 都识别,其中的 # 标题不进 TOC
+    if (line.match(/^(```|~~~)/)) {
       inCodeBlock = !inCodeBlock;
       continue;
     }
@@ -110,7 +95,7 @@ for (const cat of categories) {
     const slug = path.basename(file, '.md');
     const filePath = path.join(dir, file);
     const raw = fs.readFileSync(filePath, 'utf-8');
-    const { fm, body } = parseFrontmatter(raw);
+    const { fm, body } = parseFrontmatter(raw, `${cat}/${file}`);
 
     const order = ORDER_OVERRIDE[cat]?.[slug] || fm.order || 99;
     const toc = extractTOCFromText(body);

@@ -6,6 +6,7 @@
 
 import manifest from '../data/manifest.json';
 import { PodcastPlayer } from '../components/podcast-player.js';
+import { onPageCleanup } from '../core/page-lifecycle.js';
 
 export async function renderPodcast(container, slug) {
   const meta = manifest.find((a) => a.slug === slug);
@@ -59,7 +60,9 @@ export async function renderPodcast(container, slug) {
       } catch {}
     }
 
-    new PodcastPlayer(mount, dialogue, { audioUrl, videoUrl });
+    const player = new PodcastPlayer(mount, dialogue, { audioUrl, videoUrl });
+    // 路由切换时销毁播放器(停声音、清定时器)
+    onPageCleanup(() => player.destroy());
   } catch (err) {
     mount.innerHTML = `
       <div class="quiz-empty">

@@ -13,6 +13,7 @@
  */
 
 import { COMPARISON_CARDS } from '../data/card-configs.js';
+import { escapeHtml as escapeHTML } from '../utils/escape.js';
 
 /**
  * @param {HTMLElement} container - 文章正文容器(含 .markdown-body)
@@ -88,14 +89,4 @@ function renderSide(side, position) {
       </div>
     </div>
   `;
-}
-
-function escapeHTML(s) {
-  if (s == null) return '';
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }

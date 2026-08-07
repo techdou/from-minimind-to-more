@@ -5,8 +5,9 @@ import sys
 import time
 import os
 
-GENERATOR = "C:/Users/DouXiulu/.agents/skills/image2-api/scripts/generate_image.py"
-OUTPUT_DIR = "E:/projects/minimind2more/public/assets/cards"
+GENERATOR = os.path.expanduser("~/.agents/skills/image2-api/scripts/generate_image.py")
+# 相对本脚本位置定位输出目录,不再硬编码绝对路径(换机也能跑)
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public", "assets", "cards")
 
 # Unified style prefix for all cards
 STYLE = (
@@ -158,11 +159,15 @@ def run_one(card):
         "--prompt-lint", "off",
     ]
     print(f"\n=== [{name}] ===", flush=True)
+    expected = os.path.join(OUTPUT_DIR, f"{name}.png")
+    # 先删旧产物:否则本次生成失败(rc!=0)但旧 png 还在,
+    # exists 检查会用上次的产物误报成功
+    if os.path.exists(expected):
+        os.remove(expected)
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
         ok = result.returncode == 0
         # Check whether the expected output png exists
-        expected = os.path.join(OUTPUT_DIR, f"{name}.png")
         exists = os.path.exists(expected)
         # Tail logs
         out_tail = "\n".join((result.stdout or "").splitlines()[-15:])

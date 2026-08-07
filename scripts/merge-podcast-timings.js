@@ -8,6 +8,11 @@
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// 以仓库根目录为基准,不依赖运行时的 cwd
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
 
 const slug = process.argv[2];
 if (!slug) {
@@ -15,15 +20,15 @@ if (!slug) {
   process.exit(1);
 }
 
-const dialoguePath = path.join('podcast', 'scripts', `${slug}.json`);
-const manifestPath = path.join('podcast', 'audio', slug, 'manifest.json');
+const dialoguePath = path.join(ROOT, 'podcast', 'scripts', `${slug}.json`);
+const manifestPath = path.join(ROOT, 'podcast', 'audio', slug, 'manifest.json');
 
 if (!fs.existsSync(dialoguePath)) {
   console.error(`找不到 dialogue: ${dialoguePath}`);
   process.exit(1);
 }
 if (!fs.existsSync(manifestPath)) {
-  console.error(`找不到 manifest: ${manifestPathPath}`);
+  console.error(`找不到 manifest: ${manifestPath}`);
   process.exit(1);
 }
 
@@ -44,7 +49,7 @@ dialogue.total_duration = elapsed;
 dialogue.audio_url = `/podcast/audio/${slug}.mp3`;
 
 // 写到 public
-const outPath = path.join('public', 'podcast', 'scripts', `${slug}.json`);
+const outPath = path.join(ROOT, 'public', 'podcast', 'scripts', `${slug}.json`);
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, JSON.stringify(dialogue, null, 2), 'utf-8');
 

@@ -38,6 +38,11 @@ const STAGES = [
     id: 'career', name: '求职', subtitle: '面试冲刺',
     chains: [['interview-100']],
   },
+  {
+    // 可选拓展篇(推理与训练优化),不属于主线但收录进路径,避免成为孤岛页
+    id: 'optional', name: '拓展', subtitle: '可选深挖主题',
+    chains: [['inference-training-optimization']],
+  },
 ];
 
 const DIFF_STYLES = {
@@ -53,6 +58,7 @@ const PREREQ_SHORT = {
   'kv-cache-flash-attention': 'KVCache', moe: 'MoE', assembly: '超级拼装',
   pretrain: 'Pretrain', sft: 'SFT', 'rl-overview': 'RL概览',
   dpo: 'DPO', ppo: 'PPO', grpo: 'GRPO', spo: 'SPO',
+  'inference-training-optimization': '推理优化',
 };
 
 const COLLAPSE_KEY = 'mm2m_lp_collapse';
@@ -62,7 +68,8 @@ function loadCollapseState() {
   catch { return {}; }
 }
 function saveCollapseState(state) {
-  localStorage.setItem(COLLAPSE_KEY, JSON.stringify(state));
+  try { localStorage.setItem(COLLAPSE_KEY, JSON.stringify(state)); }
+  catch { /* 隐私模式下降级:不记忆折叠状态 */ }
 }
 
 export function renderLearningPath(container, recommendedSlug) {
@@ -140,7 +147,6 @@ export function renderLearningPath(container, recommendedSlug) {
     toggle.addEventListener('click', () => {
       const station = toggle.closest('.lp-station');
       const stageId = station.dataset.stage;
-      const body = station.querySelector('.lp-station-body-inner');
       const chevron = toggle.querySelector('.lp-chevron');
       const isCurrentlyOpen = !station.classList.contains('lp-collapsed');
 
@@ -155,6 +161,14 @@ export function renderLearningPath(container, recommendedSlug) {
       // 记忆
       const newState = { ...loadCollapseState(), [stageId]: !isCurrentlyOpen };
       saveCollapseState(newState);
+    });
+
+    // 键盘可达:role="button" tabindex="0" 的元素需要 Enter/Space 触发
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
     });
   });
 }

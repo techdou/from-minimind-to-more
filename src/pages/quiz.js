@@ -12,6 +12,7 @@
  */
 
 import manifest from '../data/manifest.json';
+import { escapeHtml } from '../utils/escape.js';
 
 export async function renderQuiz(container, slug) {
   const meta = manifest.find((a) => a.slug === slug);
@@ -119,16 +120,16 @@ function renderQuestion(q, index) {
         <span class="quiz-q-num">${index + 1}</span>
         <span class="quiz-q-type">${typeLabel}</span>
       </div>
-      <div class="quiz-q-body">${q.question}</div>
+      <div class="quiz-q-body">${escapeHtml(q.question)}</div>
       ${q.type === 'fill' ? `
         <div class="quiz-answer-input">
-          <input type="text" class="quiz-input" placeholder="填入答案..." data-answer="${q.answer}">
+          <input type="text" class="quiz-input" placeholder="填入答案..." data-answer="${escapeHtml(q.answer)}">
           <button class="quiz-check-btn">检查</button>
         </div>
       ` : ''}
       <div class="quiz-reveal" style="display:none;">
         <div class="quiz-answer-label">参考答案</div>
-        <div class="quiz-answer-text">${q.answer}</div>
+        <div class="quiz-answer-text">${escapeHtml(q.answer)}</div>
       </div>
       <div class="quiz-q-actions">
         <button class="quiz-reveal-btn">显示答案</button>
@@ -140,8 +141,27 @@ function renderQuestion(q, index) {
 }
 
 function setupQuizInteraction(container, questions) {
-  let answered = 0;
-  let correct = 0;
+  // 分数唯一事实源:题目元素的 DOM 状态(data-graded + .quiz-q-correct),
+  // 不再维护闭包计数器(原实现填空自评无法修正、showResult 里有死代码)
+  const countAnswered = () => container.querySelectorAll('.quiz-question[data-graded]').length;
+  const countCorrect = () => container.querySelectorAll('.quiz-question[data-graded].quiz-q-correct').length;
+
+  // 规范化:忽略空白和大小写,判对只比"包含正确答案"这一个方向
+  // (原实现双向 includes,用户只输 1 个字也算对)
+  const normalize = (s) => String(s).replace(/\s/g, '').toLowerCase();
+
+  function markQuestion(q, isCorrect) {
+    q.dataset.graded = '1';
+    q.classList.remove('quiz-q-correct', 'quiz-q-wrong');
+    q.classList.add(isCorrect ? 'quiz-q-correct' : 'quiz-q-wrong');
+    updateProgress();
+  }
+
+  function showSelfEval(q) {
+    q.querySelector('.quiz-reveal-btn').style.display = 'none';
+    q.querySelector('.quiz-correct-btn').style.display = 'inline-block';
+    q.querySelector('.quiz-wrong-btn').style.display = 'inline-block';
+  }
 
   // 填空题检查
   container.querySelectorAll('.quiz-check-btn').forEach((btn) => {
@@ -153,22 +173,15 @@ function setupQuizInteraction(container, questions) {
 
       if (!userAns) return;
 
-      const isCorrect = userAns.includes(correctAns) || correctAns.includes(userAns);
+      const isCorrect = normalize(userAns).includes(normalize(correctAns));
       input.classList.add(isCorrect ? 'input-correct' : 'input-wrong');
 
-      const reveal = q.querySelector('.quiz-reveal');
-      reveal.style.display = 'block';
+      q.querySelector('.quiz-reveal').style.display = 'block';
       e.target.style.display = 'none';
+      showSelfEval(q);
 
-      // 显示正确/错误按钮
-      q.querySelector('.quiz-reveal-btn').style.display = 'none';
-      q.querySelector('.quiz-correct-btn').style.display = 'inline-block';
-      q.querySelector('.quiz-wrong-btn').style.display = 'inline-block';
-
-      // 自动标记
-      if (isCorrect) correct++;
-      answered++;
-      updateProgress(container, answered, questions.length);
+      // 自动判定计入,但用户仍可用下方自评按钮修正误判
+      markQuestion(q, isCorrect);
     });
   });
 
@@ -182,73 +195,51 @@ function setupQuizInteraction(container, questions) {
       if (!hasInput) {
         reveal.style.display = 'block';
         e.target.style.display = 'none';
-        q.querySelector('.quiz-correct-btn').style.display = 'inline-block';
-        q.querySelector('.quiz-wrong-btn').style.display = 'inline-block';
+        showSelfEval(q);
       }
     });
   });
 
-  // 正确/错误按钮
+  // 正确/错误自评按钮(填空题自动判定后也可用此修正)
   container.querySelectorAll('.quiz-correct-btn, .quiz-wrong-btn').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       const q = e.target.closest('.quiz-question');
-      if (q.dataset.graded) return;
-      q.dataset.graded = '1';
-
-      // 如果之前是填空题自动检查过的,不重复计数
-      const wasFillAuto = q.querySelector('.quiz-input')?.classList.contains('input-correct') ||
-                          q.querySelector('.quiz-input')?.classList.contains('input-wrong');
-      if (!wasFillAuto) {
-        answered++;
-        if (e.target.dataset.correct === '1') correct++;
-        updateProgress(container, answered, questions.length);
-      }
+      markQuestion(q, e.target.dataset.correct === '1');
 
       q.querySelector('.quiz-correct-btn').style.display = 'none';
       q.querySelector('.quiz-wrong-btn').style.display = 'none';
-      q.classList.add(e.target.dataset.correct === '1' ? 'quiz-q-correct' : 'quiz-q-wrong');
     });
   });
 
-  // 重做
+  // 重做:直接重新渲染,不整页刷新
   const retryBtn = container.querySelector('#quiz-retry');
   if (retryBtn) {
     retryBtn.addEventListener('click', () => {
-      location.hash = `#/article/${slug}/quiz`;
-      location.reload();
+      renderQuiz(container, slug);
     });
   }
 
-  function updateProgress(container, answered, total) {
+  function updateProgress() {
+    const answered = countAnswered();
     const fill = container.querySelector('#quiz-progress-fill');
-    if (fill) fill.style.width = `${(answered / total) * 100}%`;
+    if (fill) fill.style.width = `${(answered / questions.length) * 100}%`;
 
-    if (answered >= total) {
+    if (answered >= questions.length) {
       showResult();
     }
   }
 
   function showResult() {
-    // 修正:填空题已自动计分,问答题需重新统计自评
-    let finalCorrect = correct;
-    container.querySelectorAll('.quiz-question').forEach((q) => {
-      if (q.dataset.graded === '1' && !q.querySelector('.quiz-input')) {
-        // 问答题自评
-        if (q.classList.contains('quiz-q-correct')) finalCorrect++;
-      }
-    });
-    // 去重(上面 correct 已包含部分)
-    finalCorrect = Math.min(correct, questions.length);
+    const finalCorrect = countCorrect();
+    const total = questions.length;
+    const pct = Math.round((finalCorrect / total) * 100);
 
     const result = container.querySelector('#quiz-result');
-    const score = container.querySelector('#quiz-score');
-    const feedback = container.querySelector('#quiz-feedback');
-    const pct = Math.round((correct / questions.length) * 100);
-
     container.querySelector('#quiz-questions').style.display = 'none';
     result.style.display = 'block';
-    score.textContent = `${correct} / ${questions.length} (${pct}%)`;
+    container.querySelector('#quiz-score').textContent = `${finalCorrect} / ${total} (${pct}%)`;
 
+    const feedback = container.querySelector('#quiz-feedback');
     if (pct >= 80) {
       feedback.textContent = '掌握得不错!可以进入下一篇了。';
     } else if (pct >= 50) {

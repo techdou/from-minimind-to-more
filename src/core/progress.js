@@ -18,7 +18,11 @@ function loadAll() {
 }
 
 function saveAll(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch {
+    // 隐私模式 / 超配额时静默降级:进度不保存,但不影响阅读
+  }
 }
 
 /**
@@ -38,7 +42,8 @@ export function setProgress(slug, percent, scrollY) {
     percent: Math.round(percent),
     scrollY: scrollY || 0,
     updatedAt: Date.now(),
-    read: percent > 90, // 超过 90% 算已读
+    // 已读状态粘滞:一旦读过(>90%),重访时的低进度不清掉已读标记
+    read: all[slug]?.read || percent > 90,
   };
   saveAll(all);
 }
@@ -75,8 +80,11 @@ export function getAllProgress() {
  * 绑定滚动进度条
  * @param {string} slug - 文章 slug
  * @param {HTMLElement} barEl - 进度条元素
+ * @param {AbortSignal} [signal] - 页面生命周期信号(app.js pageSignal()),
+ *   路由切换时自动移除监听,防泄漏
+ * @returns {() => void} refresh - 手动刷新函数,供 restoreScroll 后调用
  */
-export function bindProgressBar(slug, barEl) {
+export function bindProgressBar(slug, barEl, signal) {
   let ticking = false;
 
   function update() {
@@ -95,8 +103,9 @@ export function bindProgressBar(slug, barEl) {
       requestAnimationFrame(update);
       ticking = true;
     }
-  }, { passive: true });
+  }, { passive: true, signal });
 
-  // 初始更新一次
-  update();
+  // 注意:不在此立即 update——此刻 scrollY 还是上一页的位置,
+  // 立即写会算出垃圾进度覆盖记录。由调用方在 restoreScroll 后调 refresh。
+  return update;
 }

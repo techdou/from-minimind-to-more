@@ -6,9 +6,13 @@
  */
 
 import { Index } from 'flexsearch';
+import { escapeHtml, escapeRegex } from '../utils/escape.js';
 
 let indexCache = null;
 let docsCache = null;
+// 搜索代际令牌:首次搜索要 await 加载索引(慢),期间继续打字触发的新搜索
+// 会先完成——旧结果不得覆盖新结果
+let searchToken = 0;
 
 async function loadIndex() {
   if (indexCache) return { index: indexCache, docs: docsCache };
@@ -32,7 +36,7 @@ export async function renderSearch(container, query) {
         <h1>搜索</h1>
         <div class="search-input-wrap">
           <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="search-input" class="search-input" placeholder="搜索文章标题、概念、公式..." value="${query || ''}" autofocus />
+          <input type="text" id="search-input" class="search-input" placeholder="搜索文章标题、概念、公式..." autofocus />
         </div>
       </div>
       <div id="search-results" class="search-results">
@@ -43,6 +47,9 @@ export async function renderSearch(container, query) {
 
   const input = container.querySelector('#search-input');
   const resultsEl = container.querySelector('#search-results');
+
+  // query 来自 URL hash,用赋值而非拼进 HTML 字符串(防属性注入 XSS)
+  input.value = query || '';
 
   let debounceTimer;
   input.addEventListener('input', () => {
@@ -57,6 +64,7 @@ export async function renderSearch(container, query) {
 }
 
 async function doSearch(query, resultsEl) {
+  const token = ++searchToken;
   query = query.trim();
   if (!query) {
     resultsEl.innerHTML = '<div class="search-hint">输入关键词开始搜索</div>';
@@ -67,6 +75,9 @@ async function doSearch(query, resultsEl) {
 
   try {
     const { index, docs } = await loadIndex();
+    // await 期间用户又输入了新词 → 本次结果作废
+    if (token !== searchToken) return;
+
     const ids = index.search(query, { limit: 20 });
 
     if (ids.length === 0) {
@@ -82,11 +93,11 @@ async function doSearch(query, resultsEl) {
     resultsEl.innerHTML = `
       <div class="search-count">${results.length} 条结果</div>
       ${results.map((r) => `
-        <div class="search-result-item" data-slug="${r.slug}">
+        <div class="search-result-item" data-slug="${escapeHtml(r.slug)}">
           <div class="search-result-title">${highlightText(r.title, query)}</div>
           <div class="search-result-meta">
-            <span class="search-result-cat">${r.category}</span>
-            <span class="search-result-diff diff-${r.difficulty}">${diffLabel(r.difficulty)}</span>
+            <span class="search-result-cat">${escapeHtml(r.category)}</span>
+            <span class="search-result-diff diff-${escapeHtml(r.difficulty)}">${escapeHtml(diffLabel(r.difficulty))}</span>
           </div>
           <div class="search-result-snippet">${r.snippet}</div>
         </div>
@@ -99,7 +110,8 @@ async function doSearch(query, resultsEl) {
       });
     });
   } catch (err) {
-    resultsEl.innerHTML = `<div class="search-error">搜索出错: ${err.message}</div>`;
+    if (token !== searchToken) return;
+    resultsEl.innerHTML = `<div class="search-error">搜索出错: ${escapeHtml(err.message)}</div>`;
   }
 }
 
@@ -119,12 +131,6 @@ function highlightText(text, query) {
   return escaped.replace(regex, '<mark>$1</mark>');
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-function escapeRegex(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 function diffLabel(d) {
   return { beginner: '入门', intermediate: '进阶', advanced: '高级', expert: '专家' }[d] || d;
 }

@@ -18,6 +18,7 @@
  */
 
 import { CARD_GALLERY } from '../data/card-configs.js';
+import { escapeHtml as escapeHTML } from '../utils/escape.js';
 
 const _existsCache = new Set();
 const _missingCache = new Set();
@@ -177,14 +178,4 @@ function closeLightbox() {
   _lightboxEl.hidden = true;
   _lightboxImg.src = '';
   document.body.classList.remove('card-lightbox-open');
-}
-
-function escapeHTML(s) {
-  if (s == null) return '';
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }

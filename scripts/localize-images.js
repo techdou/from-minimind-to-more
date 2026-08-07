@@ -91,14 +91,8 @@ async function main() {
         continue;
       }
 
-      // 跳过非 http
+      // 跳过非 http(注:/assets/external/ 已在上面的 /assets/ 前缀里拦截)
       if (!url.startsWith('http')) {
-        skipped++;
-        continue;
-      }
-
-      // 已经是本地化的
-      if (url.startsWith('/assets/external/')) {
         skipped++;
         continue;
       }
@@ -120,8 +114,9 @@ async function main() {
         } else {
           console.log(`[已有] ${r.localName}`);
         }
-        // 替换 md 里的 URL
-        content = content.replace(r.url, r.localPath);
+        // 替换 md 里的 URL(全局:同一 URL 出现多处都要换;
+        // 用 split/join 避免 String.replace 只换首处、且不用转义正则)
+        content = content.split(r.url).join(r.localPath);
         modified = true;
       } catch (err) {
         console.error(`[失败] ${r.url.slice(0, 60)}... → ${err.message}`);

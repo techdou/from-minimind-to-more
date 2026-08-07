@@ -13,6 +13,7 @@
  */
 
 import { FLIP_CARDS } from '../data/card-configs.js';
+import { escapeHtml as escapeHTML } from '../utils/escape.js';
 
 /**
  * @param {HTMLElement} container - 文章正文容器(含 .markdown-body)
@@ -99,14 +100,4 @@ export function renderFlipCards(container, slug) {
 
 function pad(n) {
   return String(n).padStart(2, '0');
-}
-
-function escapeHTML(s) {
-  if (s == null) return '';
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }

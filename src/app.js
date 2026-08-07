@@ -14,12 +14,17 @@ import { renderQuiz } from './pages/quiz.js';
 import { renderPodcast } from './pages/podcast.js';
 import { renderSearch } from './pages/search.js';
 import { initTheme, toggleTheme } from './core/theme.js';
+import { cleanupPage } from './core/page-lifecycle.js';
+import { escapeHtml } from './utils/escape.js';
 import manifest from './data/manifest.json';
 
 // 初始化主题
 initTheme();
 
 const app = document.getElementById('app');
+
+// 路由代际令牌:快速连切 hash 时,过期的异步渲染结果直接丢弃
+let routeSeq = 0;
 
 function getRoute() {
   const hash = location.hash.slice(1) || '/';
@@ -28,6 +33,9 @@ function getRoute() {
 }
 
 async function router() {
+  const seq = ++routeSeq;
+  cleanupPage();
+
   const parts = getRoute();
   app.innerHTML = '';
   app.appendChild(renderTopbar(parts));
@@ -53,8 +61,11 @@ async function router() {
     }
   } catch (err) {
     console.error('Route error:', err);
-    main.innerHTML = `<div class="error-state"><h2>出错了</h2><p>${err.message}</p><a href="#/">回首页</a></div>`;
+    main.innerHTML = `<div class="error-state"><h2>出错了</h2><p>${escapeHtml(err.message)}</p><a href="#/">回首页</a></div>`;
   }
+
+  // 渲染期间又触发了新路由 → 本次结果作废,避免旧内容覆盖新页面
+  if (seq !== routeSeq) return;
 
   app.appendChild(main);
   window.scrollTo(0, 0);

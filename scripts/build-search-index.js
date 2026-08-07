@@ -36,8 +36,10 @@ for (const f of fs.readdirSync(ARTICLES_DIR).filter((f) => f.endsWith('.json')))
     title: article.title,
     category: article.series,
     difficulty: article.difficulty,
-    // 搜索用文本(title 权重高,放前面重复)
-    content: `${article.title} ${article.title} ${tocText} ${cleanBody.slice(0, 5000)}`,
+    // 搜索用文本(title 权重高,放前面重复)。全量收录正文:
+    // 曾截断到 5000 字,16 篇里 10 篇超出导致后半搜不到;
+    // 全量后索引约 4-6MB,搜索页懒加载,不影响首屏。
+    content: `${article.title} ${article.title} ${tocText} ${cleanBody}`,
     // 预览用(取 body 前 200 字)
     preview: cleanBody.slice(0, 200),
   });
@@ -56,26 +58,24 @@ for (const doc of docs) {
   index.add(doc.id, doc.content);
 }
 
-// 导出索引
+// 导出索引。flexsearch 0.8 的 export 逐 key 回调;用 await 兼容返回
+// Promise 的版本/配置变更后的异步行为,不再用 setTimeout(500) 赌时序。
 const exportData = {};
-index.export((key, data) => {
+await index.export((key, data) => {
   exportData[key] = data;
 });
 
-// 等待导出完成(flexsearch export 是异步回调)
-setTimeout(() => {
-  const output = {
-    docs: docs.map((d) => ({
-      slug: d.slug,
-      title: d.title,
-      category: d.category,
-      difficulty: d.difficulty,
-      preview: d.preview,
-    })),
-    index: exportData,
-  };
+const output = {
+  docs: docs.map((d) => ({
+    slug: d.slug,
+    title: d.title,
+    category: d.category,
+    difficulty: d.difficulty,
+    preview: d.preview,
+  })),
+  index: exportData,
+};
 
-  fs.writeFileSync(OUT_PATH, JSON.stringify(output), 'utf-8');
-  console.log(`[OK] 搜索索引: ${docs.length} 篇文档 → ${path.relative(ROOT, OUT_PATH)}`);
-  console.log(`  索引大小: ${(fs.statSync(OUT_PATH).size / 1024).toFixed(0)}KB`);
-}, 500);
+fs.writeFileSync(OUT_PATH, JSON.stringify(output), 'utf-8');
+console.log(`[OK] 搜索索引: ${docs.length} 篇文档 → ${path.relative(ROOT, OUT_PATH)}`);
+console.log(`  索引大小: ${(fs.statSync(OUT_PATH).size / 1024).toFixed(0)}KB`);

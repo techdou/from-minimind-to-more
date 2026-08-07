@@ -17,12 +17,14 @@ import { bindProgressBar, restoreScroll, getProgress } from '../core/progress.js
 import { renderFlipCards } from '../components/flip-card.js';
 import { renderComparisonCards } from '../components/comparison-cards.js';
 import { renderCardGallery } from '../components/card-gallery.js';
+import { escapeHtml } from '../utils/escape.js';
+import { pageSignal } from '../core/page-lifecycle.js';
 import manifest from '../data/manifest.json';
 
 export async function renderArticle(container, slug) {
   const meta = manifest.find((a) => a.slug === slug);
   if (!meta) {
-    container.innerHTML = `<div class="error-state"><h2>文章不存在</h2><p>找不到 slug: ${slug}</p><a href="#/">回首页</a></div>`;
+    container.innerHTML = `<div class="error-state"><h2>文章不存在</h2><p>找不到 slug: ${escapeHtml(slug)}</p><a href="#/">回首页</a></div>`;
     return;
   }
 
@@ -32,7 +34,7 @@ export async function renderArticle(container, slug) {
     const resp = await fetch(`/data/articles/${slug}.json`);
     article = await resp.json();
   } catch (err) {
-    container.innerHTML = `<div class="error-state"><h2>加载失败</h2><p>${err.message}</p></div>`;
+    container.innerHTML = `<div class="error-state"><h2>加载失败</h2><p>${escapeHtml(err.message)}</p></div>`;
     return;
   }
 
@@ -99,11 +101,15 @@ export async function renderArticle(container, slug) {
   const toc = extractTOC(targetEl);
   renderSidebarTOC(toc, container);
 
-  // 进度条
-  bindProgressBar(slug, container.querySelector('#progress-bar'));
+  // 进度条(监听挂到 pageSignal,路由切换自动移除)
+  const refreshProgress = bindProgressBar(slug, container.querySelector('#progress-bar'), pageSignal());
 
-  // 恢复上次阅读位置(延迟到渲染完成)
-  setTimeout(() => restoreScroll(slug), 300);
+  // 恢复上次阅读位置(延迟到渲染完成);恢复后再刷新进度条,
+  // 双重 rAF 确保 scrollTo 已生效,避免用跳转前的位置算出垃圾进度
+  setTimeout(() => {
+    restoreScroll(slug);
+    requestAnimationFrame(() => requestAnimationFrame(refreshProgress));
+  }, 300);
 
   // scrollspy
   setupScrollSpy(container, toc);
@@ -170,12 +176,13 @@ function setupScrollSpy(container, toc) {
   }
 
   let ticking = false;
+  // 挂到 pageSignal:路由切换时统一移除,防 window 监听器堆积
   window.addEventListener('scroll', () => {
     if (!ticking) {
       requestAnimationFrame(() => { updateActive(); ticking = false; });
       ticking = true;
     }
-  }, { passive: true });
+  }, { passive: true, signal: pageSignal() });
   updateActive();
 }
 

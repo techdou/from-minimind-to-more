@@ -11,6 +11,8 @@
  * 数据源:podcast/scripts/<slug>.json(dialogue 格式)
  */
 
+import { escapeHtml } from '../utils/escape.js';
+
 export class PodcastPlayer {
   constructor(container, dialogue, options = {}) {
     this.container = container;
@@ -99,10 +101,10 @@ export class PodcastPlayer {
             return `
               <div class="podcast-line" data-index="${i}" style="--speaker-bg: ${sc.bg}; --speaker-accent: ${sc.accent}">
                 <div class="podcast-speaker">
-                  <span class="podcast-speaker-name">${line.speaker}</span>
+                  <span class="podcast-speaker-name">${escapeHtml(line.speaker)}</span>
                   <span class="podcast-speaker-role">${sc.label}</span>
                 </div>
-                <div class="podcast-text">${line.text}</div>
+                <div class="podcast-text">${escapeHtml(line.text)}</div>
               </div>
             `;
           }).join('')}
@@ -181,7 +183,10 @@ export class PodcastPlayer {
       });
       this.video.addEventListener('ended', () => this.pause());
       this.video.play().catch(() => {
+        // 视频播放失败(404/解码失败):降级到音频或模拟。
+        // videoEl 一并置空,防再次进入视频分支形成无限重试递归。
         this.video = null;
+        this.videoEl = null;
         this.play();
       });
     } else if (this.video) {
@@ -282,6 +287,32 @@ export class PodcastPlayer {
     this.highlightLine(index);
     this.progressBar.style.width = (time / this.totalDuration * 100) + '%';
     this.currentTimeEl.textContent = formatTime(time);
+
+    // 模拟模式下重置时钟,否则下一个 tick 按旧时间轴算,进度跳回原位置
+    if (this.simTimer) {
+      clearInterval(this.simTimer);
+      this.simTimer = null;
+      if (this.isPlaying) this.startSimulated();
+    }
+  }
+
+  /**
+   * 销毁:路由切换时由 page-lifecycle 统一调用。
+   * 停播放、清定时器、释放媒体引用——否则视频被移除 DOM 后仍在后台出声,
+   * 模拟定时器也会永久驻留操作已分离的 DOM。
+   */
+  destroy() {
+    this.pause();
+    if (this.video) {
+      this.video.removeAttribute('src');
+      this.video.load();
+    }
+    if (this.audio) {
+      this.audio.removeAttribute('src');
+    }
+    this.video = null;
+    this.audio = null;
+    this.videoEl = null;
   }
 }
 
