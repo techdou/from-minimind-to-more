@@ -18,6 +18,7 @@ import { renderFlipCards } from '../components/flip-card.js';
 import { renderComparisonCards } from '../components/comparison-cards.js';
 import { renderCardGallery } from '../components/card-gallery.js';
 import { escapeHtml } from '../utils/escape.js';
+import { withBase } from '../utils/paths.js';
 import { pageSignal } from '../core/page-lifecycle.js';
 import manifest from '../data/manifest.json';
 
@@ -31,7 +32,7 @@ export async function renderArticle(container, slug) {
   // 动态加载文章 JSON
   let article;
   try {
-    const resp = await fetch(`/data/articles/${slug}.json`);
+    const resp = await fetch(withBase(`/data/articles/${slug}.json`));
     article = await resp.json();
   } catch (err) {
     container.innerHTML = `<div class="error-state"><h2>加载失败</h2><p>${escapeHtml(err.message)}</p></div>`;
@@ -201,7 +202,7 @@ function renderPodcastEntry(slug) {
 
 async function checkAndShowPodcastEntry(container, slug) {
   try {
-    const resp = await fetch(`/podcast/scripts/${slug}.json`);
+    const resp = await fetch(withBase(`/podcast/scripts/${slug}.json`));
     // SPA fallback 可能返回 index.html(200 但不是 JSON),必须检查 content-type
     if (!resp.ok) return;
     const ct = resp.headers.get('content-type') || '';

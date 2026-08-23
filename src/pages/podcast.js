@@ -7,6 +7,7 @@
 import manifest from '../data/manifest.json';
 import { PodcastPlayer } from '../components/podcast-player.js';
 import { onPageCleanup } from '../core/page-lifecycle.js';
+import { withBase } from '../utils/paths.js';
 
 export async function renderPodcast(container, slug) {
   const meta = manifest.find((a) => a.slug === slug);
@@ -32,7 +33,7 @@ export async function renderPodcast(container, slug) {
 
   try {
     // 尝试加载播客脚本(检查 content-type 防 SPA fallback 误判)
-    const resp = await fetch(`/podcast/scripts/${slug}.json`);
+    const resp = await fetch(withBase(`/podcast/scripts/${slug}.json`));
     if (!resp.ok) throw new Error('no script');
     const ct = resp.headers.get('content-type') || '';
     if (!ct.includes('application/json')) throw new Error('not json');
@@ -41,21 +42,21 @@ export async function renderPodcast(container, slug) {
     // 优先探测视频(视频版已包含音频轨,体验更好)
     let videoUrl = null;
     try {
-      const videoResp = await fetch(`/podcast/video/${slug}.mp4`, { method: 'HEAD' });
+      const videoResp = await fetch(withBase(`/podcast/video/${slug}.mp4`), { method: 'HEAD' });
       const vct = videoResp.headers.get('content-type') || '';
       if (videoResp.ok && (vct.includes('video') || vct.includes('octet-stream'))) {
-        videoUrl = `/podcast/video/${slug}.mp4`;
+        videoUrl = withBase(`/podcast/video/${slug}.mp4`);
       }
     } catch {}
 
-    // audio_url 可能在 dialogue 对象里,也可能需要单独探测
-    let audioUrl = dialogue.audio_url || null;
+    // audio_url 可能在 dialogue 对象里(数据里是根路径,需补 base),也可能需要单独探测
+    let audioUrl = dialogue.audio_url ? withBase(dialogue.audio_url) : null;
     if (!audioUrl && !videoUrl) {
       try {
-        const audioResp = await fetch(`/podcast/audio/${slug}.mp3`, { method: 'HEAD' });
+        const audioResp = await fetch(withBase(`/podcast/audio/${slug}.mp3`), { method: 'HEAD' });
         const ct = audioResp.headers.get('content-type') || '';
         if (audioResp.ok && (ct.includes('audio') || ct.includes('octet-stream'))) {
-          audioUrl = `/podcast/audio/${slug}.mp3`;
+          audioUrl = withBase(`/podcast/audio/${slug}.mp3`);
         }
       } catch {}
     }

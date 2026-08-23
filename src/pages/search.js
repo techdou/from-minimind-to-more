@@ -7,6 +7,7 @@
 
 import { Index } from 'flexsearch';
 import { escapeHtml, escapeRegex } from '../utils/escape.js';
+import { withBase } from '../utils/paths.js';
 
 let indexCache = null;
 let docsCache = null;
@@ -16,7 +17,7 @@ let searchToken = 0;
 
 async function loadIndex() {
   if (indexCache) return { index: indexCache, docs: docsCache };
-  const resp = await fetch('/data/search-index.json');
+  const resp = await fetch(withBase('/data/search-index.json'));
   if (!resp.ok) throw new Error('搜索索引加载失败');
   const data = await resp.json();
   const index = new Index({ charset: 'cjk', tokenize: 'forward', resolution: 9 });

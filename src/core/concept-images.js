@@ -5,6 +5,8 @@
  * 运行时 HEAD 检查图片是否存在,存在才注入。
  */
 
+import { withBase } from '../utils/paths.js';
+
 const CONCEPT_MAP = [
   // === 基石篇 ===
   // tokenizer (5张)
@@ -84,7 +86,7 @@ export async function hasConceptImages(slug) {
   const checks = await Promise.all(concepts.map(async (c) => {
     if (_existsCache.has(c.image)) return true;
     try {
-      const resp = await fetch(`/assets/concepts/${c.image}`, { method: 'HEAD' });
+      const resp = await fetch(withBase(`/assets/concepts/${c.image}`), { method: 'HEAD' });
       const ct = resp.headers.get('content-type') || '';
       if (resp.ok && !ct.includes('text/html')) { _existsCache.add(c.image); return true; }
     } catch {}
@@ -102,7 +104,7 @@ export async function injectConceptImages(container, slug) {
   const imageResults = await Promise.all(concepts.map(async (concept) => {
     if (_existsCache.has(concept.image)) return { concept, exists: true };
     try {
-      const resp = await fetch(`/assets/concepts/${concept.image}`, { method: 'HEAD' });
+      const resp = await fetch(withBase(`/assets/concepts/${concept.image}`), { method: 'HEAD' });
       const ct = resp.headers.get('content-type') || '';
       const exists = resp.ok && !ct.includes('text/html');
       if (exists) _existsCache.add(concept.image);
@@ -126,7 +128,7 @@ export async function injectConceptImages(container, slug) {
     const figure = document.createElement('figure');
     figure.className = 'concept-image';
     const img = document.createElement('img');
-    img.src = `/assets/concepts/${concept.image}`;
+    img.src = withBase(`/assets/concepts/${concept.image}`);
     img.alt = concept.caption;
     img.loading = 'lazy';
     const figcaption = document.createElement('figcaption');

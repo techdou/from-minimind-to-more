@@ -19,6 +19,7 @@
 
 import { CARD_GALLERY } from '../data/card-configs.js';
 import { escapeHtml as escapeHTML } from '../utils/escape.js';
+import { withBase } from '../utils/paths.js';
 
 const _existsCache = new Set();
 const _missingCache = new Set();
@@ -42,7 +43,7 @@ export async function renderCardGallery(container, slug) {
   // 校验每张图是否真实存在,过滤缺图
   const checks = await Promise.all(
     list.map(async (card) => {
-      const imgPath = card.image.startsWith('/') ? card.image : `/assets/cards/${card.image}`;
+      const imgPath = withBase(card.image.startsWith('/') ? card.image : `/assets/cards/${card.image}`);
       if (_existsCache.has(imgPath)) return { card, exists: true };
       if (_missingCache.has(imgPath)) return { card, exists: false };
       try {
@@ -64,7 +65,7 @@ export async function renderCardGallery(container, slug) {
   if (validCards.length === 0) return;
 
   const cardsHTML = validCards.map((card) => {
-    const imgPath = card.image.startsWith('/') ? card.image : `/assets/cards/${card.image}`;
+    const imgPath = withBase(card.image.startsWith('/') ? card.image : `/assets/cards/${card.image}`);
     return `
     <figure class="card-gallery-item" data-full="${encodeURI(imgPath)}" tabindex="0" role="button"
             aria-label="放大查看:${escapeHTML(card.title)}">
