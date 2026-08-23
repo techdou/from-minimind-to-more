@@ -3,7 +3,10 @@
 # ─────────────────────────────────────────────
 node_modules/
 dist/
-src/data/
+# manifest.json 是 build:content 生成物,card-configs.js 是手工源文件必须进 git
+# (目录整体忽略后 ! 否定无效,必须用 * 形式)
+src/data/*
+!src/data/card-configs.js
 *.log
 
 # ─────────────────────────────────────────────
